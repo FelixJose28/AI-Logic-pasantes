@@ -11,14 +11,31 @@
 
 <body>
     <div class="contianer">
-        <div class="side-menu-bar">
-            <!-- Esta parte contine el menu principal de la pagina  -->
+        <div id="sidebar" class="active">
+                    <!-- Esta parte contine el menu principal de la pagina  -->
+            <div class="toggle_btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li>Perfil</li>
+                <li>Tareas</li>
+                <li>Evaluaciones</li>
+                <li>Pasantes</li>
+                <li>Convocatorias</li>
+            </ul>
+            <ul id="opciones_inferiores">
+                <li>Ajustes</li>
+                <li>Cerrar Session</li>
+            </ul>
+
         </div>
         <div class="main-contianer" id="main">
             <!-- cargar el contenido principal es esta seccion de la pagina-->
         </div>
     </div>
-    </script>
-</body>
+    <script src="js/script.js"></script>
+    </body>
 
 </html>

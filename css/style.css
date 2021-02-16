@@ -1,6 +1,7 @@
-body {
+* {
     padding: 0;
     margin: 0;
+    font-family: sans-serif;
 }
 
 .contianer {
@@ -8,7 +9,34 @@ body {
     grid-template-columns: 200px auto;
 }
 
-.side-menu-bar {
+#sidebar {
+    position: fixed;
+    width: 200px;
     background-color: royalblue;
-    height: 100vh;
+    height: 100%;
+    left: -200px;
+}
+#sidebar.active{
+    left: 0;
+}
+#sidebar ul li{
+    color: #fff;
+    list-style: none;
+    padding: 10px 15px;
+    border-bottom: solid 1px #fff;
+}
+#sidebar .toggle_btn{
+    position: absolute;
+    left: 230px;
+    top: 20px
+}
+#sidebar .toggle_btn span{
+    display: block;
+    width: 30px;
+    height: 5px;
+    background: black;
+    margin: 3px 0px;
+}
+#opciones_inferiores{
+    margin-top: 300px;
 }
