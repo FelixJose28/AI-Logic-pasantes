@@ -1,0 +1,14 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.contianer {
+    display: grid;
+    grid-template-columns: 200px auto;
+}
+
+.side-menu-bar {
+    background-color: royalblue;
+    height: 100vh;
+}
