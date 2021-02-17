@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/global-style.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/global-style.css">
     <title>Document</title>
 </head>
 
@@ -27,40 +27,37 @@
                     <a href="#"> <li><i class="fas fa-users" style="color: white;padding: 5px;"></i> Pasantes</li></a>
                     <a href="#"><li><i class="fas fa-book-open" style="color: white; padding: 5px;"></i>Convocatorias</li></a>
                 </ul>
-                <ul id="opciones_inferiores">
-                    <a href="#"><li><i class="fas fa-cog" style="color: white;padding: 5px;"></i>Ajustes</li></a>
-                    <a href="#"><li><i class="fas fa-sign-out-alt" style="color: white;padding: 5px;"></i>Cerrar Session</li></a>
-                </ul>
+            <ul id="opciones_inferiores">
+                <a href="#"><li><i class="fas fa-cog" style="color: white;padding: 5px;"></i>Ajustes</li></a>
+                <a href="#"><li><i class="fas fa-sign-out-alt" style="color: white;padding: 5px;"></i>Cerrar Session</li></a>
+            </ul>
 
         </div>
         <div class="main_container" id="main">
             <!-- cargar el contenido principal es esta seccion de la pagina-->
-            <form class="w-65  mx-auto">
-                <h1 class="text-center w-75">Editar datos</h1>
+
+            <form action="" class="w-65 mx-auto">
+                <h1 class="text-center w-65">Abrir Convocatoria</h1>
                 <div class="form-group my-top-large">
-                    <label for="nombre">Nombre</label>
-                    <input id="nombre"  type="text" class="form-control bg-primary text-white w-75" value="Felix">
+                    <label for="fecha">Fecha de cierra</label>
+                    <input id="fecha"  type="date" class="form-control bg-primary text-white w-65" value="2021-3-20">
                 </div>
-                <div class="form-group my-top-mid">
-                    <label for="apellido">Apellido</label>
-                    <input id="apellido" type="text" class="form-control bg-primary text-white w-75" value="Ynfante">
+                <div class="form-group my-top-large">
+                    <label for="cupos">Limite de Pasantes</label>
+                    <input id="cupos" type="number" class="form-control bg-primary text-white w-65" value="1">
                 </div>
-                <div class="form-group my-top-mid">
-                    <label for="correo">Correo</label>
-                    <input id="correo" type="text" class="form-control bg-primary text-white w-75" value="ejemplo@gmail.com">
+                <div class="form-group my-top-large">
+                    <label for="descripcion">Descripcion</label>
+                        <textarea rows="6" maxlength="200" id="descripcion" type="text" class="form-control bg-primary text-white w-65">Esta convocatoria va dirigida a estudiantes de tecnologia en software</textarea>
                 </div>
-                <div class="form-group my-top-mid">
-                    <label for="direccion">Direccion</label>
-                    <input id="direccion" type="text" class="form-control bg-primary text-white w-75" value="Una casa">
-                </div>
-                <div class="my-top-large mx-auto w-75 btn-group">
+                <div class="my-top-large mx-auto w-65 btn-group">
                     <button class="btn btn-info d-inline-block">Guardar</button>
-                    <button class="btn  btn-success d-inline-block float-right">Volver Atras</button>
+                    <button class="btn  btn-success d-inline-block  float-right">Volver Atras</button>
                 </div>
             </form>
         </div>
     </div>
-    <script src="../../js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
