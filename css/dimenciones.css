@@ -1,0 +1,9 @@
+:root {
+    --small-mp: 5px;
+    --mid-mp: 15px;
+    --large-mp: 32px;
+    /* border dimencions  */
+    --small-rounded: 5px;
+    --mid-rounded: 12px;
+    --large-rounded: 18px;
+}

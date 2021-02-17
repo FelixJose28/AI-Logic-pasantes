@@ -10,16 +10,18 @@
 }
 
 #sidebar {
-    position: fixed;
+    position: relative;
     width: 200px;
     background-color: royalblue;
-    height: 100%;
+    height: 100vh;
     left: -200px;
 }
-#sidebar.active{
+
+#sidebar.active {
     left: 0;
 }
-#sidebar ul li{ 
+
+#sidebar ul li {
     display: block;
     height: 100%;
     color: #fff;
@@ -27,33 +29,37 @@
     padding: 10px 15px;
     border-bottom: solid 1px #fff;
 }
-#sidebar a{
+
+#sidebar a {
     text-decoration: none;
     background-color: blueviolet;
     color: #fff;
     height: 100%;
 }
-#sidebar li:hover{
+
+#sidebar li:hover {
     background-color: rgb(8, 59, 214);
 }
-#sidebar ul a li img{
 
+#sidebar ul a li img {
     padding-right: 20px;
-
     width: 30px;
 }
-#sidebar .toggle_btn{
+
+#sidebar .toggle_btn {
     position: absolute;
     left: 230px;
     top: 20px
 }
-#sidebar .toggle_btn span{
+
+#sidebar .toggle_btn span {
     display: block;
     width: 30px;
     height: 5px;
     background: black;
     margin: 3px 0px;
 }
-#opciones_inferiores{
+
+#opciones_inferiores {
     margin-top: 230px;
 }
