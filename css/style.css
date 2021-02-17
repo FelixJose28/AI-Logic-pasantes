@@ -4,13 +4,18 @@
     font-family: sans-serif;
 }
 
-.contianer {
+.container {
     display: grid;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 270px 1fr;
+}
+.main_container{
+    position: relative;
+    margin-top: 20px;
+    /* background-color: aquamarine; */
 }
 
 #sidebar {
-    position: fixed;
+    position: relative;
     width: 200px;
     background-color: royalblue;
     height: 100%;
@@ -31,15 +36,14 @@
     text-decoration: none;
     background-color: blueviolet;
     color: #fff;
-    height: 100%;
+    height: 1000%;
 }
 #sidebar li:hover{
     background-color: rgb(8, 59, 214);
 }
+
 #sidebar ul a li img{
-
     padding-right: 20px;
-
     width: 30px;
 }
 
@@ -59,6 +63,18 @@
 }
 #sidebar .toggle_btn{
     position: absolute;
-    left: 230px;
+    left: 220px;
     top: 20px
 }
+
+
+
+
+
+
+
+/* .main_contianer.resaze{
+    background-color: red;
+    color: aquamarine;
+    width: 100%;
+} */
