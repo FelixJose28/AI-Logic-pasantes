@@ -4,9 +4,15 @@
     font-family: sans-serif;
 }
 
-.contianer {
+.container {
     display: grid;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 270px 1fr;
+}
+
+.main_container {
+    position: relative;
+    margin-top: 20px;
+    /* background-color: aquamarine; */
 }
 
 #sidebar {
@@ -34,7 +40,7 @@
     text-decoration: none;
     background-color: blueviolet;
     color: #fff;
-    height: 100%;
+    height: 1000%;
 }
 
 #sidebar li:hover {
@@ -44,12 +50,6 @@
 #sidebar ul a li img {
     padding-right: 20px;
     width: 30px;
-}
-
-#sidebar .toggle_btn {
-    position: absolute;
-    left: 230px;
-    top: 20px
 }
 
 #sidebar .toggle_btn span {
@@ -63,3 +63,24 @@
 #opciones_inferiores {
     margin-top: 230px;
 }
+
+.toggle_btn:hover {
+    cursor: pointer;
+}
+
+#sidebar .toggle_btn {
+    position: absolute;
+    left: 220px;
+    top: 20px
+}
+
+
+/* .main_contianer.resaze{
+    background-color: red;
+    color: aquamarine;
+    width: 100%;
+<<<<<<< HEAD
+} */
+=======
+} */
+>>>>>>> bb8c37a40460063b59ab2c87a4d60360835bbe26

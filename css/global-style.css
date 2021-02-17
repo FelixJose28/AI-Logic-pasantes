@@ -29,10 +29,17 @@ h6 {
 /* estilos para los bottones. */
 
 .btn {
+    text-align: center;
+    width: 140px;
     padding: 10px 18px;
     border-radius: 5px;
     border: none;
     font-size: 14px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    cursor: pointer;
 }
 
 .btn-primario {
@@ -56,7 +63,7 @@ h6 {
 }
 
 .btn-info {
-    background-color: var(--info-color);
+    background-color: var(--color-primario);
     color: var(--white-color);
 }
 
@@ -397,6 +404,48 @@ textarea {
     font-weight: 600;
 }
 
-.form-control::-moz-placeholder {
-    font-weight: 600;
+
+/* Display */
+
+.d-block {
+    display: block;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.d-inline {
+    display: inline;
+}
+
+
+/* width elemnnts */
+
+.w-25 {
+    width: 25%;
+}
+
+.w-35 {
+    width: 35%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-65 {
+    width: 65%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+.w-85 {
+    width: 85%;
+}
+
+.w-100 {
+    width: 100%;
 }
