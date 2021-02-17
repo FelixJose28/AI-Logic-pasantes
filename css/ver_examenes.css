@@ -1,0 +1,70 @@
+@import "./global-style.css";
+
+:root {
+    --color-primario-light: rgb(231, 245, 255);
+}
+
+.examen-container {
+    margin-top: 50px;
+}
+
+.examen-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    gap: 10px;
+}
+
+.examen-item {
+    background-color: var(--color-primario-light);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+}
+
+.examen-item:hover {
+    cursor: pointer;
+    transform: scale(0.97);
+    transition-duration: 0.2s;
+}
+
+.examen-item-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.examen-item-title span {
+    color: var(--color-primario);
+    font-size: 35px;
+    margin: 0px 6px;
+}
+
+.examen-item-content {
+    width: 100px;
+    margin: 20px 0px;
+}
+
+.examen-info {
+    margin-top: 70px;
+}
+
+/* Informacion adicional */
+
+.container-card {
+    background-color: var(--color-primario-light);
+    border-radius: 10px;
+    width: 300px;
+    margin: 10px;
+    padding: 15px;
+}
+
+.card-title {
+    font-weight: bold;
+}
