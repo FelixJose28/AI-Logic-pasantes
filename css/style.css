@@ -42,11 +42,7 @@
 
     width: 30px;
 }
-#sidebar .toggle_btn{
-    position: absolute;
-    left: 230px;
-    top: 20px
-}
+
 #sidebar .toggle_btn span{
     display: block;
     width: 30px;
@@ -56,4 +52,13 @@
 }
 #opciones_inferiores{
     margin-top: 230px;
+}
+
+.toggle_btn:hover{
+    cursor: pointer;
+}
+#sidebar .toggle_btn{
+    position: absolute;
+    left: 230px;
+    top: 20px
 }
