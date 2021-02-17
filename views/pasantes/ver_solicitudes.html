@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/global-style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../../css/solitud_pasantes.css" rel="stylesheet">
+    <title>Ver Solicitudes</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="sidebar" class="active">
+                    <!-- Esta parte contine el menu principal de la pagina  -->
+                <div class="toggle_btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul>
+                    <a href="#"><li><img src="../../img/perfil.png" class="sidebar_icons">Perfil</li></a>
+                    <a href="#"><li><img src="../../img/bloc.png" class="sidebar_icons">Tareas</li></a>
+                    <a href="#"><li><img src="../../img/lista.png" class="sidebar_icons">Evaluaciones</li></a>
+                    <a href="#"><li><img src="../../img/comunidad.png" class="sidebar_icons">Pasantes</li></a>
+                    <a href="#"><li><img src="../../img/libro-abierto.png" class="sidebar_icons">Convocatorias</li></a>
+                </ul>
+                <ul id="opciones_inferiores">
+                    <a href="#"><li><img src="../../img/ajuste.png" class="sidebar_icons">Ajustes</li></a>
+                    <a href="#"><li><img src="../../img/flecha.png" class="sidebar_icons">Cerrar Session</li></a>
+                </ul>
+
+        </div>
+        <div class="main_container" id="main">
+            <h1 class="mx-left-large ">Solicitudes de los Pasantes</h1>
+            <div class="lista-pasantes">
+                <table>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Calificación</th>
+                        <th>Opciones</th>
+                    </tr>
+                    <tr>
+                        <td>Juana</td>
+                        <td>Perez</td>
+                        <td>juana25@hotmail.com</td>
+                        <td>75</td>
+                        <td>
+                            <div class="solicitud-opciones">
+                                <span class="material-icons aceptar-solitidud">check_circle</span>
+                                <span class="material-icons rechazar-solitidud">cancel</span>
+                                <span class="material-icons ver-solitidud">wysiwyg</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Juana</td>
+                        <td>Perez</td>
+                        <td>juana25@hotmail.com</td>
+                        <td>75</td>
+                        <td>
+                            <div class="solicitud-opciones">
+                                <span class="material-icons aceptar-solitidud">check_circle</span>
+                                <span class="material-icons rechazar-solitidud">cancel</span>
+                                <span class="material-icons ver-solitidud">wysiwyg</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Juana</td>
+                        <td>Perez</td>
+                        <td>juana25@hotmail.com</td>
+                        <td>75</td>
+                        <td>
+                            <div class="solicitud-opciones">
+                                <span class="material-icons aceptar-solitidud">check_circle</span>
+                                <span class="material-icons rechazar-solitidud">cancel</span>
+                                <span class="material-icons ver-solitidud">wysiwyg</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Juana</td>
+                        <td>Perez</td>
+                        <td>juana25@hotmail.com</td>
+                        <td>75</td>
+                        <td>
+                            <div class="solicitud-opciones">
+                                <span class="material-icons aceptar-solitidud">check_circle</span>
+                                <span class="material-icons rechazar-solitidud">cancel</span>
+                                <span class="material-icons ver-solitidud">wysiwyg</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="solicitudes-nav">
+                    <div class="solicitudes-nav-btn">Anterior</div>
+                    <div class="solicitud-pagina">1</div>
+                    <div class="solicitud-pagina">2</div>
+                    <div class="solicitud-pagina-actual">3</div>
+                    <div class="solicitudes-nav-btn">Siguiente</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../js/script.js"></script>
+</body>
+
+</html>

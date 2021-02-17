@@ -1,0 +1,86 @@
+@import "../css/global-style.css";
+
+.lista-pasantes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px 10px;
+}
+
+table {
+    border: 1px solid black;
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+tr {
+    border-bottom: 1px solid black;
+}
+
+td, th {
+    text-align: center;
+    font-size: 16px;
+    padding: 5px;
+}  
+
+th {
+    color: var(--color-primario);
+    font-size: 18px;
+    font-weight: 500;
+    height: 40px;
+    min-width: 80px;
+}
+
+tr:hover {
+    background-color: var(--info-color);
+}
+
+.solicitudes-nav {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    background-color: var(--danger-color);
+}
+
+.solicitud-opciones span {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.solicitud-opciones > .aceptar-solitidud {
+    color: var(--success-color);
+}
+
+.solicitud-opciones > .rechazar-solitidud {
+    color: var(--danger-color);
+}
+
+.solicitud-opciones > .ver-solitidud {
+    color: var(--color-black);
+}
+
+.solicitudes-nav-btn {
+    background-color: crimson;
+}
+
+.solicitudes-nav div {
+    --box-height: 50px;
+    width: 70px;
+    height: var(--box-height);
+    line-height:  var(--box-height);
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    padding: 2px 6px;
+}
+
+.solicitud-pagina:hover {
+    background-color: #c73555;
+}
+
+.solicitud-pagina-actual {
+    background-color: #ff8fa7;
+}
+
