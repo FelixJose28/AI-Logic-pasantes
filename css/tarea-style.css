@@ -1,11 +1,33 @@
 .main-contianer {
-    width: 100%;
+    background-color: #fafafa;
 }
 
 .contianer-tarea {
-    text-align: center;
+    width: 90%;
+    margin: auto;
 }
 
 .form-tarea {
-    max-width: 400px;
+    min-width: 400px;
+    max-width: 600px;
+    text-align: center;
 }
+
+
+/* .upload-file-contianer {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-primario-dark);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop-area {
+    background-color: #fff;
+    width: 80%;
+    height: 20em;
+} */

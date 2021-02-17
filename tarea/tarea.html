@@ -48,11 +48,12 @@
             </ul>
 
         </div>
-        <div class="main-contianer" id="main">
+        <div class="main-contianer px-mid" id="main">
             <!-- cargar el contenido principal es esta seccion de la pagina-->
-            <div class="contianer-tarea my-large">
-                <h2>Crear nueva tarea</h2>
-                <form action="" class="my-mid p-large mx-auto form-tarea" enctype="multipart/form-data">
+            <div class="contianer-tarea text-center py-mid">
+
+                <form action="" class="mx-auto form-tarea" enctype="multipart/form-data">
+                    <h2 class="text-left mx-left-large my-mid">Crear nueva tarea</h2>
                     <div class="input-grupo control-group">
                         <input type="text" placeholder="Titulo de la tarea" name="titulo" id="titulo" class="form-control">
                     </div>
@@ -60,17 +61,28 @@
                         <Textarea rows="10" cols="20" placeholder="Escribir aqui..." class="form-control"></Textarea>
                     </div>
                     <div class="input-grupo">
-                        <div class="drop-area">
+                        <!-- <div class="drop-area">
 
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="input-grupo">
-                        <input type="file" name="archivo" id="" multiple accept=".dox,.pdf,.jpg,.png,.cvg,.txt">
+                    <div class="input-grupo ">
+                        <input type="file" name="archivo" id="" multiple accept=".rar,.iso,.zip">
+                        <!-- <input type="file" class="btn ">Subir archivo</button> -->
                         <button type="submit" class="btn btn-primario text-white my-top-mid">Crear tarea</button>
                     </div>
 
                 </form>
             </div>
+            <!--Contenedor para subir un documento como adjunto de la tarea -->
+            <!-- <div class="upload-file-contianer">
+                <form action="">
+                    <input type="file" name="file" id="file" hidden>
+                </form>
+
+                <div class="drop-area">
+                    <h3>Arrastrar Aqui</h3>
+                </div>
+            </div> -->
         </div>
     </div>
     <script src="../js/script.js"></script>
