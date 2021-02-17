@@ -1,0 +1,50 @@
+@import "../css/global-style.css";
+
+.convocatoria-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.convocatoria-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90px;
+    margin: 10px 0px;
+}
+
+.convocatoria-item-title {
+    font-weight: bold;
+}
+
+.convocatoria-item-content {
+    --text-height: 30px;
+    background-color: var(--color-primario-dark);
+    border-radius: 10px;
+    color: var(--white-color);
+    margin: 15px 0px;
+    width: 250px;
+    height: var(--text-height);
+    line-height:  var(--text-height);
+    text-align: center;
+}
+
+.cerrar-convocatoria-btn {
+    margin-top: 30px;
+    color: var(--white-color);
+    background-color: var(--color-primario);
+    border-radius: 10px;
+    font-size: 20px;
+    height: 40px;
+    width: 280px;
+    border: none;
+    outline:none;
+}
+
+.cerrar-convocatoria-btn:hover {
+    cursor: pointer;
+    background-color: var(--color-primario-dark);
+    transition-duration: 0.2s;
+}

@@ -32,7 +32,7 @@ th {
     min-width: 80px;
 }
 
-tr:hover {
+tr:hover{
     background-color: var(--info-color);
 }
 
