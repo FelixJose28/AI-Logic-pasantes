@@ -129,11 +129,7 @@ h6 {
     color: var(--info-color);
 }
 
-<<<<<<< HEAD
 .text-white{
-=======
-.text-white {
->>>>>>> cc7c9269feb411bef9ba4b373b010c4066701b1b
     color: var(--white-color);
 }
 
@@ -475,7 +471,6 @@ textarea {
 }
 
 
-<<<<<<< HEAD
 
 /* float */
 
@@ -484,9 +479,8 @@ textarea {
 }
 .float-right{
     float: right;
-=======
 /* clases para las tablas  */
-
+}
 .table {
     min-width: 86%;
     padding: 5px;
@@ -576,5 +570,4 @@ a {
 .position-top {
     position: absolute;
     top: 0%;
->>>>>>> cc7c9269feb411bef9ba4b373b010c4066701b1b
 }
