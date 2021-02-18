@@ -1,6 +1,6 @@
 @import url(dimenciones.css);
 :root {
-    --color-primario: #3C95B5;
+    --color-primario: #1FA0C0;
     --color-primario-dark: #166697;
     --light-gray: #F2F2F2;
     --semi-dark-gray: #C4C4C4;
@@ -14,6 +14,17 @@
     --warning-color: #ffb222;
 }
 
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+body,
+html {
+    background-color: #fafafa;
+}
+
 h1,
 h2,
 h3,
@@ -23,6 +34,7 @@ h6 {
     font-weight: 600;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 5px;
+    color: #3e3e3e;
 }
 
 
@@ -111,6 +123,10 @@ h6 {
 
 .text-info {
     color: var(--info-color);
+}
+
+.text-white {
+    color: var(--white-color);
 }
 
 
@@ -334,20 +350,20 @@ h6 {
     border: none;
 }
 
-.border-rouned {
-    border: var(--small-rounded);
+.border-rounded {
+    border-radius: var(--small-rounded);
 }
 
-.border-rouned-small {
-    border: var(--small-rounded);
+.border-rounded-small {
+    border-radius: var(--small-rounded);
 }
 
-.border-rouned-mid {
-    border: var(--mid-rounded);
+.border-rounded-mid {
+    border-radius: var(--mid-rounded);
 }
 
-.border-rouned-large {
-    border: var(--large-rounded);
+.border-rounded-large {
+    border-radius: var(--large-rounded);
 }
 
 .border-circular {
@@ -448,4 +464,98 @@ textarea {
 
 .w-100 {
     width: 100%;
+}
+
+
+/* clases para las tablas  */
+
+.table {
+    min-width: 86%;
+    padding: 5px;
+    border-collapse: collapse;
+}
+
+.table td,
+.table th {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-hover tr:hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.table-striped tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.table-striped tr:nth-child(even):hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.table-primary th {
+    background-color: var(--color-primario);
+    color: #fff;
+}
+
+.table-danger th {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+
+.table-info th {
+    background-color: var(--info-color);
+    color: #fff;
+}
+
+.table-success th {
+    background-color: var(--success-color);
+    color: #fff;
+}
+
+.table-warning th {
+    background-color: var(--warning-color);
+    color: #fff;
+}
+
+
+/* Listas  */
+
+ul {
+    list-style: none;
+}
+
+
+/* enlaces  */
+
+a {
+    text-decoration: none;
+    font-size: 16px;
+    padding: 4px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+
+/* Position clases */
+
+.position-relative {
+    position: relative;
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.position-bottom {
+    position: absolute;
+    bottom: 5%;
+}
+
+.position-top {
+    position: absolute;
+    top: 0%;
 }

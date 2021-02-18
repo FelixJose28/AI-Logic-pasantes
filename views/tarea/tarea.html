@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/tarea-style.css">
-    <link rel="stylesheet" href="../css/global-style.css">
-    <title>Tarea</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/global-style.css">
+    <link rel="stylesheet" href="../../css/tarea-style.css">
+    <title>Document</title>
 </head>
 
 <body>
-    <div class="contianer">
+    <div class="container">
         <div id="sidebar" class="active">
             <!-- Esta parte contine el menu principal de la pagina  -->
             <div class="toggle_btn">
@@ -23,32 +23,32 @@
             </div>
             <ul>
                 <a href="#">
-                    <li><img src="img/perfil.png" class="sidebar_icons">Perfil</li>
+                    <li><i class="far fa-user-circle" style="color: white;padding: 5px;"></i> Perfil</li>
                 </a>
                 <a href="#">
-                    <li><img src="img/bloc.png" class="sidebar_icons">Tareas</li>
+                    <li><i class="far fa-file-alt" style="color: white;padding: 5px;"></i>Tareas</li>
                 </a>
                 <a href="#">
-                    <li><img src="img/lista.png" class="sidebar_icons">Evaluaciones</li>
+                    <li><i class="fas fa-clipboard-list" style="color: white;padding: 5px;"></i>Evaluaciones</li>
                 </a>
                 <a href="#">
-                    <li><img src="img/comunidad.png" class="sidebar_icons">Pasantes</li>
+                    <li><i class="fas fa-users" style="color: white;padding: 5px;"></i> Pasantes</li>
                 </a>
                 <a href="#">
-                    <li><img src="img/libro-abierto.png" class="sidebar_icons">Convocatorias</li>
+                    <li><i class="fas fa-book-open" style="color: white; padding: 5px;"></i>Convocatorias</li>
                 </a>
             </ul>
             <ul id="opciones_inferiores">
                 <a href="#">
-                    <li><img src="img/ajuste.png" class="sidebar_icons">Ajustes</li>
+                    <li><i class="fas fa-cog" style="color: white;padding: 5px;"></i>Ajustes</li>
                 </a>
                 <a href="#">
-                    <li><img src="img/flecha.png" class="sidebar_icons">Cerrar Session</li>
+                    <li><i class="fas fa-sign-out-alt" style="color: white;padding: 5px;"></i>Cerrar Session</li>
                 </a>
             </ul>
 
         </div>
-        <div class="main-contianer px-mid" id="main">
+        <div class="main_container" id="main">
             <!-- cargar el contenido principal es esta seccion de la pagina-->
             <div class="contianer-tarea text-center py-mid">
 
@@ -63,7 +63,7 @@
                     <div class="input-grupo">
                         <!-- <div class="drop-area">
 
-                        </div> -->
+                    </div> -->
                     </div>
                     <div class="input-grupo ">
                         <input type="file" name="archivo" id="" multiple accept=".rar,.iso,.zip">
@@ -75,18 +75,19 @@
             </div>
             <!--Contenedor para subir un documento como adjunto de la tarea -->
             <!-- <div class="upload-file-contianer">
-                <form action="">
-                    <input type="file" name="file" id="file" hidden>
-                </form>
+            <form action="">
+                <input type="file" name="file" id="file" hidden>
+            </form>
 
-                <div class="drop-area">
-                    <h3>Arrastrar Aqui</h3>
-                </div>
-            </div> -->
+            <div class="drop-area">
+                <h3>Arrastrar Aqui</h3>
+            </div>
+        </div> -->
+
+
         </div>
     </div>
-    <script src="../js/script.js"></script>
-</body>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
