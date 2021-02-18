@@ -1,33 +1,9 @@
-.main-contianer {
-    background-color: #fafafa;
-}
-
-.contianer-tarea {
-    width: 90%;
-    margin: auto;
-}
-
-.form-tarea {
-    min-width: 400px;
-    max-width: 600px;
-    text-align: center;
-}
-
-
-/* .upload-file-contianer {
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--color-primario-dark);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
+.control-group {
+    display: grid;
+    grid-template-columns: 100px auto;
     align-items: center;
-    justify-content: center;
 }
 
-.drop-area {
-    background-color: #fff;
-    width: 80%;
-    height: 20em;
-} */
+form {
+    max-width: 600px;
+}

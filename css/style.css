@@ -1,7 +1,7 @@
 .container {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     /* grid-template-columns: minmax(200px, 1fr); */
 }
 
@@ -15,7 +15,7 @@
 }
 
 #sidebar-container {
-    max-width: 200px;
+    width: 200px;
     height: 100vh;
 }
 
@@ -101,15 +101,3 @@
     left: 220px;
     top: 20px
 }
-<<<<<<< HEAD
-
-
-/* .main_contianer.resaze{
-    background-color: red;
-    color: aquamarine;
-    width: 100%;
-}
-    */
-=======
-*/
->>>>>>> cc7c9269feb411bef9ba4b373b010c4066701b1b

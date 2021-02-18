@@ -1,5 +1,5 @@
 @import url(dimenciones.css);
-:root {
+ :root {
     --color-primario: #1FA0C0;
     --color-primario-dark: #166697;
     --light-gray: #F2F2F2;
@@ -53,11 +53,13 @@ h6 {
 .btn:hover {
     cursor: pointer;
 }
-.btn-group{
+
+.btn-group {
     padding: var(--small-mp);
     display: inline-block;
     padding: 10px;
 }
+
 .btn-primario {
     background-color: var(--color-primario-dark);
     color: var(--white-color);
@@ -85,6 +87,10 @@ h6 {
 
 
 /* background */
+
+.bg-white {
+    background-color: var(--white-color);
+}
 
 .bg-danger {
     background-color: var(--danger-color);
@@ -123,17 +129,13 @@ h6 {
 
 .text-warning {
     color: var(--warning-color);
-} 
+}
 
 .text-info {
     color: var(--info-color);
 }
 
-<<<<<<< HEAD
-.text-white{
-=======
 .text-white {
->>>>>>> cc7c9269feb411bef9ba4b373b010c4066701b1b
     color: var(--white-color);
 }
 
@@ -397,35 +399,31 @@ h6 {
 /* Inputs y formularios  */
 
 input {
-    min-width: 200px;
     padding: var(--small-mp);
 }
 
 textarea {
-    min-width: 300px;
     text-indent: 5px;
     font-size: 16px;
     padding: var(--small-mp);
+    resize: vertical;
+    min-height: 20px;
 }
 
 
 /* Clases para formulario  */
 
 .control-group {
-    margin: 10px;
+    min-width: 200px;
+    margin: 12px;
 }
 
 .form-control {
-    min-width: 300px;
-    width: 90%;
+    min-width: 200px;
     padding: 10px;
     border: 1px solid var(--color-black);
     border-radius: 4px;
     margin: 3px;
-}
-
-.form-control::placeholder {
-    font-weight: 600;
 }
 
 
@@ -475,16 +473,17 @@ textarea {
 }
 
 
-<<<<<<< HEAD
-
 /* float */
 
-.float-left{
+.float-left {
     float: left;
 }
-.float-right{
+
+.float-right {
     float: right;
-=======
+}
+
+
 /* clases para las tablas  */
 
 .table {
@@ -576,5 +575,47 @@ a {
 .position-top {
     position: absolute;
     top: 0%;
->>>>>>> cc7c9269feb411bef9ba4b373b010c4066701b1b
+}
+
+
+/* Flex classes */
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+.flex-justify-around {
+    justify-content: space-around;
+}
+
+.flex-align-item-center {
+    align-items: center;
+}
+
+.flex-align-self-center {
+    align-self: center;
+}
+
+.gap-small {
+    gap: 5px;
+}
+
+.gap-mid {
+    gap: 12px;
+}
+
+.gap-large {
+    gap: 20px;
 }

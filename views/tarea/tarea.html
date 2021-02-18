@@ -64,41 +64,33 @@
                 </ul>
             </div>
         </div>
-        <div class="main-container">
+        <div class="main-container w-100  p-large">
             <!-- cargar el contenido principal es esta seccion de la pagina-->
-            <div class="contianer-tarea text-center py-mid">
+            <h2 class="text-left mx-left-large my-mid">Añadir Tarea</h2>
+            <hr class="my-large ">
+            <div class="contianer-tarea flex flex-justify-center">
+                <div class="px-large w-85">
+                    <form action="" enctype="multipart/form-data" class="mx-auto px-large">
+                        <div class="control-group">
+                            <label for="" class="">Titulo *</label>
+                            <input type="text" placeholder="Titulo de la tarea" name="titulo" id="titulo" class="form-control w-75">
+                        </div>
+                        <div class="control-group">
+                            <label for="">Descripcion *</label>
+                            <Textarea rows="5" cols="8" placeholder="Escribir la descripcion de su tarea." class="form-control w-75"></Textarea>
+                        </div>
+                        <div class="control-group">
+                            <label for="">Adjunto *</label>
+                            <input type="file" name="archivo" id="" multiple accept=".rar,.iso,.zip" class="form-control w-75">
+                        </div>
+                        <div class="text-center">
+                            <!-- <input type="file" class="btn ">Subir archivo</button> -->
+                            <button type="submit" class="btn btn-primario text-white my-top-mid">Crear tarea</button>
+                        </div>
 
-                <form action="" class="mx-auto form-tarea" enctype="multipart/form-data">
-                    <h2 class="text-left mx-left-large my-mid">Crear nueva tarea</h2>
-                    <div class="input-grupo control-group">
-                        <input type="text" placeholder="Titulo de la tarea" name="titulo" id="titulo" class="form-control">
-                    </div>
-                    <div class="input-grupo control-group ">
-                        <Textarea rows="10" cols="20" placeholder="Escribir aqui..." class="form-control"></Textarea>
-                    </div>
-                    <div class="input-grupo">
-                        <!-- <div class="drop-area">
-
-                    </div> -->
-                    </div>
-                    <div class="input-grupo ">
-                        <input type="file" name="archivo" id="" multiple accept=".rar,.iso,.zip">
-                        <!-- <input type="file" class="btn ">Subir archivo</button> -->
-                        <button type="submit" class="btn btn-primario text-white my-top-mid">Crear tarea</button>
-                    </div>
-
-                </form>
+                    </form>
+                </div>
             </div>
-            <!--Contenedor para subir un documento como adjunto de la tarea -->
-            <!-- <div class="upload-file-contianer">
-            <form action="">
-                <input type="file" name="file" id="file" hidden>
-            </form>
-
-            <div class="drop-area">
-                <h3>Arrastrar Aqui</h3>
-            </div>
-        </div> -->
 
 
         </div>
