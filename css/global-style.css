@@ -1,6 +1,6 @@
 @import url(dimenciones.css);
 :root {
-    --color-primario: #3C95B5;
+    --color-primario: #1FA0C0;
     --color-primario-dark: #166697;
     --light-gray: #F2F2F2;
     --semi-dark-gray: #C4C4C4;
@@ -14,6 +14,17 @@
     --warning-color: #ffb222;
 }
 
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+body,
+html {
+    background-color: #fafafa;
+}
+
 h1,
 h2,
 h3,
@@ -23,6 +34,7 @@ h6 {
     font-weight: 600;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 5px;
+    color: #3e3e3e;
 }
 
 
@@ -37,7 +49,8 @@ h6 {
     font-size: 14px;
     text-decoration: none;
 }
-.btn:hover{
+
+.btn:hover {
     cursor: pointer;
 }
 .btn-group{
@@ -116,7 +129,11 @@ h6 {
     color: var(--info-color);
 }
 
+<<<<<<< HEAD
 .text-white{
+=======
+.text-white {
+>>>>>>> cc7c9269feb411bef9ba4b373b010c4066701b1b
     color: var(--white-color);
 }
 
@@ -341,20 +358,20 @@ h6 {
     border: none;
 }
 
-.border-rouned {
-    border: var(--small-rounded);
+.border-rounded {
+    border-radius: var(--small-rounded);
 }
 
-.border-rouned-small {
-    border: var(--small-rounded);
+.border-rounded-small {
+    border-radius: var(--small-rounded);
 }
 
-.border-rouned-mid {
-    border: var(--mid-rounded);
+.border-rounded-mid {
+    border-radius: var(--mid-rounded);
 }
 
-.border-rouned-large {
-    border: var(--large-rounded);
+.border-rounded-large {
+    border-radius: var(--large-rounded);
 }
 
 .border-circular {
@@ -380,12 +397,12 @@ h6 {
 /* Inputs y formularios  */
 
 input {
-    width: 200px;
+    min-width: 200px;
     padding: var(--small-mp);
 }
 
 textarea {
-    width: 300px;
+    min-width: 300px;
     text-indent: 5px;
     font-size: 16px;
     padding: var(--small-mp);
@@ -399,50 +416,66 @@ textarea {
 }
 
 .form-control {
-    width: 300px;
-    display: block;
+    min-width: 300px;
+    width: 90%;
     padding: 10px;
     border: 1px solid var(--color-black);
-    border-radius: 6px;
-    margin: 5px;
+    border-radius: 4px;
+    margin: 3px;
+}
+
+.form-control::placeholder {
+    font-weight: 600;
 }
 
 
 /* Display */
-.d-block{
+
+.d-block {
     display: block;
 }
-.d-inline-block{
+
+.d-inline-block {
     display: inline-block;
 }
-.d-inline{
+
+.d-inline {
     display: inline;
 }
 
+
 /* width elemnnts */
-.w-25{
+
+.w-25 {
     width: 25%;
 }
-.w-35{
+
+.w-35 {
     width: 35%;
 }
-.w-50{
+
+.w-50 {
     width: 50%;
 }
-.w-65{
+
+.w-65 {
     width: 65%;
 }
-.w-75{
+
+.w-75 {
     width: 75%;
 }
-.w-85{
+
+.w-85 {
     width: 85%;
 }
-.w-100{
+
+.w-100 {
     width: 100%;
 }
 
 
+<<<<<<< HEAD
 
 /* float */
 
@@ -451,4 +484,97 @@ textarea {
 }
 .float-right{
     float: right;
+=======
+/* clases para las tablas  */
+
+.table {
+    min-width: 86%;
+    padding: 5px;
+    border-collapse: collapse;
+}
+
+.table td,
+.table th {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-hover tr:hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.table-striped tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.table-striped tr:nth-child(even):hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.table-primary th {
+    background-color: var(--color-primario);
+    color: #fff;
+}
+
+.table-danger th {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+
+.table-info th {
+    background-color: var(--info-color);
+    color: #fff;
+}
+
+.table-success th {
+    background-color: var(--success-color);
+    color: #fff;
+}
+
+.table-warning th {
+    background-color: var(--warning-color);
+    color: #fff;
+}
+
+
+/* Listas  */
+
+ul {
+    list-style: none;
+}
+
+
+/* enlaces  */
+
+a {
+    text-decoration: none;
+    font-size: 16px;
+    padding: 4px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+
+/* Position clases */
+
+.position-relative {
+    position: relative;
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.position-bottom {
+    position: absolute;
+    bottom: 5%;
+}
+
+.position-top {
+    position: absolute;
+    top: 0%;
+>>>>>>> cc7c9269feb411bef9ba4b373b010c4066701b1b
 }

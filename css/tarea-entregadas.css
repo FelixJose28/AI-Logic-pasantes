@@ -1,0 +1,12 @@
+ .main-container {
+     width: 80%;
+ }
+ 
+ .icon {
+     font-size: 20px;
+ }
+ 
+ .icon:hover {
+     box-shadow: 2px 2px 3px #7c7c7c;
+     transition: 0.3s;
+ }

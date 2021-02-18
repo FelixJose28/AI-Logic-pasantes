@@ -1,57 +1,88 @@
-* {
-    padding: 0;
-    margin: 0;
-    font-family: sans-serif;
-}
-
 .container {
-    display: grid;
-    grid-template-columns: 270px 1fr;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* grid-template-columns: minmax(200px, 1fr); */
 }
 
-.main_container {
+.menu-contianer li:hover {
+    background-color: #fafafa;
+    transition: 0.3s;
+}
+
+.menu-contianer li:hover>a {
+    color: var(--color-primario);
+}
+
+#sidebar-container {
+    max-width: 200px;
+    height: 100vh;
+}
+
+#btn-menu-open a,
+#btn-menu-close a {
+    font-size: 30px;
+}
+
+#btn-menu-open a {
+    color: #3e3e3e;
+}
+
+.slide-left-out {
+    animation: slideleft 1s;
+}
+
+.slide-right-in {
+    animation: sliderightin 2s;
+}
+
+@keyframes slideleft {
+    100% {
+        position: relative;
+        left: -300px;
+    }
+}
+
+@keyframes sliderightin {
+    100% {
+        position: relative;
+        left: 0;
+    }
+}
+
+
+/* .main_container {
     position: relative;
     margin-top: 20px;
-    /* background-color: aquamarine; */
-}
+    background-color: aquamarine;
 
+
+}
 #sidebar {
     position: relative;
     width: 200px;
-    background-color: royalblue;
+    background-color: var(--color-primario);
     height: 100vh;
     left: -200px;
 }
-
 #sidebar.active {
     left: 0;
 }
-
 #sidebar ul li {
     display: block;
-    height: 100%;
-    color: #fff;
     list-style: none;
-    padding: 10px 15px;
-    border-bottom: solid 1px #fff;
 }
-
 #sidebar a {
     text-decoration: none;
-    background-color: blueviolet;
     color: #fff;
-    height: 1000%;
 }
-
 #sidebar li:hover {
     background-color: rgb(8, 59, 214);
 }
-
 #sidebar ul a li img {
     padding-right: 20px;
     width: 30px;
 }
-
 #sidebar .toggle_btn span {
     display: block;
     width: 30px;
@@ -59,20 +90,18 @@
     background: black;
     margin: 3px 0px;
 }
-
 #opciones_inferiores {
     margin-top: 230px;
 }
-
 .toggle_btn:hover {
     cursor: pointer;
 }
-
 #sidebar .toggle_btn {
     position: absolute;
     left: 220px;
     top: 20px
 }
+<<<<<<< HEAD
 
 
 /* .main_contianer.resaze{
@@ -81,3 +110,6 @@
     width: 100%;
 }
     */
+=======
+*/
+>>>>>>> cc7c9269feb411bef9ba4b373b010c4066701b1b
