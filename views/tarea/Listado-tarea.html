@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../js/load-table-data.js"></script>
+    <script src="../../js/paginator.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/global-style.css">
+    <link rel="stylesheet" href="../../css/paginator-style.css">
 
     <link rel="stylesheet" href="../../css/listado-tareas.css">
     <title>Tarea</title>
+
+
+    <script>
+        let estudiantes = [{
+            "nombre": "Gabriel",
+            "Apellido": "Geronimo",
+            "Edad": 20,
+            "Carrera": "Software"
+        }, {
+            "nombre": "Jose",
+            "Apellido": "Mendez",
+            "Edad": 12,
+            "Carrera": "Software"
+        }, {
+            "nombre": "Ronadl",
+            "Apellido": "Rojas",
+            "Edad": 20,
+            "Carrera": "Software"
+        }, {
+            "nombre": "Felix",
+            "Apellido": "Ynfante",
+            "Edad": 20,
+            "Carrera": "Software"
+        }, {
+            "nombre": "Eduardo",
+            "Apellido": "Gusman",
+            "Edad": 20,
+            "Carrera": "Software"
+        }, {
+            "nombre": "Freddy",
+            "Apellido": "Paredes",
+            "Edad": 20,
+            "Carrera": "Software"
+        }]
+    </script>
 </head>
 
 <body>
@@ -68,18 +107,19 @@
         <div class="main-container mx-auto">
             <!-- cargar el contenido principal es esta seccion de la pagina-->
             <div class="contianer-listado my-top-large">
-                <h2>Listado de tareas</h2>
-                <br>
-                <div>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <th>Dia de creacion</th>
+                <div class="px-large mx-large">
+                    <!-- <h2>Listado de tareas</h2> -->
+                </div>
+                <div class="my-top-large">
+                    <table id="table-estudiantes" class="table table-striped table-hover mx-auto">
+                        <thead id="thead">
+                            <!-- <th>Dia de creacion</th>
                             <th>Titulo</th>
                             <th>Estado</th>
-                            <th>Optiones</th>
+                            <th>Optiones</th> -->
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id="tbody">
+                            <!-- <tr>
                                 <td>20 de febrero</td>
                                 <td>Asignacion#12</td>
                                 <td>Sin asignar</td>
@@ -88,10 +128,32 @@
                                     <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
                                     <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>
                                 </td>
-                            </tr>
-
+                            </tr> -->
+                            <script>
+                                cargarDatosEnTable(["nombre", "Apellido", "Edad", "Carreara"], {
+                                    "thead": "thead",
+                                    "tbody": "tbody",
+                                    "data": estudiantes
+                                });
+                            </script>
                         </tbody>
                     </table>
+                    <div id="paginator" class="flex flex-row  flex-justify-center p-large">
+                        <script>
+                            crearPaginator({
+                                "data": estudiantes,
+                                "length": 10,
+                                "tableName": "table-estudiantes",
+                                "tableConfig": [
+                                    [], {
+                                        "thead": "thead",
+                                        "tbody": "tbody",
+                                        "data": estudiantes
+                                    }
+                                ]
+                            })
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>

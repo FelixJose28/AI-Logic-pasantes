@@ -7,3 +7,12 @@
 form {
     max-width: 600px;
 }
+
+#small-menu-btn,
+#big-menu-btn {
+    right: -40px;
+    font-size: 16px;
+    color: var(--color-primario-dark);
+    cursor: pointer;
+    background-color: white;
+}

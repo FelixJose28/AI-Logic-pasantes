@@ -5,6 +5,10 @@
     /* grid-template-columns: minmax(200px, 1fr); */
 }
 
+.main-container {
+    width: 80%;
+}
+
 .menu-contianer li:hover {
     background-color: #fafafa;
     transition: 0.3s;
@@ -15,7 +19,6 @@
 }
 
 #sidebar-container {
-    width: 200px;
     height: 100vh;
 }
 

@@ -473,11 +473,14 @@ function insertEncabezado(titulos, thead) {
     let row = thead.insertRow();
 
     titulos.forEach(value => {
-        let th = document.createElement("b");
-        th.appendChild(document.createTextNode(value))
+        let th = document.createElement("TH");
+        // th.appendChild(document.createTextNode(value))
 
-        let cell = row.insertCell();
-        cell.appendChild(th);
+        th.innerHTML = value;
+        row.appendChild(th);
+
+        // let cell = row.insertCell();
+        // cell.appendChild(th);
     });
 
 }
