@@ -1,0 +1,8 @@
+.paginator-button {
+    padding: 6px 0px;
+    margin-left: 1px;
+    width: 60px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
