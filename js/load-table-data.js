@@ -479,7 +479,6 @@ function insertContenido(datos, tbody, opciones, length) {
             cell.appendChild(document.createTextNode(item[key]));
         }
 
-
         index++;
     }
 }
