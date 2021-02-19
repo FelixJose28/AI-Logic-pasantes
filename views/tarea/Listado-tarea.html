@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -142,10 +141,13 @@
                                 </td>
                             </tr> -->
                             <script>
-                                cargarDatosEnTable(["nombre", "Apellido", "Edad", "Carreara"], {
+                                const opciones = "<a href='#' class='icon text-success mx-small p-small'><i class='fas fa-pen'></i></a>";
+
+                                cargarDatosEnTable(["nombre", "Apellido", "Edad", "Carreara", "Opciones"], {
                                     "thead": "thead",
                                     "tbody": "tbody",
-                                    "data": estudiantes
+                                    "data": estudiantes,
+                                    "opciones": opciones
                                 });
                             </script>
                         </tbody>
