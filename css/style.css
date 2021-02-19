@@ -7,10 +7,11 @@
 
 .menu-contianer li:hover {
     background-color: #fafafa;
+    color: var(--color-primario);
     transition: 0.3s;
 }
 
-.menu-contianer li:hover>a {
+.menu-contianer li a {
     color: var(--color-primario);
 }
 
