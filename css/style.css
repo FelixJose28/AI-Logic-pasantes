@@ -1,7 +1,8 @@
+@import url(menu-style.css);
 .container {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     /* grid-template-columns: minmax(200px, 1fr); */
 }
 
