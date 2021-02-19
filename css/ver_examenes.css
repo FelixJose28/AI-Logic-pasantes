@@ -5,10 +5,12 @@
 }
 
 .examen-container {
-    margin-top: 50px;
+    margin: 50px;
+    width: 60vw;
 }
 
 .examen-list {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);
     gap: 10px;
