@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/global-style.css">
+    <link rel="stylesheet" href="../../css/perfil.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="sidebar" class="active">
+            <!-- Esta parte contine el menu principal de la pagina  -->
+            <div class="toggle_btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <a href="#">
+                    <li><i class="far fa-user-circle" style="color: white;padding: 5px;"></i> Perfil</li>
+                </a>
+                <a href="#">
+                    <li><i class="far fa-file-alt" style="color: white;padding: 5px;"></i>Tareas</li>
+                </a>
+                <a href="#">
+                    <li><i class="fas fa-clipboard-list" style="color: white;padding: 5px;"></i>Evaluaciones</li>
+                </a>
+                <a href="#">
+                    <li><i class="fas fa-users" style="color: white;padding: 5px;"></i> Pasantes</li>
+                </a>
+                <a href="#">
+                    <li><i class="fas fa-book-open" style="color: white; padding: 5px;"></i>Convocatorias</li>
+                </a>
+            </ul>
+            <ul id="opciones_inferiores">
+                <a href="#">
+                    <li><i class="fas fa-cog" style="color: white;padding: 5px;"></i>Ajustes</li>
+                </a>
+                <a href="#">
+                    <li><i class="fas fa-sign-out-alt" style="color: white;padding: 5px;"></i>Cerrar Session</li>
+                </a>
+            </ul>
+
+        </div>
+        <div class="main_container" id="main">
+            <img src="../../img/perfil_pasante.jpg" alt="admin">
+
+            <h2 class="mx-left-large titlec" style="color: var(--color-primario); ">Alberto Madera <i class="fas fa-check-circle" style="color: green;"></i></h2>
+
+            <div class="detalles_admin">
+
+                <label for="text">Pasante</label>
+                <br><br>
+                <label for="text">Nivel: Iniciado</label>
+
+
+            </div>
+            <div style="position: absolute; top: 30%;">
+                <h1 class="mx-left-large  " style="color: var(--color-primario);font-size: 40px;">Detalles del Pasante</h1>
+                <hr width="900">
+                <br><br>
+                <div style="position: absolute; left: 5%;">
+                    <label for="text" class="content"><strong class="formulario">Email: </strong>&nbsp; &nbsp; &nbsp; &nbsp; 
+            usuario06@hotmail.com </label>
+                    <hr width="800">
+                    <br><br><br>
+                    <label for="text" class="content"><strong class="formulario">Nombres: </strong>&nbsp; &nbsp; &nbsp; &nbsp; 
+                    Alberto Felix </label>
+                    <hr width="800">
+                    <br><br><br>
+                    <label for="text" class="content"><strong class="formulario">Apellidos: </strong>&nbsp; &nbsp; &nbsp; &nbsp; 
+                    Madera Concepcion </label>
+
+                    <hr width="800">
+                    <br><br><br>
+                    <label for="text" class="content"><strong class="formulario">Contraseña: </strong>&nbsp; &nbsp; &nbsp; &nbsp; 
+                    **********  <i class="far fa-edit icon" style="float:right; color:#3C95B5;"></i></label>
+                    <hr width="800">
+                    <br><br><br>
+
+                    <input type="button" onclick="document.location='detalles_pasante.html'" value="Guardar Cambios" class="btn btn-success guardar">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../js/script.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

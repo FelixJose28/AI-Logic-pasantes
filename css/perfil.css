@@ -1,0 +1,56 @@
+@import "./global-style.css";
+.formulario {
+    font-size: 25px;
+}
+
+.content {
+    font-size: 20px;
+}
+
+.icon {
+    text-align: right;
+}
+
+.guardar {
+    position: absolute;
+    top: 95%;
+    left: 40%;
+}
+
+.pasante {
+    position: absolute;
+    top: -40%;
+    left: 90%;
+}
+
+.imgadmin {
+    border-radius: 50%;
+    position: absolute;
+    left: 40%;
+    top: 10%;
+    width: 20%;
+    height: 30%;
+}
+
+img {
+    border-radius: 50%;
+    position: absolute;
+    left: 85%;
+    top: 0%;
+    width: 10%;
+    height: 10%;
+}
+
+.titlec {
+    position: absolute;
+    top: 10%;
+    left: 78%;
+}
+
+.detalles_admin {
+    font-size: 20px;
+    text-align: center;
+    position: absolute;
+    top: 17%;
+    left: 85%;
+}
