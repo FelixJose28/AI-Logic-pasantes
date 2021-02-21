@@ -440,7 +440,7 @@ let data = [{
 
 
 
-function cargarDatosEnTable(titulos, config, length) {
+function cargarDatosEnTable(opciones, titulos, config) {
     let thead = document.getElementById(config.thead);
     let tbody = document.getElementById(config.tbody);
 
@@ -448,7 +448,7 @@ function cargarDatosEnTable(titulos, config, length) {
     insertEncabezado(titulos, thead);
 
     // load body contenido 
-    insertContenido(config.data, tbody, config.opciones, length);
+    insertContenido(config.data, tbody, opciones, config.length);
 
 }
 
@@ -466,7 +466,7 @@ function insertEncabezado(titulos, thead) {
 }
 
 
-function insertContenido(datos, tbody, opciones, length) {
+function insertContenido(datos, tbody, opcion, length) {
 
     let index = 0;
     for (let item of datos) {
@@ -478,6 +478,12 @@ function insertContenido(datos, tbody, opciones, length) {
             let cell = row.insertCell();
             cell.appendChild(document.createTextNode(item[key]));
         }
+
+        let div = document.createElement("div");
+        div.innerHTML = opcion;
+        let cell = row.insertCell();
+
+        cell.appendChild(div);
 
         index++;
     }

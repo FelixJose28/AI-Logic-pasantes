@@ -18,7 +18,7 @@
     height: 100%;
     transition: var(--transition-time);
     background-color: var(--color-primario);
-    box-shadow: 10px 0px 20px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 10px 0px 20px rgba(0, 0, 0, 0.3); */
     z-index: 1;
 }
 

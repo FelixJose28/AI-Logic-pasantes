@@ -54,11 +54,13 @@ h6 {
 .btn:hover {
     cursor: pointer;
 }
-.btn-group{
+
+.btn-group {
     padding: var(--small-mp);
     display: inline-block;
     padding: 10px;
 }
+
 .btn-primario {
     background-color: var(--color-primario-dark);
     color: var(--white-color);
@@ -86,6 +88,10 @@ h6 {
 
 
 /* background */
+
+.bg-white {
+    background-color: var(--white-color);
+}
 
 .bg-danger {
     background-color: var(--danger-color);
@@ -124,13 +130,13 @@ h6 {
 
 .text-warning {
     color: var(--warning-color);
-} 
+}
 
 .text-info {
     color: var(--info-color);
 }
 
-.text-white{
+.text-white {
     color: var(--white-color);
 }
 
@@ -472,16 +478,17 @@ textarea {
 }
 
 
-
 /* float */
 
-.float-left{
+.float-left {
     float: left;
 }
-.float-right{
+
+.float-right {
     float: right;
-/* clases para las tablas  */
+    /* clases para las tablas  */
 }
+
 .table {
     min-width: 86%;
     padding: 5px;
@@ -571,4 +578,10 @@ a {
 .position-top {
     position: absolute;
     top: 0%;
+}
+
+.shadow-small {
+    box-shadow: -1px 1px 11px -3px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: -1px 1px 11px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 1px 11px -3px rgba(0, 0, 0, 0.75);
 }
