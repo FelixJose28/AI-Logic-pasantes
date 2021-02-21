@@ -68,32 +68,34 @@
             </div>
         </div>
 
-        <div class="main_container" id="main">
+        <div class="main_container mx-auto" id="main">
             <!-- cargar el contenido principal es esta seccion de la pagina-->
-            <form class="w-65  mx-auto">
-                <h1 class="text-center w-75">Editar datos</h1>
+
+            <form action="" class="w-65 mx-auto">
+                <h1 class="text-center w-65">Editar Datos</h1>
                 <div class="form-group my-top-large">
-                    <label for="nombre">Nombre</label>
-                    <input id="nombre"  type="text" class="form-control bg-primary text-white w-75" value="Felix">
+                    <label class="d-block" for="nombre">Nombre</label>
+                    <input id="nombre"  type="text" class="form-control bg-primary text-white w-65" value="2021-3-20">
                 </div>
-                <div class="form-group my-top-mid">
-                    <label for="apellido">Apellido</label>
-                    <input id="apellido" type="text" class="form-control bg-primary text-white w-75" value="Ynfante">
+                <div class="form-group my-top-large">
+                    <label  class="d-block" for="apellido">Apellido</label>
+                    <input id="apellido" type="text" class="form-control bg-primary text-white w-65" value="1">
                 </div>
-                <div class="form-group my-top-mid">
-                    <label for="correo">Correo</label>
-                    <input id="correo" type="text" class="form-control bg-primary text-white w-75" value="ejemplo@gmail.com">
+                <div class="form-group my-top-large">
+                    <label  class="d-block" for="correo">Correo</label>
+                    <input id="correo" type="text" class="form-control bg-primary text-white w-65" value="1">
                 </div>
-                <div class="form-group my-top-mid">
-                    <label for="direccion">Direccion</label>
-                    <input id="direccion" type="text" class="form-control bg-primary text-white w-75" value="Una casa">
+                <div class="form-group my-top-large">
+                    <label  class="d-block"  for="direccion">Direccion</label>
+                        <textarea rows="3" maxlength="200" id="direccion" type="text" class="form-control bg-primary text-white w-65">Calle numero tal, casa numero tal, provincia tal</textarea>
                 </div>
-                <div class="my-top-large mx-auto w-75 btn-group">
-                    <button class="btn btn-info d-inline-block">Guardar</button>
-                    <button class="btn  btn-success d-inline-block float-right">Volver Atras</button>
+                <div id="btn_group_ACA" class="my-top-large btn-agrupados mx-auto w-65 btn-group">
+                    <button id="btn_saveACA" class="btn w-40 my-top-mid btn-info ">Guardar</button>
+                    <button id="btn_backACA" class="btn w-40 my-top-mid btn-success  float-right">Atras</button>
                 </div>
             </form>
         </div>
     </div>
+</body>
 </body>
 </html>
