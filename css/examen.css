@@ -1,89 +1,94 @@
 @import "./global-style.css";
 
-.question-container {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
+/* Preguntas */
+.questions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 30px;
 }
 
-.back-btn {
-    background-color: var(--color-primario);
-    color: var(--white-color);
-    font-weight: bold;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+.question {
+  margin: 30px 20px;
 }
 
-.back-btn:hover {
-    cursor: pointer;
-    background-color: var(--color-primario-dark);
+.question-text {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.back-btn span {
-    font-size: 30px;
-    font-weight: bold;
+.answer {
+    display: block;
 }
 
-.question-list {
-    list-style: none;
-}
-
-.question-title {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.question-answers {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.question-answer-item {
-    display: flex;
+/* Checkmark */
+.answer {
     position: relative;
-    flex-direction: row;
-    align-items: center;
-    margin: 5px 10px;
-    width: 270px;
+    padding-left: 35px;
+    font-size: 18px;
+    margin: 15px;
 }
 
-.question-item {
-    margin-bottom: 20px;
+.answer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
 }
 
-.question-answer-item span {
-    font-size: 40px;
-    margin: 4px;
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
 }
 
-.checkmark-correct {
-    color: var( --success-color);
+.answer:hover input ~ .checkmark {
+  background-color: #ccc;
 }
 
-.checkmark-incorrect {
-    color: var( --danger-color);
+.answer input:checked ~ .checkmark {
+  background-color: var(--color-primario-dark);
 }
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.answer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.answer .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--white-color);
+}
+
+/* Boton Siguiente */
 
 .siguiente-btn {
-    align-self: center;
-    margin-top: 60px;
-    color: var(--white-color);
-    background-color: var(--color-primario);
-    height: 40px;
-    width: 260px;
-    font-size: 18px;
-    border-radius: 10px;
-    border: none;
-    outline:none;
+  align-self: center;
+  margin-top: 60px;
+  color: var(--white-color);
+  background-color: var(--color-primario);
+  height: 40px;
+  width: 260px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
 }
 
 .siguiente-btn:hover {
-    cursor: pointer;
-    background-color: var(--color-primario-dark);
+  cursor: pointer;
+  background-color: var(--color-primario-dark);
 }
