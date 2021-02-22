@@ -7,13 +7,13 @@ window.addEventListener("hashchange", () => {
     let routeHash = window.location.hash;
     console.log(`New route hash: ${routeHash}`);
 
-    if (routeHash.length > 0){
+    if (routeHash.length > 0) {
         let route = routeHash.substr(1);
 
-        if (route.length == 0){
+        if (route.length == 0) {
             // Redirect to homepage
         } else {
-            location.assign(`${location.origin}/views/${route}.html`);
+            location.assign(`${location.origin}/views/${route}`);
         }
     }
 });

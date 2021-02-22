@@ -4,7 +4,7 @@ function crearPaginator(config) {
 
     tableBody.innerHTML = '';
 
-    cargarDatosEnTable(config.tableConfig[0], config.tableConfig[1], config.length);
+    cargarDatosEnTable(config.opciones, config.tableConfig[0], config.tableConfig[1]);
 
     if (config.data.length > config.length) {
 
@@ -32,9 +32,9 @@ function crearPaginator(config) {
                     config.tableConfig[1].data = config.data.slice((localStorage.getItem("pagina") - 1) * config.length);
 
                     // volver a cargar los datos en la tabla
-                    cargarDatosEnTable(config.tableConfig[0],
-                        config.tableConfig[1],
-                        config.length);
+                    cargarDatosEnTable(config.opciones,
+                        config.tableConfig[0],
+                        config.tableConfig[1]);
 
                 })
 
@@ -53,9 +53,9 @@ function crearPaginator(config) {
                     config.tableConfig[1].data = config.data.slice((localStorage.getItem("pagina") - 1) * config.length);
 
                     // volver a cargar los datos en la tabla
-                    cargarDatosEnTable(config.tableConfig[0],
-                        config.tableConfig[1],
-                        config.length);
+                    cargarDatosEnTable(config.opciones,
+                        config.tableConfig[0],
+                        config.tableConfig[1]);
                 })
 
                 contianer.appendChild(button);
@@ -80,9 +80,9 @@ function crearPaginator(config) {
 
             config.tableConfig[1].data = config.data.slice((localStorage.getItem("pagina") - 1) * config.length);
 
-            cargarDatosEnTable(config.tableConfig[0],
-                config.tableConfig[1],
-                config.length);
+            cargarDatosEnTable(config.opciones,
+                config.tableConfig[0],
+                config.tableConfig[1]);
 
         })
 

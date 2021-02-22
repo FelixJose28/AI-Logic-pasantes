@@ -21,16 +21,20 @@
         <div class="sidebar-container">
             <div id="sidebar">
                 <div class="sidebar-menu">
-                    <ul class="opciones_superiores">
+                    <ul class="opciones_superiores mainmenu">
                         <li class="py-mid my-mid border-rounded-small">
                             <a href="#" class="text-white">
                                 <i class="far fa-user-circle mx-right-mid"></i> Perfil
                             </a>
                         </li>
-                        <li class="py-mid my-mid border-rounded-small">
-                            <a href="#" class="text-white">
-                                <i class="far fa-file-alt mx-right-mid"></i>Tareas
-                            </a>
+                        <li class="py-mid my-small border-rounded-small">
+                            <i class="far fa-file-alt"></i>
+                            <a href="#">Tareas</a>
+                            <ul class="submenu mx-left-large">
+                                <li><a href="javascript:redirectToRoute('tarea/tarea.html');">Crear tarea</a></li>
+                                <li><a href="javascript:redirectToRoute('tarea/Listado-tarea.html');">Sin asignar</a></li>
+                                <li><a href="javascript:redirectToRoute('tarea/tareas-entregadas.html');">Ver entregas</a></li>
+                            </ul>
                         </li>
                         <li class="py-mid my-mid border-rounded-small">
                             <a href="#" class="text-white">
@@ -73,9 +77,11 @@
         <div class="main-container p-large" id="main">
             <!-- cargar el contenido principal es esta seccion de la pagina-->
             <!-- <h2 class="text-left mx-left-large my-mid">Añadir Tarea</h2> -->
-            <div class="contianer-tarea flex flex-justify-center">
-                <div class="px-large w-85">
-                    <form action="" enctype="multipart/form-data" class="mx-auto px-large">
+            <div class="contianer-tarea">
+                <div>
+                    <form action="" enctype="multipart/form-data" class="mx-auto px-large my-top-large">
+                        <h2>Crear una nueva tarea</h2>
+                        <br>
                         <div class="control-group">
                             <label for="" class="">Titulo *</label>
                             <input type="text" placeholder="Titulo de la tarea" name="titulo" id="titulo" class="form-control w-75">
@@ -90,7 +96,7 @@
                         </div>
                         <div class="text-center">
                             <!-- <input type="file" class="btn ">Subir archivo</button> -->
-                            <button type="submit" class="btn btn-primario text-white my-top-mid">Crear tarea</button>
+                            <button type="submit" class="btn btn-primario text-white my-large">Crear tarea</button>
                         </div>
 
                     </form>
@@ -101,4 +107,5 @@
         </div>
     </div>
 </body>
+
 </html>

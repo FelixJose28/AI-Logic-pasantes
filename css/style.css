@@ -1,9 +1,10 @@
 @import url(menu-style.css);
-.container {
+
+/* .container {
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
-    /* grid-template-columns: minmax(200px, 1fr); */
+    grid-template-columns: minmax(200px, 1fr);
 }
 
 .menu-contianer li:hover {
@@ -28,87 +29,4 @@
 
 #btn-menu-open a {
     color: #3e3e3e;
-}
-
-.slide-left-out {
-    animation: slideleft 1s;
-}
-
-.slide-right-in {
-    animation: sliderightin 2s;
-}
-
-@keyframes slideleft {
-    100% {
-        position: relative;
-        left: -300px;
-    }
-}
-
-@keyframes sliderightin {
-    100% {
-        position: relative;
-        left: 0;
-    }
-}
-
-
-/* .main_container {
-    position: relative;
-    margin-top: 20px;
-    background-color: aquamarine;
-
-
-}
-#sidebar {
-    position: relative;
-    width: 200px;
-    background-color: var(--color-primario);
-    height: 100vh;
-    left: -200px;
-}
-#sidebar.active {
-    left: 0;
-}
-#sidebar ul li {
-    display: block;
-    list-style: none;
-}
-#sidebar a {
-    text-decoration: none;
-    color: #fff;
-}
-#sidebar li:hover {
-    background-color: rgb(8, 59, 214);
-}
-#sidebar ul a li img {
-    padding-right: 20px;
-    width: 30px;
-}
-#sidebar .toggle_btn span {
-    display: block;
-    width: 30px;
-    height: 5px;
-    background: black;
-    margin: 3px 0px;
-}
-#opciones_inferiores {
-    margin-top: 230px;
-}
-.toggle_btn:hover {
-    cursor: pointer;
-}
-#sidebar .toggle_btn {
-    position: absolute;
-    left: 220px;
-    top: 20px
-}
-
-
-/* .main_contianer.resaze{
-    background-color: red;
-    color: aquamarine;
-    width: 100%;
-}
-    */
-
+} */

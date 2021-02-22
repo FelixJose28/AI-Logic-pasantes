@@ -439,24 +439,8 @@ let data = [{
 ]
 
 
-// function insertarDatos(object, tbody) {
-//     let tableBody = document.getElementById(tbody);
 
-//     object.forEach(item => {
-//         tableBody.insertRow().innerHTML = ` <td>${item.fecha}</td>
-//                                             <td>${item.titulo}</td>
-//                                             <td>${item.grupo}</td>
-//                                             <td>${item.calificacion}</td>
-//                                             <td>
-//                                                 <a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
-//                                                 <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
-//                                                 <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>
-//                                             </td> `;
-
-//     });
-// }
-
-function cargarDatosEnTable(titulos, config, length) {
+function cargarDatosEnTable(opciones, titulos, config) {
     let thead = document.getElementById(config.thead);
     let tbody = document.getElementById(config.tbody);
 
@@ -464,7 +448,7 @@ function cargarDatosEnTable(titulos, config, length) {
     insertEncabezado(titulos, thead);
 
     // load body contenido 
-    insertContenido(config.data, tbody, length);
+    insertContenido(config.data, tbody, opciones, config.length);
 
 }
 
@@ -474,19 +458,16 @@ function insertEncabezado(titulos, thead) {
 
     titulos.forEach(value => {
         let th = document.createElement("TH");
-        // th.appendChild(document.createTextNode(value))
 
         th.innerHTML = value;
         row.appendChild(th);
-
-        // let cell = row.insertCell();
-        // cell.appendChild(th);
     });
 
 }
 
 
-function insertContenido(datos, tbody, length) {
+function insertContenido(datos, tbody, opcion, length) {
+
     let index = 0;
     for (let item of datos) {
         if (index == length) { break; }
@@ -497,6 +478,13 @@ function insertContenido(datos, tbody, length) {
             let cell = row.insertCell();
             cell.appendChild(document.createTextNode(item[key]));
         }
+
+        let div = document.createElement("div");
+        div.innerHTML = opcion;
+        let cell = row.insertCell();
+
+        cell.appendChild(div);
+
         index++;
     }
 }

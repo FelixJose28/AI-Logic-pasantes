@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/global-style.css">
     <link rel="stylesheet" href="../../css/paginator-style.css">
-    <link rel="stylesheet" href="../../css/tarea-entregadas.css">
+    <!-- <link rel="stylesheet" href="../../css/tarea-entregadas.css"> -->
 
     <!-- Sidebar -->
     <link href="../../css/sidebar.css" rel="stylesheet" />
@@ -24,16 +24,20 @@
         <div class="sidebar-container">
             <div id="sidebar">
                 <div class="sidebar-menu">
-                    <ul class="opciones_superiores">
+                    <ul class="opciones_superiores mainmenu">
                         <li class="py-mid my-mid border-rounded-small">
                             <a href="#" class="text-white">
                                 <i class="far fa-user-circle mx-right-mid"></i> Perfil
                             </a>
                         </li>
-                        <li class="py-mid my-mid border-rounded-small">
-                            <a href="#" class="text-white">
-                                <i class="far fa-file-alt mx-right-mid"></i>Tareas
-                            </a>
+                        <li class="py-mid my-small border-rounded-small">
+                            <i class="far fa-file-alt"></i>
+                            <a href="#">Tareas</a>
+                            <ul class="submenu mx-left-large">
+                                <li><a href="javascript:redirectToRoute ('tarea/tarea.html');">Crear tarea</a></li>
+                                <li><a href="javascript:redirectToRoute('tarea/Listado-tarea.html');">Sin asignar</a></li>
+                                <li><a href="javascript:redirectToRoute('tarea/tareas-entregadas.html');">Ver entregas</a></li>
+                            </ul>
                         </li>
                         <li class="py-mid my-mid border-rounded-small">
                             <a href="#" class="text-white">
@@ -82,33 +86,40 @@
                         </thead>
                         <tbody id="tbody">
                             <script>
-                                cargarDatosEnTable(["fecha", "titulo", "grupo", "calificacion"], {
+                                const opciones = `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
+                                    <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`;
+
+                                cargarDatosEnTable(opciones, ["nombre", "Apellido", "Edad", "Carreara", "Opciones"], {
                                     "thead": "thead",
                                     "tbody": "tbody",
                                     "data": data
-                                })
+                                });
                             </script>
                         </tbody>
                     </table>
                 </div>
-                <div id="paginator" class="flex flex-row  flex-justify-center p-large "></div>
+                <div id="paginator" class="text-center p-large"></div>
                 <script>
                     crearPaginator({
+                        "opciones": opciones,
                         "data": data,
-                        "length": 8,
-                        "tableName": "table-entrega",
+                        "length": 10,
+                        "tableName": "table-estudiantes",
                         "tableConfig": [
                             [], {
                                 "thead": "thead",
                                 "tbody": "tbody",
-                                "data": data
+                                "data": data,
+                                "length": 8
                             }
                         ]
-                    });
+                    })
                 </script>
             </div>
         </div>
     </div>
 
 </body>
+
 </html>
