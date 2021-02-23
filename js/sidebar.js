@@ -1,4 +1,7 @@
 
+// Initial state of the sidebar
+let isVisible = true; // use session or cookies to store the state
+
 // Load the side bar into `sidebar-container`
 loadSidebar();
 
@@ -9,9 +12,6 @@ const SIDEBAR_VISIBLE = "sidebar-visible";
 const sidebar = document.getElementById("sidebar");
 const main = document.getElementById("main");
 const btn = document.getElementById("sidebar-btn");
-
-// Initial state of the sidebar
-let isVisible = true;
 
 // Set the initial state
 showSidebar(isVisible);
@@ -44,20 +44,20 @@ function showSidebar(visible){
     }
 }
 
-
 function loadSidebar(){
     const sidebarContainer = document.getElementById("sidebar-container");
+    const attributes = isVisible? `sidebar-visible="true"` : `sidebar-visible="false`;
 
     sidebarContainer.innerHTML = `
     <div id="sidebar">
-    <div class="sidebar-menu">
+    <div class="sidebar-menu" ${attributes}>
         <ul class="options_top">
-            <li class="  border-rounded-small">
+            <li class="border-rounded-small">
                 <a href="../pasantes/perfil_pasante.html" class="text-white">
                     <i class="far fa-user-circle mx-right-mid"></i> Perfil
                 </a>
             </li>
-            <li class="  border-rounded-small">
+            <li class="border-rounded-small">
                 <a class="text-white">
                     <i class="far fa-file-alt mx-right-mid"></i> Tarea
                 </a>
@@ -68,12 +68,12 @@ function loadSidebar(){
                 </ul>
             </li>
 
-            <li class="  border-rounded-small">
+            <li class="border-rounded-small">
                 <a href="../examenes/ver_examenes.html" class="text-white">
                     <i class="fas fa-clipboard-list mx-right-mid"></i>Examenes
                 </a>
             </li>
-            <li class="  border-rounded-small active">
+            <li class="border-rounded-small active">
                 <a class="text-white">
                     <i class="fas fa-users mx-right-mid"></i> Pasantes
                 </a>
@@ -82,7 +82,7 @@ function loadSidebar(){
                     <li><a href="../pasantes/estado_solicitudes.html">Estado solicitudes</a></li>
                 </ul>
             </li>
-            <li class="  border-rounded-small">
+            <li class="border-rounded-small">
                 <a href="#" class="text-white">
                     <i class="fas fa-book-open mx-right-mid"></i>Convocatorias
                 </a>
@@ -94,7 +94,7 @@ function loadSidebar(){
                     <i class="fas fa-cog mx-right-mid"></i>Ajustes
                 </a>
             </li>
-            <li class="  border-rounded-small">
+            <li class="border-rounded-small">
                 <a href="#" class="text-white">
                     <i class="fas fa-sign-out-alt mx-right-mid"></i>Cerrar Session
                 </a>
