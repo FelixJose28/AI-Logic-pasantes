@@ -1,10 +1,10 @@
 @import "./global-style.css";
 .formulario {
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .content {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .icon {
@@ -35,7 +35,7 @@
 img {
     border-radius: 50%;
     position: absolute;
-    left: 87%;
+    left: 83%;
     top: 8%;
     width: 10%;
     height: 10%;
@@ -44,7 +44,7 @@ img {
 .titlec {
     position: absolute;
     top: 17%;
-    left: 84%;
+    left: 80%;
 }
 
 .detalles_pasante {
@@ -52,7 +52,7 @@ img {
     text-align: center;
     position: absolute;
     top: 23%;
-    left: 88%;
+    left: 83.5%;
 }
 
 .detalles_admin {
