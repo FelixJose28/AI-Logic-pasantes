@@ -1,9 +1,8 @@
-
 // Used for session storage
 const SIDEBAR_KEY = "__sidebar";
 
 // Initial state of the sidebar
-let isVisible = isSidebarVisible();
+let isVisible = getSessionSidebarVisibility();
 
 // Load the side bar into `sidebar-container`
 loadSidebar();
@@ -16,16 +15,25 @@ const sidebar = document.getElementById("sidebar");
 const main = document.getElementById("main");
 const btn = document.getElementById("sidebar-btn");
 
-// Set the initial state
-showSidebar(isVisible);
+// Button click event
+btn.addEventListener("click", () => {
+    setVisible(!isVisible);
+});
 
-// Hide the sidebar if visible otherwise close it
-function hideOrShowSideBar() { 
-    showSidebar(!isVisible);
-}  
+window.onload = () => {
+    // Hide the sidebar when is loaded in a devide with a width of 600 or less.
+    // This close the sidebar when a hyperlink is clicked in a movile device.
+    if (window.screen.width <= 600) {
+        setVisible(false);
+    }
+}
+
+// Set the initial state
+setVisible(isVisible);
 
 // Change the visibility state of the sidebar
-function showSidebar(visible){ 
+function setVisible(visible){ 
+    console.assert(typeof visible === "boolean");
     isVisible = visible;
 
     if (visible) {
@@ -50,22 +58,23 @@ function showSidebar(visible){
     window.sessionStorage.setItem(SIDEBAR_KEY, visible);
 }
 
-function isSidebarVisible(){
-    let visible = window.sessionStorage.getItem(SIDEBAR_KEY);
+// Gets the visiblity state of the sidebar from `sessionStorage`
+function getSessionSidebarVisibility(){
+    const value = window.sessionStorage.getItem(SIDEBAR_KEY);
 
-    if (visible == null){
-        visible = true;
-        window.sessionStorage.setItem(SIDEBAR_KEY, visible);
+    if (value == null){
+        window.sessionStorage.setItem(SIDEBAR_KEY, true);
+        return true;
     }
 
-    return visible;
+    return value === "true";
 }
 
 function loadSidebar(){
     const sidebarContainer = document.getElementById("sidebar-container");
 
     sidebarContainer.innerHTML = `
-    <div id="sidebar" >
+    <div id="sidebar">
     <div class="sidebar-menu">
         <ul class="options_top">
             <li class="border-rounded-small">
@@ -135,7 +144,7 @@ function loadSidebar(){
 
 <!-- Open/Close Button -->
 <div class="btn-bar">
-    <i class="fas fa-bars" id="sidebar-btn" onclick="hideOrShowSideBar()"></i>
+    <i class="fas fa-bars" id="sidebar-btn"></i>
 </div>
     `;
 }
