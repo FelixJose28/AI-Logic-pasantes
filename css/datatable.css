@@ -1,9 +1,28 @@
 /*
 DO NOT MODIFY, this is `datatable.js` global configuration,
-consider using other `.css` file with `!important` if needed
+consider using other `.css` file with `!important` if needed.
+
+The styles of the datatable must be keep at minimun to avoid conficts when using css.
 */
 
+/**/
+:root {
+    --main-color: #ccc;
+    --active-color: #ccc;
+    --disable-color: #ccc;
+}
+
+/* Styling datatable */
+.datatable {
+    /* No styles, let the parent decide the width or others properties of the datatable */
+}
+
 /* Styling table */
+table {
+    margin: 0;
+    width: 100%;
+}
+
 table, th, td {
     border-collapse: collapse;
     padding: 10px;
@@ -12,23 +31,40 @@ table, th, td {
 th, td {
     min-width: 100px;
     height: 40px;
-    white-space: nowrap;
+}
+
+.text-center {
+    text-align: center;
 }
 
 th {
     user-select: none;
 }
 
-tr:hover :not(th){
-    background-color: #ddd;
+/* Row hover */
+.hoverable:hover {
+    background-color: #ddd; 
 }
 
 .row-even {
     background-color: #eee;
 }
 
-/* Sortable */
+/* Selected column */
+td.selected-column {
+    background-color: rgb(200, 200, 200, 0.2);
+}
 
+/* Selected row */
+.selectable {
+    cursor: pointer;
+}
+
+.selectable tr {
+    background-color: rgb(200, 200, 200, 0.2);
+}
+
+/* Sortable */
 .sortable {
     cursor: pointer;
 }
@@ -47,44 +83,31 @@ tr:hover :not(th){
     float: right;
 }
 
-/* Enable in scroll-y */
-
-.table-scroll-y thead > tr {
-    position: relative;
-    display: inline-block;
-}
-
+/* Scroll-y */
 .table-scroll-y tbody {
-    display: block;
-    overflow-y: auto;
-    display: inline-block;
-}
-
-/* Styling paginator container */
-
-.datatable {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/*Scroll x*/
-.table-container {
+    display:block;
+    overflow: auto;
     width: 100%;
 }
 
+.table-scroll-y thead, .table-scroll-y tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Scroll-x */
 .table-scroll-x {
     overflow-x: auto;
 }
 
-table {
-    width: 100%;
+.table-scroll-x table td, .table-scroll-x table th {
+    white-space: nowrap;
 }
 
 /* Styling paginator */
-
 .paginator-container {
-    align-self: center
+    text-align: center;
 }
 
 .paginator button {
@@ -108,4 +131,14 @@ table {
 
 .paginator button:hover:not(.inactive) {
     background-color: #bbb;
+}
+
+/* Styling searchbar */
+.searchbar-container {
+   overflow: hidden;
+}
+
+.searchbar {
+    float: right;
+    margin-bottom: 5px;
 }
