@@ -5,6 +5,7 @@
 :root {
   --sidebar-width: 250px;
   --slide-in-duration: 0.3s;
+  --menu-option-radius: 8px;
 }
 
 /* Sidebar */
@@ -41,14 +42,28 @@
   overflow-y: auto;
 }
 
-.sidebar-menu li {
-    padding: 15px 5px;
-    margin: 0px 10px;
+/* Menu options and hover */
+.sidebar-menu li div {
+  padding: 10px;
+  margin: 12px 10px;
 }
 
-.sidebar-menu li:hover {
+.submenu li {
+  padding: 8px 10px;
+  margin: 5px 10px;
+  margin-left: 20px;
+}
+
+.sidebar-menu li:hover div {
   background-color: var(--white-color);
   color: var(--color-primario-dark);
+  border-radius: var(--menu-option-radius);
+}
+
+.submenu li:hover {
+  background-color: var(--white-color);
+  color: var(--color-primario-dark);
+  border-radius: var(--menu-option-radius);
 }
 
 /* Push bottom options down */
@@ -127,17 +142,6 @@ li:hover .submenu {
   height: 50px;
 }
 
-/* .sidebar-bg {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: black;
-    opacity: 0.3;
-    backdrop-filter: blur(10px);
-} */
-
 @media (max-width: 800px) {
   #sidebar-btn {
     position: absolute;
@@ -145,31 +149,8 @@ li:hover .submenu {
     right: 0;
   }
 
-  .btn_back {
-    background-color: aquamarine;
-  }
-
   #main {
     margin-left: 0;
-  }
-
-  /* ABRIR CONCONVOCATORIA ADMIN */
-  #btn_group_ACA {
-    width: 65%;
-  }
-
-  #btn_saveACA {
-    display: block;
-    margin: auto;
-    width: 50%;
-  }
-
-  #btn_backACA {
-    display: block;
-    margin: auto;
-    float: none;
-    margin-top: 2%;
-    width: 50%;
   }
 }
 
@@ -184,34 +165,33 @@ li:hover .submenu {
   }
 
   #sidebar[sidebar-visible="false"] {
-    left: -100%;
+    left: -200%; 
   }
 
-  .sidebar-menu li {
+  /* .sidebar-menu li {
     padding: 20px 25px;
+  } */
+  .sidebar-menu li div a{
+    font-size: 20px;
+  }
+
+  .submenu li a {
+    font-size: 16px;
+  }
+
+  .sidebar-menu li div {
+    padding: 10px;
+    margin: 10px auto;
+    margin-left: 20px;
+  }
+  
+  .submenu li {
+    padding: 8px 10px;
+    margin: 5px 10px;
+    margin-left: 40px;
   }
 
   .sidebar-menu {
     margin-top: 60px;
-  }
-
-  /* ABRIR CONCONVOCATORIA ADMIN */
-  #btn_group_ACA {
-    margin: auto;
-    width: 90%;
-  }
-
-  #btn_saveACA {
-    display: block;
-    margin: auto;
-    width: 50%;
-  }
-
-  #btn_backACA {
-    display: block;
-    margin: auto;
-    float: none;
-    margin-top: 2%;
-    width: 50%;
   }
 }

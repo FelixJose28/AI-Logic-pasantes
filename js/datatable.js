@@ -1,5 +1,8 @@
 "use strict";
 
+const SORT_ASC = "asc";
+const SORT_DESC = "desc";
+
 class DataTable {
     constructor(options) {
         if (options == null) {
@@ -10,6 +13,14 @@ class DataTable {
         this.header = options.header;
         this.data = options.data ?? [];
 
+        if (this.header == null){
+            if (this.data == null || this.data.length === 0){
+                throw new Error("A 'header' must be provided if the data is empty");
+            }
+
+            this.header = Object.keys(this.data[0]);
+        }
+
         // Table options
         this.currentPage = options.currentPage ?? 0;
         this.paginate = options.paginate ?? true;
@@ -18,9 +29,9 @@ class DataTable {
         this.previousButtonText = options.previousButtonText ?? "«";
         this.nextButtonText = options.nextButtonText ?? "»";
         this.pageButtonCount = options.pageButtonCount ?? 10;
-        this.scrollX = options.scrollX;
+        this.scrollX = options.scrollX?? false;
         this.scrollY = options.scrollY;
-        this.sorteable = options.sorteable;
+        this.sorteable = options.sorteable?? true;
 
         for (const key in options) {
             if (!this.hasOwnProperty(key)) {
@@ -54,12 +65,10 @@ class DataTable {
 
     nextPage() {
         this.moveToPage(this.currentPage + 1);
-        console.log("NEXT");
     }
 
     prevPage() {
         this.moveToPage(this.currentPage - 1);
-        console.log("PREV");
     }
 
     getCurrentPageData() {
@@ -70,21 +79,19 @@ class DataTable {
 
         if (this.sorting) {
             switch (this.sorting.sortBy) {
-                case "asc":
+                case SORT_ASC:
                     pageData = pageData.sort((objA, objB) => {
                         const index = this.sorting.index;
                         const x = objA[Object.keys(objA)[index]]
                         const y = objB[Object.keys(objB)[index]]
-                        console.log(`${x} and ${y} == ${sortByAscending(x, y)}`);
                         return sortByAscending(x, y);
                     });
                     break;
-                case "desc":
+                case SORT_DESC:
                     pageData = pageData.sort((objA, objB) => {
                         const index = this.sorting.index;
                         const x = objA[Object.keys(objA)[index]]
                         const y = objB[Object.keys(objB)[index]]
-                        console.log(`${x} and ${y} == ${sortByDecensing(x, y)}`);
                         return sortByDecensing(x, y);
                     });
                     break;
@@ -102,27 +109,28 @@ class DataTable {
         return pageData;
     }
 
-    sortColumn(column, index) {
-        const sorting = this.sorting;
-        if (sorting == null) {
-            column.classList.add("asc");
-
+    sortColumn(column, index) {        
+        if (this.sorting == null) {
             this.sorting = {
                 index: index,
                 column: column,
-                sortBy: "asc"
+                sortBy: SORT_ASC
             };
-
         } else {
-            sorting.index = index;
-
+            const sorting = this.sorting;
             sorting.column.classList.remove(sorting.sortBy);
-            sorting.sortBy = sorting.sortBy === "asc" ? "desc" : "asc";
+
+            if (sorting.index !== index){
+                sorting.sortBy = SORT_ASC;
+            } else {
+                sorting.sortBy = sorting.sortBy === SORT_ASC ? SORT_DESC : SORT_ASC;
+            }
+
             sorting.column = column;
-
-            column.classList.add(sorting.sortBy);
+            sorting.index = index;
         }
-
+        
+        column.classList.add(this.sorting.sortBy);
         this.render();
     }
 
@@ -146,11 +154,13 @@ class DataTable {
         this.dataTable = dataTable;
 
         if (this.paginate) {
+            // Container for the `table`
             const tableContainer = document.createElement("div");
             tableContainer.className = "table-container";
             tableContainer.appendChild(table);
             dataTable.appendChild(tableContainer);
 
+            // Container for the `paginator`
             const paginatorContainer = document.createElement("div");
             paginatorContainer.className = "paginator-container";
             paginatorContainer.appendChild(this.createPaginatorNode());
@@ -246,10 +256,15 @@ class DataTable {
         for (let i = 0; i < this.header.length; i++) {
             const element = this.header[i];
             const th = document.createElement("th");
-            th.innerText = element;
+            th.innerHTML = element;
 
             if (this.sorteable) {
                 th.classList.add("sortable");
+                
+                if (this.sorting && this.sorting.index === i) {
+                    th.classList.add(this.sorting.sortBy);
+                }
+
                 th.addEventListener("click", this.sortColumn.bind(this, th, i));
             }
 
@@ -265,9 +280,11 @@ class DataTable {
         tableNode.appendChild(tableHeader);
 
         // Creates the table rows
-        let index = 0;
+        const pageData = this.getCurrentPageData();
         const tableBody = document.createElement("tbody");
-        for (const data of this.getCurrentPageData()) {
+
+        for (let rowIndex = 0; rowIndex < pageData.length; rowIndex++) {
+            const data = pageData[rowIndex];
             const tr = document.createElement("tr");
 
             if (data !== null) {
@@ -275,8 +292,7 @@ class DataTable {
                     if (Object.hasOwnProperty.call(data, key)) {
                         const element = data[key];
                         const td = document.createElement("td");
-                        td.innerText = element;
-
+                        td.innerHTML = element;
                         tr.appendChild(td);
                     }
                 }
@@ -287,14 +303,14 @@ class DataTable {
             }
 
             tr.classList.add("row");
-            if (index % 2 === 0) {
+
+            if (rowIndex % 2 === 0) {
                 tr.classList.add("row-even");
             } else {
                 tr.classList.add("row-odd");
             }
 
             tableBody.appendChild(tr);
-            index += 1;
         }
 
         // Set vertical scroll
@@ -307,7 +323,6 @@ class DataTable {
         if (this.scrollX) {
             const tableScrollContainer = document.createElement("div");
             tableScrollContainer.className = "table-scroll-x";
-            tableScrollContainer.style.overflowX = "auto";
             tableScrollContainer.appendChild(tableNode);
             return tableScrollContainer;
         }

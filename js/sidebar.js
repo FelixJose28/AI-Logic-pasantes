@@ -1,6 +1,9 @@
 
+// Used for session storage
+const SIDEBAR_KEY = "__sidebar";
+
 // Initial state of the sidebar
-let isVisible = true; // use session or cookies to store the state
+let isVisible = isSidebarVisible();
 
 // Load the side bar into `sidebar-container`
 loadSidebar();
@@ -22,7 +25,7 @@ function hideOrShowSideBar() {
 }  
 
 // Change the visibility state of the sidebar
-function showSidebar(visible){
+function showSidebar(visible){ 
     isVisible = visible;
 
     if (visible) {
@@ -42,25 +45,42 @@ function showSidebar(visible){
             btn.classList.add(OPEN_SIDEBAR_ICON);
         }
     }
+
+    // Save the state in the browser current session
+    window.sessionStorage.setItem(SIDEBAR_KEY, visible);
+}
+
+function isSidebarVisible(){
+    let visible = window.sessionStorage.getItem(SIDEBAR_KEY);
+
+    if (visible == null){
+        visible = true;
+        window.sessionStorage.setItem(SIDEBAR_KEY, visible);
+    }
+
+    return visible;
 }
 
 function loadSidebar(){
     const sidebarContainer = document.getElementById("sidebar-container");
-    const attributes = isVisible? `sidebar-visible="true"` : `sidebar-visible="false`;
 
     sidebarContainer.innerHTML = `
-    <div id="sidebar">
-    <div class="sidebar-menu" ${attributes}>
+    <div id="sidebar" >
+    <div class="sidebar-menu">
         <ul class="options_top">
             <li class="border-rounded-small">
-                <a href="../pasantes/perfil_pasante.html" class="text-white">
-                    <i class="far fa-user-circle mx-right-mid"></i> Perfil
-                </a>
+                <div>
+                    <a href="../pasantes/perfil_pasante.html" class="text-white">
+                        <i class="far fa-user-circle mx-right-mid"></i> Perfil
+                    </a>
+                </div>
             </li>
             <li class="border-rounded-small">
-                <a class="text-white">
-                    <i class="far fa-file-alt mx-right-mid"></i> Tarea
-                </a>
+                <div>
+                    <a class="text-white">
+                        <i class="far fa-file-alt mx-right-mid"></i> Tarea
+                    </a>
+                </div>
                 <ul class="submenu">
                     <li><a href="../tarea/tarea.html">Crear tarea</a></li>
                     <li><a href="../tarea/Listado-tarea.html">Sin asignar</a></li>
@@ -69,35 +89,45 @@ function loadSidebar(){
             </li>
 
             <li class="border-rounded-small">
-                <a href="../examenes/ver_examenes.html" class="text-white">
-                    <i class="fas fa-clipboard-list mx-right-mid"></i>Examenes
-                </a>
+                <div>
+                    <a href="../examenes/ver_examenes.html" class="text-white">
+                        <i class="fas fa-clipboard-list mx-right-mid"></i>Examenes
+                    </a>
+                </div>
             </li>
             <li class="border-rounded-small active">
-                <a class="text-white">
-                    <i class="fas fa-users mx-right-mid"></i> Pasantes
-                </a>
+                <div>
+                    <a class="text-white">
+                        <i class="fas fa-users mx-right-mid"></i> Pasantes
+                    </a>
+                </div>
                 <ul class="submenu">
                     <li><a href="../pasantes/ver_solicitudes.html">Ver solicitudes</a></li>
                     <li><a href="../pasantes/estado_solicitudes.html">Estado solicitudes</a></li>
                 </ul>
             </li>
             <li class="border-rounded-small">
-                <a href="#" class="text-white">
-                    <i class="fas fa-book-open mx-right-mid"></i>Convocatorias
-                </a>
+                <div>
+                    <a href="#" class="text-white">
+                        <i class="fas fa-book-open mx-right-mid"></i>Convocatorias
+                    </a>
+                </div>
             </li>
         </ul>
         <ul class="options_bottom">
             <li class="  border-rounded-small">
-                <a href="#" class="text-white">
-                    <i class="fas fa-cog mx-right-mid"></i>Ajustes
-                </a>
+                <div>
+                    <a href="#" class="text-white">
+                        <i class="fas fa-cog mx-right-mid"></i>Ajustes
+                    </a>
+                </div>
             </li>
             <li class="border-rounded-small">
-                <a href="#" class="text-white">
-                    <i class="fas fa-sign-out-alt mx-right-mid"></i>Cerrar Session
-                </a>
+                <div>
+                    <a href="#" class="text-white">
+                        <i class="fas fa-sign-out-alt mx-right-mid"></i>Cerrar Session
+                    </a>
+                </div>
             </li>
         </ul>
     </div>
