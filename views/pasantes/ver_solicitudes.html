@@ -8,7 +8,7 @@
     <!-- <link rel="stylesheet" href="../../css/global-style.css"> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
-    <!-- <link href="../../css/solitud_pasantes.css" rel="stylesheet"> -->
+    <link href="../../css/solitud_pasantes.css" rel="stylesheet">
 
     <!-- Datatable -->
     <script src="../../js/datatable.js"></script>
@@ -21,7 +21,6 @@
 
     <style>
         #lista-pasantes {
-      
             padding: 30px;
             margin: 0 auto;
         }
@@ -36,111 +35,38 @@
 
         <div class="main_container" id="main">
             <h1 class="mx-left-large text-center" style="color: var(--color-primario);">Solicitudes de los Pasantes</h1>
-            <div id="lista-pasantes"></div>
-
-
-            <!-- <div class="table-container">
-                <div class="table-scroll-x">
-                    <table>
-                        <thead>
-                            <th>Head 1</th>
-                            <th>Head 2</th>
-                            <th>Head 3</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                            </tr>
-                            <tr>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                            </tr>
-                            <tr>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                            </tr>
-                            <tr>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                            </tr>
-                            <tr>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                                <td>Value 1</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div> -->
-
-            
+            <div id="lista-pasantes"></div>            
         </div>
     </div>
 </body>
 <script type="module">
-    const data = [];
-    for (let i = 0; i < 23; i++) {
-        // if (i === 2) {
-        //     data.push({value: "Hello World"});
-        // }
+    import { DataGenerator } from "../../js/datagenerator.js";
 
-        if (i === 3 || i === 6) {
-            data.push({
-                value: "Element aaaaa aaaaa" + (i + 1),
-                index: null,
-                letter: String.fromCharCode(97 + i),
-                value2: "Element " + (i + 1),
-                index2: null,
-                letter: String.fromCharCode(97 + i),
-            });
-        } else {
-            data.push({
-                value: "Element aaaaaa aaaaa" + (i + 1),
-                index: i + 1,
-                letter: String.fromCharCode(97 + i),
-                value2: "Element " + (i + 1),
-                index2: null,
-                letter2: String.fromCharCode(97 + i),
-            });
-        }
-    }
+    const data = new DataGenerator(100).nextArray(23, (gen) => {
+        const name = gen.nextName();
+        const lastName = gen.nextLastName();
 
-    // const nombres = ["Juana", "Pedro", "Maria", "Alberto"];
-    // const apellidos = ["Perez", "Almanzar", "Vega", "Dominguez"];
-    // const correo = nombres.map((n, i) => n.toLowerCase() +  apellidos[i].toLocaleLowerCase() + "@hotmail.com");
-    // const calificaciones = [90, 85, 75, 100];
+        return {
+            Nombre: name,
+            Apellido: lastName,
+            Correo: `${name}${lastName}@hotmail.com`.toLowerCase(),
+            Calificacion: gen.nextInt(70, 100),
+            Opciones: `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
+                    <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
+                    <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`
+        };
+    });
 
-    // for (let i = 0; i < nombres.length; i++){
-    //     data.push({
-    //         Nombre: nombres[i],
-    //         Apellido: apellidos[i],
-    //         Correo:correo[i],
-    //         Calificacion: calificaciones[i],
-    //         Opciones: `<td>
-    //                         <div class="solicitud-opciones">
-    //                             <span class="material-icons aceptar-solitidud">check_circle</span>
-    //                             <span class="material-icons rechazar-solitidud">cancel</span>
-    //                             <span class="material-icons ver-solitidud">wysiwyg</span>
-    //                         </div>
-    //                     </td>`
-    //     });
-    // }
-
-    createDatatable("lista-pasantes",
+    createDatatable("#lista-pasantes",
     {
-        //pageButtonCount: 2,
+        //pageButtonCount: 4,
         //paginate: false,
-        //sorteable: true,
-        //scrollX: true,
-        scrollY: 200,
         //searchable: false,
+        //scrollX: true,
+        //scrollY: 400,
+        centerText: true,
         maxRows: 10,
-        // header: ["nombre", "apellido", "correo", "opciones"],
+        sortable: ["Nombre", "Apellido", "Correo", "Calificacion"],
         data: data,
     })
 </script>

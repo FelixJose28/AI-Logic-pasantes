@@ -7,9 +7,16 @@ The styles of the datatable must be keep at minimun to avoid conficts when using
 
 /**/
 :root {
-    --main-color: #ccc;
-    --active-color: #ccc;
-    --disable-color: #ccc;
+    /* Colors */
+    --primary-color: #aaa;
+    --secondary-color: #bbb;
+    --inactive-color: #ccc;
+    --hover-color: #ddd;
+    --alt-color: #eee;
+    --selected-color: rgba(200, 200, 200, 0.2);
+    
+    /* Sizes */
+    --sort-icon-size: 13px;
 }
 
 /* Styling datatable */
@@ -43,16 +50,16 @@ th {
 
 /* Row hover */
 .hoverable:hover {
-    background-color: #ddd; 
+    background-color: var(--hover-color); 
 }
 
 .row-even {
-    background-color: #eee;
+    background-color: var(--alt-color);
 }
 
 /* Selected column */
 td.selected-column {
-    background-color: rgb(200, 200, 200, 0.2);
+    background-color: var(--selected-color);
 }
 
 /* Selected row */
@@ -61,7 +68,7 @@ td.selected-column {
 }
 
 .selectable tr {
-    background-color: rgb(200, 200, 200, 0.2);
+    background-color: var(--selected-color);
 }
 
 /* Sortable */
@@ -69,21 +76,30 @@ td.selected-column {
     cursor: pointer;
 }
 
+.sortable::after {
+    content: "";
+    width: var(--sort-icon-size);
+    height: var(--sort-icon-size);
+    float: right;
+}
+
 .sortable.asc::after { 
     content: "⯅";
-    font-size: 13px;
-    color: #999;
+    font-size: var(--sort-icon-size);
+    color: var(--primary-color);
     float: right;
 }
 
 .sortable.desc::after {
     content: "⯆";
-    font-size: 13px;
-    color: #999;
+    font-size: var(--sort-icon-size);
+    color: var(--primary-color);
     float: right;
 }
 
 /* Scroll-y */
+/*
+// This overflows when the width is small 
 .table-scroll-y tbody {
     display:block;
     overflow: auto;
@@ -92,8 +108,19 @@ td.selected-column {
 
 .table-scroll-y thead, .table-scroll-y tbody tr {
     display: table;
-    width: 100%;
     table-layout: fixed;
+    width: 100%;
+} */
+
+.table-scroll-y { 
+    overflow-y: auto;  
+    height: 400px;
+}
+
+.table-scroll-y thead th { 
+    background-color: white;
+    position: sticky; 
+    top: 0; 
 }
 
 /* Scroll-x */
@@ -122,15 +149,15 @@ td.selected-column {
 }
 
 .paginator .inactive {
-    color: #ccc;
+    color: var(--inactive-color);
 }
 
 .paginator button.active {
-    background-color: #ccc;
+    background-color: var(--secondary-color);
 }
 
 .paginator button:hover:not(.inactive) {
-    background-color: #bbb;
+    background-color: var(--secondary-color);
 }
 
 /* Styling searchbar */
@@ -140,5 +167,5 @@ td.selected-column {
 
 .searchbar {
     float: right;
-    margin-bottom: 5px;
+    margin: 5px;
 }

@@ -1,20 +1,12 @@
 @import "../css/global-style.css";
 
-#lista-pasantes {
-    margin: 60px 40px;
+#solicitud-pasantes{
+
 }
 
 table {
-    max-width: 800px;
     border: 1px solid black;
     border-collapse: collapse;
-    margin: 0 auto;
-}
-
-@media (max-width: 800px) {
-    table {
-        max-width: 90%;
-    }
 }
 
 tr {
@@ -35,8 +27,8 @@ th {
     min-width: 80px;
 }
 
-tr:hover{
-    background-color: var(--info-color);
+.row:hover {
+    background-color: rgba(128, 187, 255, 0.2) !important;
 }
 
 .solicitudes-nav {

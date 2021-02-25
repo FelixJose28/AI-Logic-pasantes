@@ -24,8 +24,8 @@ class DataTable {
      * @param {Boolean} options.centerText center the text of the cells, by default false.
      * @param {Boolean} options.scrollX enable horizontal scroll if the table overflows, by default false.
      * @param {Number|String} options.scrollY enable vertical overflow within the given heigh for example `30vw` or `300`px.
-     * @param {Boolean} options.alternate alternate the rows colors in the table.
-     * @param {Boolean} options.sortable enable sorting in the table.
+     * @param {Boolean} options.striped alternate the rows colors in the table.
+     * @param {Boolean|string[]} options.sortable enable sorting in the table in all columns or the given column names.
      * @param {Boolean} options.searchable enable searching in the table.
      * @param {String} options.searchLabelText the text of the search input label, by default "Search: ".
      * @param {Boolean} options.columnSelection enable column selection. If no `false` and the column is `sortable` will be enable.
@@ -59,12 +59,12 @@ class DataTable {
         this.centerText = options.centerText?? false;
         this.scrollX = options.scrollX?? false;
         this.scrollY = options.scrollY;
-        this.alternate = options.alternate?? true;
-        this.sorteable = options.sorteable?? true;
+        this.striped = options.striped?? true;
+        this.sortable = options.sortable?? true;
         this.searchable = options.searchable?? true;
         this.searchLabelText = options.searchLabelText?? "Search: ";
 
-        if (options.columnSelection == null && this.sorteable != null) {
+        if (options.columnSelection == null && this.sortable != null) {
             this.columnSelection = true;
         }
 
@@ -113,24 +113,12 @@ class DataTable {
         let pageData = this.data.slice(startIndex, endIndex);
 
         if (this.sorting) {
-            switch (this.sorting.sortBy) {
-                case SORT_ASC:
-                    pageData = pageData.sort((objA, objB) => {
-                        const index = this.sorting.index;
-                        const x = objA[Object.keys(objA)[index]]
-                        const y = objB[Object.keys(objB)[index]]
-                        return sortByAscending(x, y);
-                    });
-                    break;
-                case SORT_DESC:
-                    pageData = pageData.sort((objA, objB) => {
-                        const index = this.sorting.index;
-                        const x = objA[Object.keys(objA)[index]]
-                        const y = objB[Object.keys(objB)[index]]
-                        return sortByDecensing(x, y);
-                    });
-                    break;
-            }
+            pageData = pageData.sort((objA, objB) => {
+                const index = this.sorting.index;
+                const x = objA[Object.keys(objA)[index]]
+                const y = objB[Object.keys(objB)[index]]
+                return this.sorting.sortBy === SORT_ASC? compare(x, y) : compare(y, x);
+            });
         }
 
         if (this.search && this.search.length > 0) {
@@ -159,7 +147,15 @@ class DataTable {
         return pageData;
     }
 
-    sortColumn(column, index) {        
+    sortColumn(column, index) {
+        if (Array.isArray(this.sortable)) {
+            // We check if the given index is a valid column for sorting
+            const elements = this.sortable;
+            if (this.header[index] !== elements[index]) {
+                return;
+            }
+        }   
+
         if (this.sorting == null) {
             this.sorting = {
                 index: index,
@@ -212,7 +208,7 @@ class DataTable {
             }
 
             // Alternate the colors
-            if (this.alternate) {
+            if (this.striped) {
                 if (rowIndex % 2 === 0) {
                     tableRow.classList.add("row-even");
                 } else {
@@ -222,7 +218,6 @@ class DataTable {
         }
     }
 
-    // This is only called if there is a paginator, otherwise the table is static
     render() {
         if (this.dataTable == null) {
             return;
@@ -364,7 +359,7 @@ class DataTable {
     }
 
     createTableNode() {
-        const tableNode = document.createElement("table");
+        let tableNode = document.createElement("table");
 
         // Creates the table header
         const tableHeader = document.createElement("thead");
@@ -379,7 +374,7 @@ class DataTable {
                 th.classList.add("text-center");
             }
 
-            if (this.sorteable) {
+            if (this.sortable) {
                 th.classList.add("sortable");
                 
                 if (this.sorting && this.sorting.index === i) {
@@ -403,12 +398,6 @@ class DataTable {
         // Creates the table rows
         const pageData = this.getCurrentPageData();
         const tableBody = document.createElement("tbody");
-
-        // vertical scroll
-        if (this.scrollY) {
-            tableNode.classList.add("table-scroll-y");
-            tableBody.style.maxHeight = typeof this.scrollY === "number" ? `${this.scrollY}px` : this.scrollY;
-        }
 
         for (let rowIndex = 0; rowIndex < pageData.length; rowIndex++) {
             const data = pageData[rowIndex];
@@ -454,12 +443,21 @@ class DataTable {
 
         tableNode.appendChild(tableBody);
 
+        // vertical scroll
+        if (this.scrollY) {
+            const scrollYContainer = document.createElement("div");
+            scrollYContainer.classList.add("table-scroll-y");
+            scrollYContainer.style.maxHeight = typeof this.scrollY === "number" ? `${this.scrollY}px` : this.scrollY;
+            scrollYContainer.appendChild(tableNode);
+            tableNode = scrollYContainer;
+        }
+
         // Horizontal scroll
         if (this.scrollX) {
             const tableScrollContainer = document.createElement("div");
             tableScrollContainer.className = "table-scroll-x";
             tableScrollContainer.appendChild(tableNode);
-            return tableScrollContainer;
+            tableNode = tableScrollContainer;
         }
 
         return tableNode;
@@ -478,7 +476,7 @@ class DataTable {
 function createDatatable(element, options) {
     console.assert(element, "`element` cannot be null");
 
-    const root = typeof element === "string" ? document.getElementById(element) : element;
+    const root = typeof element === "string" ? document.querySelector(element) : element;
 
     if (root === null) {
         throw new Error(`Cannot find ${element}`);
@@ -489,7 +487,7 @@ function createDatatable(element, options) {
 }
 
 /* Utilities */
-function sortByAscending(x, y) {
+function compare(x, y) {
     if (Object.is(x, y)) {
         return 0;
     }
@@ -503,10 +501,6 @@ function sortByAscending(x, y) {
     }
 }
 
-function sortByDecensing(x, y) {
-    return -sortByAscending(x, y);
-}
-
 function nodeToHtml(node, clone) {
     const tempParent = document.getElementById("div");
     if(clone == null || clone === true) {
@@ -515,6 +509,16 @@ function nodeToHtml(node, clone) {
         tempParent.appendChild(node)
     }
     return tempParent.innerHTML;
+}
+
+function nodeToString(node, clone) {
+    const tempParent = document.getElementById("div");
+    if(clone == null || clone === true) {
+        tempParent.appendChild(node.deepClone())
+    } else {
+        tempParent.appendChild(node)
+    }
+    return tempParent.innerText;
 }
 
 // Unique ID generator
