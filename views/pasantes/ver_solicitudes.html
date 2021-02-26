@@ -8,7 +8,7 @@
     <!-- <link rel="stylesheet" href="../../css/global-style.css"> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
-    <link href="../../css/solitud_pasantes.css" rel="stylesheet">
+    <!-- <link href="../../css/solitud_pasantes.css" rel="stylesheet"> -->
 
     <!-- Datatable -->
     <script src="../../js/datatable.js"></script>
@@ -42,22 +42,22 @@
 <script type="module">
     import { DataGenerator } from "../../js/datagenerator.js";
 
-    const data = new DataGenerator(100).nextArray(23, (gen) => {
+    const data = new DataGenerator(100).nextArray(26, (gen) => {
         const name = gen.nextName();
         const lastName = gen.nextLastName();
 
         return {
-            Nombre: name,
-            Apellido: lastName,
-            Correo: `${name}${lastName}@hotmail.com`.toLowerCase(),
-            Calificacion: gen.nextInt(70, 100),
-            Opciones: `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
-                    <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
-                    <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`
+            "Nombre": name,
+            "Apellido": lastName,
+            "Correo": `${name}${lastName}@hotmail.com`.toLowerCase(),
+            "Calificacion": gen.nextInt(70, 100),
+            // "Opciones": `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
+            //         <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
+            //         <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`
         };
     });
 
-    createDatatable("#lista-pasantes",
+    const t = createDatatable("#lista-pasantes",
     {
         //pageButtonCount: 4,
         //paginate: false,
@@ -65,10 +65,12 @@
         //scrollX: true,
         //scrollY: 400,
         centerText: true,
+        //rowSelection: true,
         maxRows: 10,
-        sortable: ["Nombre", "Apellido", "Correo", "Calificacion"],
-        data: data,
-    })
+        //sortable: ["Nombre", "Apellido", "Correo", "Calificacion"],
+        header: ["Nombre", "Apellido", "Correo", "Calificacion", "Opciones"],
+        data: data
+    });
 </script>
 
 </html>

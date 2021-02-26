@@ -10,6 +10,7 @@ class DataTable {
     /**
      * Constructs a new `DataTable`
      * 
+     * @param {string|Element} element the element where the datatable will be created.
      * @param {Object} options configuration of the datatable.
      * @param {any[]} options.data the source data to display in the table.
      * @param {String[]} options.header the header of the table, if omited the `options.data` keys will be used instead.
@@ -30,7 +31,11 @@ class DataTable {
      * @param {String} options.searchLabelText the text of the search input label, by default "Search: ".
      * @param {Boolean} options.columnSelection enable column selection. If no `false` and the column is `sortable` will be enable.
      */
-    constructor(options) {
+    constructor(element, options) {
+        if (element == null) {
+            throw new Error("DataTable `element` cannot be null");
+        }
+
         if (options == null) {
             throw new Error("DataTable `options` cannot be null");
         }
@@ -39,12 +44,19 @@ class DataTable {
         this.header = options.header;
         this.data = options.data ?? [];
 
-        if (this.header == null){
-            if (this.data == null || this.data.length === 0){
-                throw new Error("A 'header' must be provided if the data is empty");
+        if (this.header == null) {
+            if (this.data == null || this.data.length === 0) {
+                throw new Error("A 'header' must be provided if the data is null or empty");
             }
 
+            // Takes the first object keys as the header
             this.header = Object.keys(this.data[0]);
+        }
+
+        if (this.data != null && this.data.length > 0) {
+            if (this.header.length < Object.keys(this.data[0]).length) {
+                throw new Error("'header' cannot have less elements than the data items");
+            }
         }
 
         // Table options
@@ -55,18 +67,23 @@ class DataTable {
         this.previousButtonText = options.previousButtonText ?? "«";
         this.nextButtonText = options.nextButtonText ?? "»";
         this.pageButtonCount = options.pageButtonCount ?? 10;
-        this.hover = options.hover?? true;
-        this.centerText = options.centerText?? false;
-        this.scrollX = options.scrollX?? false;
+        this.hover = options.hover ?? true;
+        this.centerText = options.centerText ?? false;
+        this.scrollX = options.scrollX ?? false;
         this.scrollY = options.scrollY;
-        this.striped = options.striped?? true;
-        this.sortable = options.sortable?? true;
-        this.searchable = options.searchable?? true;
-        this.searchLabelText = options.searchLabelText?? "Search: ";
+        this.striped = options.striped ?? true;
+        this.sortable = options.sortable ?? true;
+        this.searchable = options.searchable ?? true;
+        this.searchLabelText = options.searchLabelText ?? "Search: ";
+        this.columnSelection = options.columnSelection;
+        this.rowSelection = options.rowSelection;
 
-        if (options.columnSelection == null && this.sortable != null) {
+        if (this.columnSelection == null && this.sortable != null) {
             this.columnSelection = true;
         }
+
+        // Transforms the data in the datatable for example sorting or filtering.
+        this.transformers = [];
 
         // Assertions
         for (const key in options) {
@@ -75,8 +92,37 @@ class DataTable {
             }
         }
 
-        console.assert(this.minRows <= this.maxRows, "minRows must be lower of equals to maxRows");
+        if (Array.isArray(this.sortable)) {
+            this.sortable.forEach(e => {
+                if (!this.header.includes(e)) {
+                    throw new Error(`Invalid sortable column, '${e}' is no part of the header: [${this.header}]`);
+                }
+            })
+        }
+
+        if (Array.isArray(this.searchable)) {
+            this.searchable.forEach(e => {
+                if (!this.header.includes(e)) {
+                    throw new Error(`Invalid searchable column, '${e}' is no part of the header: [${this.header}]`);
+                }
+            })
+        }
+
+        console.assert(this.minRows <= this.maxRows, "'minRows' must be lower of equals to 'maxRows'");
         console.assert(this.isValidPage(this.currentPage), `invalid 'currentPage' ${this.currentPage} max is ${this.pageCount()}`);
+
+        // Constructs the datadable
+        DataTable.createDataTableOnElement(this, element);
+    }
+
+    static createDataTableOnElement(dataTable, element) {
+        const root = typeof element === "string" ? document.querySelector(element) : element;
+
+        if (root === null) {
+            throw new Error(`Cannot find ${element}`);
+        } else {
+            root.appendChild(dataTable.toNode());
+        }
     }
 
     isValidPage(page) {
@@ -107,33 +153,120 @@ class DataTable {
         this.moveToPage(this.currentPage - 1);
     }
 
-    getCurrentPageData() {
+    add(item) {
+        if (item == null) {
+            this.data.push(item);
+        } else {
+            if (this.header.length !== Object.keys(item).length) {
+                throw new Error(`Invalid item, do not match header length: ${this.header}`);
+            }
+
+            this.data.push(item);
+        }
+    }
+
+    remove(startIndex, endIndex) {
+        if (endIndex == null) {
+            endIndex = startIndex + 1;
+        }
+
+        if (typeof startIndex !== "number" || typeof endIndex !== "number") {
+            throw new TypeError("indices must be a number");
+        }
+
+        if (startIndex > endIndex) {
+            throw new Error('Invalid indices ranges');
+        }
+
+        const items = this.data;
+        const length = items.length;
+
+        if (startIndex < 0 || startIndex > length) {
+            throw new Error(`'startIndex' out of range, length is ${length} but index was ${startIndex}`);
+        }
+
+        if (endIndex < 0 || endIndex > length) {
+            throw new Error(`'endIndex' out of range, length is ${length} but index was ${endIndex}`);
+        }
+
+        const count = endIndex - startIndex;
+        return this.data.splice(startIndex, count);
+    }
+
+    clear() {
+        this.data = [];
+    }
+
+    sort(compare) {
+        this.transformers.push((pageData) => pageData.sort(compare));
+        this.render();
+        return this;
+    }
+
+    sortBy(keySelector) {
+        if (keySelector == null) {
+            keySelector = identity();
+        }
+
+        return this.sort((objA, objB) => {
+            const keyA = keySelector(objA);
+            const keyB = keySelector(objB);
+            return compare(keyA, keyB)
+        });
+    }
+
+    sortByDecending(keySelector) {
+        if (keySelector == null) {
+            keySelector = identity();
+        }
+
+        return this.sort((objA, objB) => {
+            const keyA = keySelector(objA);
+            const keyB = keySelector(objB);
+            return compare(keyB, keyA)
+        });
+    }
+
+    filter(predicate) {
+        this.transformers.push((pageData) => pageData.filter(predicate));
+        this.render();
+        return this;
+    }
+
+    unique(keySelector) {
+        if (keySelector == null) {
+            keySelector = identity();
+        }
+
+        this.transformers.push((columnsData) => {
+            const array = [];
+            for (const e of columnsData) {
+                const key = keySelector(e);
+                if (!array.some(value => keySelector(value) == key)) {
+                    array.push(e);
+                }
+            }
+
+            return array;
+        });
+
+        this.render();
+        return this;
+    }
+
+    removeTransformers(){
+        this.transformers = [];
+    }
+
+    getCurrentPageColumnsData() {
         const startIndex = this.currentPage * this.maxRows;
         const endIndex = Math.min(startIndex + this.maxRows, this.data.length);
         let pageData = this.data.slice(startIndex, endIndex);
 
-        if (this.sorting) {
-            pageData = pageData.sort((objA, objB) => {
-                const index = this.sorting.index;
-                const x = objA[Object.keys(objA)[index]]
-                const y = objB[Object.keys(objB)[index]]
-                return this.sorting.sortBy === SORT_ASC? compare(x, y) : compare(y, x);
-            });
-        }
-
-        if (this.search && this.search.length > 0) {
-            pageData = pageData.filter(obj => {
-                for (const key in obj) {
-                    if (Object.hasOwnProperty.call(obj, key)) {
-                        const element = obj[key]?.toString();
-                        if (element && element.includes(this.search)) {
-                            return true;
-                        }
-                    }
-                }
-
-                return false;
-            })
+        if (this.transformers.length > 0) {
+            for (const f of this.transformers) {
+                pageData = f(pageData);
+            }
         }
 
         if (pageData.length < this.minRows) {
@@ -147,59 +280,77 @@ class DataTable {
         return pageData;
     }
 
-    sortColumn(column, index) {
-        if (Array.isArray(this.sortable)) {
-            // We check if the given index is a valid column for sorting
-            const elements = this.sortable;
-            if (this.header[index] !== elements[index]) {
-                return;
-            }
-        }   
-
-        if (this.sorting == null) {
-            this.sorting = {
-                index: index,
-                column: column,
-                sortBy: SORT_ASC
-            };
-        } else {
-            const sorting = this.sorting;
-            sorting.column.classList.remove(sorting.sortBy);
-
-            if (sorting.index !== index){
-                sorting.sortBy = SORT_ASC;
-            } else {
-                sorting.sortBy = sorting.sortBy === SORT_ASC ? SORT_DESC : SORT_ASC;
-            }
-
-            sorting.column = column;
-            sorting.index = index;
+    selectColumn(column, index) {
+        if (this.columnSelection) {
+            const temp = this.selectColumn;
+            this.selectedColumn = index;
+            this.prevSelectedColumn = temp;
         }
-        
-        column.classList.add(this.sorting.sortBy);
-        this.render();
-    }
 
-    selectColumn(index) {
-        const temp = this.selectColumn;
-        this.selectedColumn = index;
-        this.prevSelectedColumn = temp;
+        if (this.sortable) {
+            if (Array.isArray(this.sortable)) {
+                if (this.sortable.length === 0) {
+                    return;
+                }
+
+                // We check if the given index is a valid column for sorting
+                const elements = this.sortable;
+                if (this.header[index] !== elements[index]) {
+                    return;
+                }
+            }
+
+            if (this.sorting == null) {
+                this.sorting = {
+                    index: index,
+                    column: column,
+                    sortBy: SORT_ASC
+                };
+            } else {
+                const sorting = this.sorting;
+                sorting.column.classList.remove(sorting.sortBy);
+
+                if (sorting.index !== index) {
+                    sorting.sortBy = SORT_ASC;
+                } else {
+                    sorting.sortBy = sorting.sortBy === SORT_ASC ? SORT_DESC : SORT_ASC;
+                }
+
+                sorting.column = column;
+                sorting.index = index;
+            }
+
+            column.classList.add(this.sorting.sortBy);
+
+            // Sorts the data by the specified column
+            this.sort((objA, objB) => {
+                const index = this.sorting.index;
+                const x = objA[Object.keys(objA)[index]]
+                const y = objB[Object.keys(objB)[index]]
+                return this.sorting.sortBy === SORT_ASC ? compare(x, y) : compare(y, x);
+            });
+
+            return;
+        }
+
+        // Fallback
         this.render();
     }
 
     onTableColumn(tableCell, columnIndex) {
         if (this.columnSelection) {
             if (this.prevSelectedColumn === columnIndex) {
-                tableCell.classList.remove("selected-column");
+                tableCell.classList.remove("selected");
             }
-    
-            if(this.selectedColumn === columnIndex) {
-                tableCell.classList.add("selected-column");
+
+            if (this.selectedColumn === columnIndex) {
+                tableCell.classList.add("selected");
             }
         }
     }
 
     onTableRow(tableRow, rowIndex) {
+        // rowIndex === 0 is the header
         if (rowIndex > 0) {
             tableRow.classList.add("row");
 
@@ -207,12 +358,33 @@ class DataTable {
                 tableRow.classList.add("hoverable");
             }
 
+            // Table row selection
+            if (this.rowSelection) {
+                tableRow.classList.add("selectable");
+                tableRow.addEventListener("click", () => {
+                    if (this.selectedRow && this.selectedRow === rowIndex) {
+                        this.prevSelectedRow = rowIndex;
+                        this.selectedRow = null;
+                    } else {
+                        const tempRow = this.selectedRow;
+                        this.selectedRow = rowIndex;
+                        this.prevSelectedRow = tempRow;
+                    }
+
+                    this.render();
+                });
+
+                if (this.selectedRow === rowIndex) {
+                    tableRow.classList.add("selected");
+                }
+            }
+
             // Alternate the colors
             if (this.striped) {
                 if (rowIndex % 2 === 0) {
-                    tableRow.classList.add("row-even");
+                    tableRow.classList.add("even");
                 } else {
-                    tableRow.classList.add("row-odd");
+                    tableRow.classList.add("odd");
                 }
             }
         }
@@ -227,19 +399,19 @@ class DataTable {
         const tableContainer = dataTable.getElementsByClassName("table-container")[0];
         const paginatorContainer = dataTable.getElementsByClassName("paginator-container")[0];
 
-        tableContainer.replaceChild(this.createTableNode(), tableContainer.firstChild);
-        paginatorContainer.replaceChild(this.createPaginatorNode(), paginatorContainer.firstChild);
+        tableContainer.replaceChild(this.renderTableNode(), tableContainer.firstChild);
+        paginatorContainer.replaceChild(this.renderPaginatorNode(), paginatorContainer.firstChild);
     }
 
-    createPage(table) {
+    renderDatatableNode(table) {
         const dataTable = document.createElement("div");
-        dataTable.className = "datatable";
+        dataTable.className = "datatable-container";
         this.dataTable = dataTable;
 
         if (this.searchable) {
             const searchContainer = document.createElement("div");
             searchContainer.className = "searchbar-container";
-            searchContainer.appendChild(this.createSearchBar());
+            searchContainer.appendChild(this.renderSearchBarNode());
             dataTable.appendChild(searchContainer);
         }
 
@@ -253,7 +425,7 @@ class DataTable {
             // Container for the `paginator`
             const paginatorContainer = document.createElement("div");
             paginatorContainer.className = "paginator-container";
-            paginatorContainer.appendChild(this.createPaginatorNode());
+            paginatorContainer.appendChild(this.renderPaginatorNode());
             dataTable.appendChild(paginatorContainer);
         } else {
             dataTable.appendChild(table);
@@ -262,16 +434,44 @@ class DataTable {
         return dataTable;
     }
 
-    createSearchBar() {
+    renderSearchBarNode() {
         const container = document.createElement("div");
         container.className = "searchbar";
 
         const id = getNextID("searchbar-input");
         const input = document.createElement("input");
         input.setAttribute("id", id)
-        input.addEventListener("input", (e) => {
-            this.search = e.target.value;
-            this.render();
+
+        input.addEventListener("input", (event) => {
+            this.filter((data) => {
+                if (Array.isArray(this.searchable)) {
+                    if (this.searchable.length === 0) {
+                        return true;
+                    }
+
+                    const objectKeys = Object.keys(data);
+
+                    for (const e of this.searchable) {
+                        const index = this.header.indexOf(e);
+                        const key = objectKeys[index];
+                        const element = data[key]?.toString().toLowerCase();
+
+                        if (element && element.includes(event.target.value.toLowerCase())) {
+                            return true;
+                        }
+                    }
+
+                } else {
+                    for (const key in data) {
+                        const element = data[key]?.toString().toLowerCase();
+                        if (element && element.includes(event.target.value.toLowerCase())) {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            })
         });
 
         const inputLabel = document.createElement("label");
@@ -284,7 +484,7 @@ class DataTable {
         return container;
     }
 
-    createPaginatorNode() {
+    renderPaginatorNode() {
         const paginator = document.createElement("div");
         paginator.className = "paginator";
 
@@ -358,8 +558,9 @@ class DataTable {
         return paginator;
     }
 
-    createTableNode() {
+    renderTableNode() {
         let tableNode = document.createElement("table");
+        tableNode.className = "datatable";
 
         // Creates the table header
         const tableHeader = document.createElement("thead");
@@ -368,7 +569,7 @@ class DataTable {
         for (let i = 0; i < this.header.length; i++) {
             const element = this.header[i];
             const th = document.createElement("th");
-            th.innerHTML = element?? "";
+            th.innerHTML = element ?? "";
 
             if (this.centerText) {
                 th.classList.add("text-center");
@@ -376,15 +577,15 @@ class DataTable {
 
             if (this.sortable) {
                 th.classList.add("sortable");
-                
+
                 if (this.sorting && this.sorting.index === i) {
                     th.classList.add(this.sorting.sortBy);
                 }
-                th.addEventListener("click", this.sortColumn.bind(this, th, i));
             }
 
-            if (this.columnSelection) {
-                th.addEventListener("click", this.selectColumn.bind(this, i));
+            if (this.columnSelection || this.sortable) {
+                //th.addEventListener("click", this.selectColumn.bind(this, th, i));
+                th.addEventListener("click", () => this.selectColumn(th, i));
             }
 
             this.onTableColumn(th, i);
@@ -396,45 +597,39 @@ class DataTable {
         tableNode.appendChild(tableHeader);
 
         // Creates the table rows
-        const pageData = this.getCurrentPageData();
+        const pageData = this.getCurrentPageColumnsData();
         const tableBody = document.createElement("tbody");
 
         for (let rowIndex = 0; rowIndex < pageData.length; rowIndex++) {
             const data = pageData[rowIndex];
             const tr = document.createElement("tr");
 
+            // Number of 'td' inserted in the current row
+            let count = 0;
+            
             if (data !== null) {
                 let colIndex = 0;
                 for (const key in data) {
-                    if (Object.hasOwnProperty.call(data, key)) {
-                        const element = data[key];
-                        const td = document.createElement("td");
-                        td.innerHTML = element?? "";
-                        tr.appendChild(td);
-                        
-                        this.onTableColumn(td, colIndex);
-                        colIndex += 1;
-                    }
-                }
-            } else {
-                for (let i = 0; i < this.header.length; i++) {
+                    const element = data[key];
                     const td = document.createElement("td");
-                    this.onTableColumn(td, i);
+                    td.innerHTML = element ?? "";
                     tr.appendChild(td);
-                }
+
+                    this.onTableColumn(td, colIndex);
+                    colIndex += 1;
+                    count += 1;
+                }  
+            } 
+
+            // Insert empty cells if the current row length is less than the header
+            for (let i = count; i < this.header.length; i++) {
+                const td = document.createElement("td");
+                this.onTableColumn(td, i);
+                tr.appendChild(td);
             }
 
             if (this.centerText) {
                 tr.classList.add("text-center");
-            }
-
-            // Check if the current element fit the table, if not expand it
-            if (data != null) {
-                const currentDataCols = Object.keys(data).filter(k => typeof data[k] !== "function").length;
-                if (currentDataCols !== this.header.length && currentDataCols < this.header.length) {
-                    const requiredColumns = this.header.length - currentDataCols + 1;
-                    tr.lastChild.setAttribute("colspan", requiredColumns);  
-                }
             }
 
             this.onTableRow(tr, rowIndex + 1);
@@ -464,8 +659,8 @@ class DataTable {
     }
 
     toNode() {
-        const tableNode = this.createTableNode();
-        return this.createPage(tableNode)
+        const tableNode = this.renderTableNode();
+        return this.renderDatatableNode(tableNode)
     }
 
     toHtml() {
@@ -473,17 +668,20 @@ class DataTable {
     }
 }
 
+/**
+ * Constructs a new `DataTable` in this element.
+ * 
+ * @param options Datatable options.
+ */
+Element.prototype.dataTable = function (options) {
+    return new DataTable(this, options)
+};
+
+/**
+ * Constructs a new `DataTable` in the given element.
+ */
 function createDatatable(element, options) {
-    console.assert(element, "`element` cannot be null");
-
-    const root = typeof element === "string" ? document.querySelector(element) : element;
-
-    if (root === null) {
-        throw new Error(`Cannot find ${element}`);
-    }
-
-    const dataTable = new DataTable(options);
-    root.appendChild(dataTable.toNode());
+    return new DataTable(element, options);
 }
 
 /* Utilities */
@@ -492,9 +690,9 @@ function compare(x, y) {
         return 0;
     }
 
-    if (x > y){
+    if (x > y) {
         return 1;
-    } else if(x < y){
+    } else if (x < y) {
         return -1;
     } else {
         return 0;
@@ -503,7 +701,7 @@ function compare(x, y) {
 
 function nodeToHtml(node, clone) {
     const tempParent = document.getElementById("div");
-    if(clone == null || clone === true) {
+    if (clone == null || clone === true) {
         tempParent.appendChild(node.deepClone())
     } else {
         tempParent.appendChild(node)
@@ -513,7 +711,7 @@ function nodeToHtml(node, clone) {
 
 function nodeToString(node, clone) {
     const tempParent = document.getElementById("div");
-    if(clone == null || clone === true) {
+    if (clone == null || clone === true) {
         tempParent.appendChild(node.deepClone())
     } else {
         tempParent.appendChild(node)
@@ -521,10 +719,14 @@ function nodeToString(node, clone) {
     return tempParent.innerText;
 }
 
+function identity(obj) {
+    return obj;
+}
+
 // Unique ID generator
 const getNextID = (() => {
     let id = 0;
-    return function(name) {
+    return function (name) {
         if (name) {
             return `${name}-${id++}`;
         } else {
