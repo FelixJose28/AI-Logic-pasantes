@@ -16,7 +16,132 @@
     <link href="../../css/sidebar.css" rel="stylesheet" />
     <script src="../../js/sidebar.js" defer></script>
     <script src="../../js/routing.js"></script>
+    <script src="../../js/tareas-entregadas.js"></script>
     <title>Tarea</title>
+
+    <script>
+        let data = [{
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "GAMMA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "EPSILON",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "AITO",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "GAMMA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "GAMMA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "EPSILON",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "BETA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "GAMMA",
+            "calificacion": "sin calificar",
+        } {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "GAMMA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "GAMMA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "EPSILON",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "BETA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }, {
+            "fecha": "20-10-2021",
+            "titulo": "Asignacion#2",
+            "grupo": "ALFA",
+            "calificacion": "sin calificar",
+        }]
+    </script>
 </head>
 
 <body>
@@ -35,8 +160,8 @@
                     <tbody id="tbody">
                         <script>
                             const opciones = `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
-                                <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`;
+                                <a href="javascript:deleteTarea();" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
+                                <a href="Detalle-entrega-tarea.html" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`;
 
                             cargarDatosEnTable(opciones, ["nombre", "Apellido", "Edad", "Carreara", "Opciones"], {
                                 "thead": "thead",
