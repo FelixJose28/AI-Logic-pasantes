@@ -1,0 +1,44 @@
+@media (max-width: 800px) { 
+    /* ABRIR CONCONVOCATORIA ADMIN */
+    #btn_group_ACA {
+      width: 65%;
+    }
+  
+    #btn_saveACA {
+      display: block;
+      margin: auto;
+      width: 50%;
+    }
+  
+    #btn_backACA {
+      display: block;
+      margin: auto;
+      float: none;
+      margin-top: 2%;
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 600px) {  
+    /* ABRIR CONCONVOCATORIA ADMIN */
+    #btn_group_ACA {
+      margin: auto;
+      width: 90%;
+    }
+  
+    #btn_saveACA {
+      display: block;
+      margin: auto;
+      width: 50%;
+    }
+  
+    #btn_backACA {
+      display: block;
+      margin: auto;
+      float: none;
+      margin-top: 2%;
+      width: 50%;
+    }
+  }
+  
+  

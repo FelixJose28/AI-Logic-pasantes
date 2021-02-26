@@ -1,6 +1,35 @@
 "use strict";
 
+const SORT_ASC = "asc";
+const SORT_DESC = "desc";
+
+/**
+ * A html table generator.
+ */
 class DataTable {
+    /**
+     * Constructs a new `DataTable`
+     * 
+     * @param {Object} options configuration of the datatable.
+     * @param {any[]} options.data the source data to display in the table.
+     * @param {String[]} options.header the header of the table, if omited the `options.data` keys will be used instead.
+     * @param {Number} options.currentPage the current page of the table, by default 0.
+     * @param {Boolean} options.paginate enable pagination in the table, by default true.
+     * @param {Number} options.minRows the minimun numbers of rows to display per page, by default 0.
+     * @param {Number} options.maxRows the maximun numbers of rows to display per page, by default display all the rows.
+     * @param {String|any} options.previousButtonText text displayed in the `Previous` button of the paginator.
+     * @param {String|any} options.nextButtonText text displayed in the `Next` button of the paginator.
+     * @param {Number} options.pageButtonCount numbers of buttons to display in the paginator.
+     * @param {Boolean} options.hover enable row hover, by default true.
+     * @param {Boolean} options.centerText center the text of the cells, by default false.
+     * @param {Boolean} options.scrollX enable horizontal scroll if the table overflows, by default false.
+     * @param {Number|String} options.scrollY enable vertical overflow within the given heigh for example `30vw` or `300`px.
+     * @param {Boolean} options.striped alternate the rows colors in the table.
+     * @param {Boolean|string[]} options.sortable enable sorting in the table in all columns or the given column names.
+     * @param {Boolean} options.searchable enable searching in the table.
+     * @param {String} options.searchLabelText the text of the search input label, by default "Search: ".
+     * @param {Boolean} options.columnSelection enable column selection. If no `false` and the column is `sortable` will be enable.
+     */
     constructor(options) {
         if (options == null) {
             throw new Error("DataTable `options` cannot be null");
@@ -10,18 +39,36 @@ class DataTable {
         this.header = options.header;
         this.data = options.data ?? [];
 
+        if (this.header == null){
+            if (this.data == null || this.data.length === 0){
+                throw new Error("A 'header' must be provided if the data is empty");
+            }
+
+            this.header = Object.keys(this.data[0]);
+        }
+
         // Table options
         this.currentPage = options.currentPage ?? 0;
         this.paginate = options.paginate ?? true;
         this.minRows = options.minRows ?? 0;
-        this.maxRows = options.maxRows ?? Number.MAX_VALUE;
+        this.maxRows = options.maxRows ?? Number.MAX_SAFE_INTEGER;
         this.previousButtonText = options.previousButtonText ?? "«";
         this.nextButtonText = options.nextButtonText ?? "»";
         this.pageButtonCount = options.pageButtonCount ?? 10;
-        this.scrollX = options.scrollX;
+        this.hover = options.hover?? true;
+        this.centerText = options.centerText?? false;
+        this.scrollX = options.scrollX?? false;
         this.scrollY = options.scrollY;
-        this.sorteable = options.sorteable;
+        this.striped = options.striped?? true;
+        this.sortable = options.sortable?? true;
+        this.searchable = options.searchable?? true;
+        this.searchLabelText = options.searchLabelText?? "Search: ";
 
+        if (options.columnSelection == null && this.sortable != null) {
+            this.columnSelection = true;
+        }
+
+        // Assertions
         for (const key in options) {
             if (!this.hasOwnProperty(key)) {
                 throw new Error(`Unexpected property '${key}' for DataTable`);
@@ -54,12 +101,10 @@ class DataTable {
 
     nextPage() {
         this.moveToPage(this.currentPage + 1);
-        console.log("NEXT");
     }
 
     prevPage() {
         this.moveToPage(this.currentPage - 1);
-        console.log("PREV");
     }
 
     getCurrentPageData() {
@@ -67,28 +112,28 @@ class DataTable {
         const endIndex = Math.min(startIndex + this.maxRows, this.data.length);
         let pageData = this.data.slice(startIndex, endIndex);
 
-
         if (this.sorting) {
-            switch (this.sorting.sortBy) {
-                case "asc":
-                    pageData = pageData.sort((objA, objB) => {
-                        const index = this.sorting.index;
-                        const x = objA[Object.keys(objA)[index]]
-                        const y = objB[Object.keys(objB)[index]]
-                        console.log(`${x} and ${y} == ${sortByAscending(x, y)}`);
-                        return sortByAscending(x, y);
-                    });
-                    break;
-                case "desc":
-                    pageData = pageData.sort((objA, objB) => {
-                        const index = this.sorting.index;
-                        const x = objA[Object.keys(objA)[index]]
-                        const y = objB[Object.keys(objB)[index]]
-                        console.log(`${x} and ${y} == ${sortByDecensing(x, y)}`);
-                        return sortByDecensing(x, y);
-                    });
-                    break;
-            }
+            pageData = pageData.sort((objA, objB) => {
+                const index = this.sorting.index;
+                const x = objA[Object.keys(objA)[index]]
+                const y = objB[Object.keys(objB)[index]]
+                return this.sorting.sortBy === SORT_ASC? compare(x, y) : compare(y, x);
+            });
+        }
+
+        if (this.search && this.search.length > 0) {
+            pageData = pageData.filter(obj => {
+                for (const key in obj) {
+                    if (Object.hasOwnProperty.call(obj, key)) {
+                        const element = obj[key]?.toString();
+                        if (element && element.includes(this.search)) {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            })
         }
 
         if (pageData.length < this.minRows) {
@@ -103,30 +148,76 @@ class DataTable {
     }
 
     sortColumn(column, index) {
-        const sorting = this.sorting;
-        if (sorting == null) {
-            column.classList.add("asc");
+        if (Array.isArray(this.sortable)) {
+            // We check if the given index is a valid column for sorting
+            const elements = this.sortable;
+            if (this.header[index] !== elements[index]) {
+                return;
+            }
+        }   
 
+        if (this.sorting == null) {
             this.sorting = {
                 index: index,
                 column: column,
-                sortBy: "asc"
+                sortBy: SORT_ASC
             };
-
         } else {
-            sorting.index = index;
-
+            const sorting = this.sorting;
             sorting.column.classList.remove(sorting.sortBy);
-            sorting.sortBy = sorting.sortBy === "asc" ? "desc" : "asc";
+
+            if (sorting.index !== index){
+                sorting.sortBy = SORT_ASC;
+            } else {
+                sorting.sortBy = sorting.sortBy === SORT_ASC ? SORT_DESC : SORT_ASC;
+            }
+
             sorting.column = column;
-
-            column.classList.add(sorting.sortBy);
+            sorting.index = index;
         }
-
+        
+        column.classList.add(this.sorting.sortBy);
         this.render();
     }
 
-    // This is only called if there is a paginator, otherwise the table is static
+    selectColumn(index) {
+        const temp = this.selectColumn;
+        this.selectedColumn = index;
+        this.prevSelectedColumn = temp;
+        this.render();
+    }
+
+    onTableColumn(tableCell, columnIndex) {
+        if (this.columnSelection) {
+            if (this.prevSelectedColumn === columnIndex) {
+                tableCell.classList.remove("selected-column");
+            }
+    
+            if(this.selectedColumn === columnIndex) {
+                tableCell.classList.add("selected-column");
+            }
+        }
+    }
+
+    onTableRow(tableRow, rowIndex) {
+        if (rowIndex > 0) {
+            tableRow.classList.add("row");
+
+            if (this.hover) {
+                tableRow.classList.add("hoverable");
+            }
+
+            // Alternate the colors
+            if (this.striped) {
+                if (rowIndex % 2 === 0) {
+                    tableRow.classList.add("row-even");
+                } else {
+                    tableRow.classList.add("row-odd");
+                }
+            }
+        }
+    }
+
     render() {
         if (this.dataTable == null) {
             return;
@@ -145,12 +236,21 @@ class DataTable {
         dataTable.className = "datatable";
         this.dataTable = dataTable;
 
+        if (this.searchable) {
+            const searchContainer = document.createElement("div");
+            searchContainer.className = "searchbar-container";
+            searchContainer.appendChild(this.createSearchBar());
+            dataTable.appendChild(searchContainer);
+        }
+
         if (this.paginate) {
+            // Container for the `table`
             const tableContainer = document.createElement("div");
             tableContainer.className = "table-container";
             tableContainer.appendChild(table);
             dataTable.appendChild(tableContainer);
 
+            // Container for the `paginator`
             const paginatorContainer = document.createElement("div");
             paginatorContainer.className = "paginator-container";
             paginatorContainer.appendChild(this.createPaginatorNode());
@@ -160,6 +260,28 @@ class DataTable {
         }
 
         return dataTable;
+    }
+
+    createSearchBar() {
+        const container = document.createElement("div");
+        container.className = "searchbar";
+
+        const id = getNextID("searchbar-input");
+        const input = document.createElement("input");
+        input.setAttribute("id", id)
+        input.addEventListener("input", (e) => {
+            this.search = e.target.value;
+            this.render();
+        });
+
+        const inputLabel = document.createElement("label");
+        inputLabel.setAttribute("for", id)
+        inputLabel.innerHTML = this.searchLabelText;
+        inputLabel.appendChild(input);
+
+        container.appendChild(inputLabel);
+
+        return container;
     }
 
     createPaginatorNode() {
@@ -237,7 +359,7 @@ class DataTable {
     }
 
     createTableNode() {
-        const tableNode = document.createElement("table");
+        let tableNode = document.createElement("table");
 
         // Creates the table header
         const tableHeader = document.createElement("thead");
@@ -246,70 +368,96 @@ class DataTable {
         for (let i = 0; i < this.header.length; i++) {
             const element = this.header[i];
             const th = document.createElement("th");
-            th.innerText = element;
+            th.innerHTML = element?? "";
 
-            if (this.sorteable) {
+            if (this.centerText) {
+                th.classList.add("text-center");
+            }
+
+            if (this.sortable) {
                 th.classList.add("sortable");
+                
+                if (this.sorting && this.sorting.index === i) {
+                    th.classList.add(this.sorting.sortBy);
+                }
                 th.addEventListener("click", this.sortColumn.bind(this, th, i));
             }
 
+            if (this.columnSelection) {
+                th.addEventListener("click", this.selectColumn.bind(this, i));
+            }
+
+            this.onTableColumn(th, i);
             tableHeaderRow.appendChild(th);
         }
 
-        // Set vertical scroll
-        if (this.scrollY) {
-            tableHeaderRow.classList.add("table-scroll-y");
-        }
-
+        this.onTableRow(tableHeaderRow, 0);
         tableHeader.appendChild(tableHeaderRow);
         tableNode.appendChild(tableHeader);
 
         // Creates the table rows
-        let index = 0;
+        const pageData = this.getCurrentPageData();
         const tableBody = document.createElement("tbody");
-        for (const data of this.getCurrentPageData()) {
+
+        for (let rowIndex = 0; rowIndex < pageData.length; rowIndex++) {
+            const data = pageData[rowIndex];
             const tr = document.createElement("tr");
 
             if (data !== null) {
+                let colIndex = 0;
                 for (const key in data) {
                     if (Object.hasOwnProperty.call(data, key)) {
                         const element = data[key];
                         const td = document.createElement("td");
-                        td.innerText = element;
-
+                        td.innerHTML = element?? "";
                         tr.appendChild(td);
+                        
+                        this.onTableColumn(td, colIndex);
+                        colIndex += 1;
                     }
                 }
             } else {
                 for (let i = 0; i < this.header.length; i++) {
-                    tr.appendChild(document.createElement("td"));
+                    const td = document.createElement("td");
+                    this.onTableColumn(td, i);
+                    tr.appendChild(td);
                 }
             }
 
-            tr.classList.add("row");
-            if (index % 2 === 0) {
-                tr.classList.add("row-even");
-            } else {
-                tr.classList.add("row-odd");
+            if (this.centerText) {
+                tr.classList.add("text-center");
             }
 
-            tableBody.appendChild(tr);
-            index += 1;
-        }
+            // Check if the current element fit the table, if not expand it
+            if (data != null) {
+                const currentDataCols = Object.keys(data).filter(k => typeof data[k] !== "function").length;
+                if (currentDataCols !== this.header.length && currentDataCols < this.header.length) {
+                    const requiredColumns = this.header.length - currentDataCols + 1;
+                    tr.lastChild.setAttribute("colspan", requiredColumns);  
+                }
+            }
 
-        // Set vertical scroll
-        if (this.scrollY) {
-            this.tableBody.style.minHeight = typeof this.scrollY === "number" ? `${this.scrollY}px` : this.scrollY;
+            this.onTableRow(tr, rowIndex + 1);
+            tableBody.appendChild(tr);
         }
 
         tableNode.appendChild(tableBody);
 
+        // vertical scroll
+        if (this.scrollY) {
+            const scrollYContainer = document.createElement("div");
+            scrollYContainer.classList.add("table-scroll-y");
+            scrollYContainer.style.maxHeight = typeof this.scrollY === "number" ? `${this.scrollY}px` : this.scrollY;
+            scrollYContainer.appendChild(tableNode);
+            tableNode = scrollYContainer;
+        }
+
+        // Horizontal scroll
         if (this.scrollX) {
             const tableScrollContainer = document.createElement("div");
             tableScrollContainer.className = "table-scroll-x";
-            tableScrollContainer.style.overflowX = "auto";
             tableScrollContainer.appendChild(tableNode);
-            return tableScrollContainer;
+            tableNode = tableScrollContainer;
         }
 
         return tableNode;
@@ -321,16 +469,14 @@ class DataTable {
     }
 
     toHtml() {
-        const temp = document.createElement("div");
-        temp.appendChild(this.toNode())
-        return temp.innerHTML;
+        return nodeToHtml(this.toNode(), false);
     }
 }
 
 function createDatatable(element, options) {
     console.assert(element, "`element` cannot be null");
 
-    const root = typeof element === "string" ? document.getElementById(element) : element;
+    const root = typeof element === "string" ? document.querySelector(element) : element;
 
     if (root === null) {
         throw new Error(`Cannot find ${element}`);
@@ -341,7 +487,7 @@ function createDatatable(element, options) {
 }
 
 /* Utilities */
-function sortByAscending(x, y) {
+function compare(x, y) {
     if (Object.is(x, y)) {
         return 0;
     }
@@ -355,6 +501,34 @@ function sortByAscending(x, y) {
     }
 }
 
-function sortByDecensing(x, y) {
-    return -sortByAscending(x, y);
+function nodeToHtml(node, clone) {
+    const tempParent = document.getElementById("div");
+    if(clone == null || clone === true) {
+        tempParent.appendChild(node.deepClone())
+    } else {
+        tempParent.appendChild(node)
+    }
+    return tempParent.innerHTML;
 }
+
+function nodeToString(node, clone) {
+    const tempParent = document.getElementById("div");
+    if(clone == null || clone === true) {
+        tempParent.appendChild(node.deepClone())
+    } else {
+        tempParent.appendChild(node)
+    }
+    return tempParent.innerText;
+}
+
+// Unique ID generator
+const getNextID = (() => {
+    let id = 0;
+    return function(name) {
+        if (name) {
+            return `${name}-${id++}`;
+        } else {
+            return id++;
+        }
+    }
+})();

@@ -112,6 +112,9 @@ h6 {
 .bg-info {
     background-color: var(--info-color);
 }
+.bg-color-primario-dark{
+    background-color: var(--color-primario-dark);
+}
 
 
 /* text-color */
@@ -205,6 +208,9 @@ h6 {
 
 .mx-left-mid {
     margin-left: var(--mid-mp);
+}
+.mx-left-25{
+    margin-left: 25%;
 }
 
 .mx-left-large {
@@ -424,7 +430,16 @@ textarea {
     padding: 10px;
     border: 1px solid var(--color-black);
     border-radius: 4px;
-    margin: 3px;
+    margin: 3px;   
+}
+.form-control-auto{
+    min-width: 300px;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid var(--color-black);
+    border-radius: 4px;
+    margin: auto;   
+    display: block;
 }
 
 .form-control::placeholder {

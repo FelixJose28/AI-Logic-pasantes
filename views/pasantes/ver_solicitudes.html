@@ -18,6 +18,13 @@
     <link href="../../css/sidebar.css" rel="stylesheet" />
     <script src="../../js/sidebar.js" defer></script>
     <title>Ver Solicitudes</title>
+
+    <style>
+        #lista-pasantes {
+            padding: 30px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,101 +35,40 @@
 
         <div class="main_container" id="main">
             <h1 class="mx-left-large text-center" style="color: var(--color-primario);">Solicitudes de los Pasantes</h1>
-
-            <div id="lista-pasantes"></div>
-            
-            <!-- <div class="lista-pasantes">
-                <div class="tabla-pasantes">
-                    <table>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Correo</th>
-                            <th>Calificación</th>
-                            <th>Opciones</th>
-                        </tr>
-                        <tr>
-                            <td>Juana</td>
-                            <td>Perez</td>
-                            <td>juana25@hotmail.com</td>
-                            <td>75</td>
-                            <td>
-                                <div class="solicitud-opciones">
-                                    <span class="material-icons aceptar-solitidud">check_circle</span>
-                                    <span class="material-icons rechazar-solitidud">cancel</span>
-                                    <span class="material-icons ver-solitidud">wysiwyg</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Juana</td>
-                            <td>Perez</td>
-                            <td>juana25@hotmail.com</td>
-                            <td>75</td>
-                            <td>
-                                <div class="solicitud-opciones">
-                                    <span class="material-icons aceptar-solitidud">check_circle</span>
-                                    <span class="material-icons rechazar-solitidud">cancel</span>
-                                    <span class="material-icons ver-solitidud">wysiwyg</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Juana</td>
-                            <td>Perez</td>
-                            <td>juana25@hotmail.com</td>
-                            <td>75</td>
-                            <td>
-                                <div class="solicitud-opciones">
-                                    <span class="material-icons aceptar-solitidud">check_circle</span>
-                                    <span class="material-icons rechazar-solitidud">cancel</span>
-                                    <span class="material-icons ver-solitidud">wysiwyg</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Juana</td>
-                            <td>Perez</td>
-                            <td>juana25@hotmail.com</td>
-                            <td>75</td>
-                            <td>
-                                <div class="solicitud-opciones">
-                                    <span class="material-icons aceptar-solitidud">check_circle</span>
-                                    <span class="material-icons rechazar-solitidud">cancel</span>
-                                    <span class="material-icons ver-solitidud">wysiwyg</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="solicitudes-nav">
-                    <div class="solicitudes-nav-btn">Anterior</div>
-                    <div class="solicitud-pagina">1</div>
-                    <div class="solicitud-pagina">2</div>
-                    <div class="solicitud-pagina-actual">3</div>
-                    <div class="solicitudes-nav-btn">Siguiente</div>
-                </div>
-            </div> -->
+            <div id="lista-pasantes"></div>            
         </div>
     </div>
 </body>
-<script>
-    const data = [];
-    for (let i = 0; i < 23; i++){
-        data.push({
-            value: "Element " + (i + 1),
-            index: i + 1,
-            letter: String.fromCharCode(97 + i)
-        });
-    }
+<script type="module">
+    import { DataGenerator } from "../../js/datagenerator.js";
 
-    createDatatable("lista-pasantes",
+    const data = new DataGenerator(100).nextArray(23, (gen) => {
+        const name = gen.nextName();
+        const lastName = gen.nextLastName();
+
+        return {
+            Nombre: name,
+            Apellido: lastName,
+            Correo: `${name}${lastName}@hotmail.com`.toLowerCase(),
+            Calificacion: gen.nextInt(70, 100),
+            Opciones: `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
+                    <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
+                    <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`
+        };
+    });
+
+    createDatatable("#lista-pasantes",
     {
-        // pageButtonCount: 40,
-        sorteable: true,
-        maxRows: 4,
-        header: Object.keys(data[0]),
-        data: data
+        //pageButtonCount: 4,
+        //paginate: false,
+        //searchable: false,
+        //scrollX: true,
+        //scrollY: 400,
+        centerText: true,
+        maxRows: 10,
+        sortable: ["Nombre", "Apellido", "Correo", "Calificacion"],
+        data: data,
     })
 </script>
+
 </html>
