@@ -3,6 +3,55 @@
 const SORT_ASC = "asc";
 const SORT_DESC = "desc";
 
+// TODO: REMOVE
+function _USAGE() {
+    createDatatable("#myContainer"                      /* #id, .class or element to insert the table */,
+    {
+        // data: data,                                  /* the source data to display in the table */
+        // ajax: "../../data/colors.json",              /* the URL to load the data from */
+        // header: [],                                  /* the header of the table, if omited the `data` keys will be used instead */
+        // currentPage: 0,                              /* the current page of the table, by default 0 */
+        // paginate: false,                             /* enable pagination in the table, by default true */
+        // minRows: 0,                                  /* the minimun numbers of rows to display per page, by default 0 */
+        // maxRows: 10,                                 /* the maximun numbers of rows to display per page, by default display all the rows */
+        // previousButtonText: "Previous",              /* text displayed in the `Previous` button of the paginator */
+        // nextButtonText: "Next",                      /* text displayed in the `Next` button of the paginator */
+        // pageButtonCount: 10,                         /* numbers of buttons to display in the paginator */
+        // hover: false,                                /* enable row hover, by default true */
+        // centerText: true,                            /* center the text of the cells, by default false */
+        // scrollX: true,                               /* enable horizontal scroll if the table overflows, by default false */
+        // scrollY: 300,                                /* enable vertical overflow within the given heigh for example `30vw` or `300`px */
+        // sortable: false,                             /* enable sorting in the table, by default true */
+        // searchable: false,                           /* enable searching in the table, by default true */
+        // searchLabelText: "Search: ",                 /* the text of the search input label */
+        // columnSelection: false,                      /* enable column selection. If no `false` and the column is `sortable` will be enable */
+        // rowSelection: true,                          /* enable row selection */
+        // columns: {},                                 /* the data used for display the columns */
+        // styles: [],                                  /* the styles applied to the table, See datatable.js 'TableStyles' */
+    });
+}
+
+// Table styles
+const TableStyles = {
+    // Alternates the colors of the even rows
+    STRIPED: "striped",
+    // Alternates the colors of the odd rows
+    STRIPED_INVERTED : "striped-inverted",
+    // Removes the padding from the rows
+    COMPACT: "compact",
+    // Adds bottom and top border to the rows
+    ROW_BORDER: "row-border",
+    // Adds left and right border to the columns
+    COL_BORDER: "column-border",
+    // Adds highlight color when hovering a row
+    HOVER_ROW: "hover-row",
+    // Adds highlight color when selecting a column header
+    HOVER_COL: "hover-column",
+};
+
+// Default styles of a table, use "default" in styles to add these.
+const DEFAULT_STYLES = [TableStyles.STRIPED, TableStyles.HOVER_COL, TableStyles.HOVER_ROW];
+
 /**
  * A html table generator.
  */
@@ -10,26 +59,29 @@ class DataTable {
     /**
      * Constructs a new `DataTable`
      * 
-     * @param {string|Element} element the element where the datatable will be created.
+     * @param {String|Element} element the element where the datatable will be created.
      * @param {Object} options configuration of the datatable.
      * @param {any[]} options.data the source data to display in the table.
+     * @param {string} options.ajax the URL to load the data from.
      * @param {String[]} options.header the header of the table, if omited the `options.data` keys will be used instead.
      * @param {Number} options.currentPage the current page of the table, by default 0.
      * @param {Boolean} options.paginate enable pagination in the table, by default true.
-     * @param {Number} options.minRows the minimun numbers of rows to display per page, by default 0.
      * @param {Number} options.maxRows the maximun numbers of rows to display per page, by default display all the rows.
-     * @param {String|any} options.previousButtonText text displayed in the `Previous` button of the paginator.
-     * @param {String|any} options.nextButtonText text displayed in the `Next` button of the paginator.
+     * @param {Number} options.minRows the minimun numbers of rows to display per page, by default 0.
+     * @param {String} options.previousButtonText text displayed in the `Previous` button of the paginator.
+     * @param {String} options.nextButtonText text displayed in the `Next` button of the paginator.
      * @param {Number} options.pageButtonCount numbers of buttons to display in the paginator.
      * @param {Boolean} options.hover enable row hover, by default true.
      * @param {Boolean} options.centerText center the text of the cells, by default false.
      * @param {Boolean} options.scrollX enable horizontal scroll if the table overflows, by default false.
      * @param {Number|String} options.scrollY enable vertical overflow within the given heigh for example `30vw` or `300`px.
-     * @param {Boolean} options.striped alternate the rows colors in the table.
-     * @param {Boolean|string[]} options.sortable enable sorting in the table in all columns or the given column names.
+     * @param {Boolean} options.sortable enable sorting in the table.
      * @param {Boolean} options.searchable enable searching in the table.
      * @param {String} options.searchLabelText the text of the search input label, by default "Search: ".
      * @param {Boolean} options.columnSelection enable column selection. If no `false` and the column is `sortable` will be enable.
+     * @param {Boolean} options.rowSelection enable row selection.
+     * @param {Boolean} options.columns the data used for display the columns.
+     * @param {string[]} options.style the styles applied to the table. @see TableStyles.
      */
     constructor(element, options) {
         if (element == null) {
@@ -42,7 +94,8 @@ class DataTable {
 
         // Table data
         this.header = options.header;
-        this.data = options.data ?? [];
+        this.ajax = options.ajax;
+        this.data = this.ajax? this.#fetchJsonArrayData(this.ajax) : (options.data?? []);
 
         if (this.header == null) {
             if (this.data == null || this.data.length === 0) {
@@ -62,24 +115,52 @@ class DataTable {
         // Table options
         this.currentPage = options.currentPage ?? 0;
         this.paginate = options.paginate ?? true;
-        this.minRows = options.minRows ?? 0;
         this.maxRows = options.maxRows ?? Number.MAX_SAFE_INTEGER;
+        this.minRows = options.minRows ?? 0;
         this.previousButtonText = options.previousButtonText ?? "«";
         this.nextButtonText = options.nextButtonText ?? "»";
         this.pageButtonCount = options.pageButtonCount ?? 10;
-        this.hover = options.hover ?? true;
+        this.hover = options.hover?? true;
         this.centerText = options.centerText ?? false;
         this.scrollX = options.scrollX ?? false;
         this.scrollY = options.scrollY;
-        this.striped = options.striped ?? true;
         this.sortable = options.sortable ?? true;
         this.searchable = options.searchable ?? true;
         this.searchLabelText = options.searchLabelText ?? "Search: ";
-        this.columnSelection = options.columnSelection;
-        this.rowSelection = options.rowSelection;
+        this.columnSelection = options.columnSelection?? this.sortable;
+        this.rowSelection = options.rowSelection?? false;
+        this.columns = DataTable.#createColumnsData(this.header, options.columns);
+        this.styles = options.styles?? DEFAULT_STYLES;
 
-        if (this.columnSelection == null && this.sortable != null) {
-            this.columnSelection = true;
+        // Styling
+        if (this.styles.includes("default")) {
+            this.styles = this.styles.filter(s => s != "default");
+            this.styles.push(...DEFAULT_STYLES);
+        }
+
+        if (this.hover) {
+            if (!this.styles.includes(TableStyles.HOVER_ROW)) {
+                this.styles.push(TableStyles.HOVER_ROW);
+            }
+        } else {
+            this.styles = this.styles.filter(s => s != TableStyles.HOVER_ROW);
+        }
+
+        if(this.columnSelection) {
+            if (!this.styles.includes(TableStyles.HOVER_COL)) {
+                this.styles.push(TableStyles.HOVER_COL);
+            }
+        } else {
+            this.styles = this.styles.filter(s => s != TableStyles.HOVER_COL);
+        }
+
+        // Footer
+        if(options.foot != null) {
+            if (typeof options.foot === "boolean") {
+                this.foot = options.foot? this.header : null;
+            } else {
+                this.foot = options.foot;
+            }
         }
 
         // Transforms the data in the datatable for example sorting or filtering.
@@ -92,30 +173,21 @@ class DataTable {
             }
         }
 
-        if (Array.isArray(this.sortable)) {
-            this.sortable.forEach(e => {
-                if (!this.header.includes(e)) {
-                    throw new Error(`Invalid sortable column, '${e}' is no part of the header: [${this.header}]`);
-                }
-            })
-        }
-
-        if (Array.isArray(this.searchable)) {
-            this.searchable.forEach(e => {
-                if (!this.header.includes(e)) {
-                    throw new Error(`Invalid searchable column, '${e}' is no part of the header: [${this.header}]`);
-                }
-            })
+        const STYLES = Object.values(TableStyles);
+        for (const s of this.styles) {
+            if (!STYLES.includes(s)) {
+                throw new Error(`Invalid style value '${s}' expected one of: ${STYLES}`);
+            }
         }
 
         console.assert(this.minRows <= this.maxRows, "'minRows' must be lower of equals to 'maxRows'");
         console.assert(this.isValidPage(this.currentPage), `invalid 'currentPage' ${this.currentPage} max is ${this.pageCount()}`);
 
         // Constructs the datadable
-        DataTable.createDataTableOnElement(this, element);
+        DataTable.#createDataTableOnElement(this, element);
     }
 
-    static createDataTableOnElement(dataTable, element) {
+    static #createDataTableOnElement(dataTable, element) {
         const root = typeof element === "string" ? document.querySelector(element) : element;
 
         if (root === null) {
@@ -125,6 +197,58 @@ class DataTable {
         }
     }
 
+    static #createColumnsData(header, columns) {
+        const columnsData = [];
+
+        // Asserts columns keys
+        for (const key in columns) {
+            if (!header.includes(key)) {
+                throw new Error(`column '${key}' is no in the header: ${header}`);
+            }
+        }
+
+        for (let i = 0; i < header.length; i++) {
+            const key = header[i];
+            if (columns && key in columns) {
+                const col = columns[key];
+                columnsData.push(new ColumnData(key, i, col.sortable, col.searchable, col.render));
+            } else {
+                columnsData.push(new ColumnData(key, i));
+            }
+        }
+
+        return columnsData;
+    }
+
+    #fetchJsonArrayData(url) {
+        const data = [];
+        const request = new XMLHttpRequest();
+
+        request.onreadystatechange = () => {
+            if (request.readyState == 4 && request.status == 200) {
+                const text = request.responseText;
+                const json = JSON.parse(text);
+
+                // The first key value should be the array of objects.
+                const key = Object.keys(json)[0];
+                const arrayData = json[key];
+                if (arrayData == null){
+                    throw new Error(`couldn't load '${url}'`);
+                }
+                
+                if (!Array.isArray(arrayData)) {
+                    throw new TypeError("Loaded data is not a json array");
+                }
+
+                data.push(...arrayData);
+            }
+        };   
+
+        request.open("GET", url, false);
+        request.send();
+        return data;
+    }
+
     isValidPage(page) {
         const count = this.pageCount();
         if (page < 0 || page > count) {
@@ -132,6 +256,10 @@ class DataTable {
         } else {
             return true;
         }
+    }
+
+    count(){
+        return this.data.length;
     }
 
     pageCount() {
@@ -258,14 +386,29 @@ class DataTable {
         this.transformers = [];
     }
 
-    getCurrentPageColumnsData() {
+    render() {
+        if (this.dataTable == null) {
+            return;
+        }
+
+        const dataTable = this.dataTable;
+        const tableContainer = dataTable.getElementsByClassName("table-container")[0];
+        const paginatorContainer = dataTable.getElementsByClassName("paginator-container")[0];
+
+        tableContainer.replaceChild(this.renderTableNode(), tableContainer.firstChild);
+        paginatorContainer.replaceChild(this.renderPaginatorNode(), paginatorContainer.firstChild);
+    }
+
+    ////////////////////////// Internal Methods //////////////////////////
+
+    getCurrentPageData() {
         const startIndex = this.currentPage * this.maxRows;
         const endIndex = Math.min(startIndex + this.maxRows, this.data.length);
         let pageData = this.data.slice(startIndex, endIndex);
 
         if (this.transformers.length > 0) {
             for (const f of this.transformers) {
-                pageData = f(pageData);
+                pageData = f(pageData, this.columns);
             }
         }
 
@@ -288,16 +431,8 @@ class DataTable {
         }
 
         if (this.sortable) {
-            if (Array.isArray(this.sortable)) {
-                if (this.sortable.length === 0) {
-                    return;
-                }
-
-                // We check if the given index is a valid column for sorting
-                const elements = this.sortable;
-                if (this.header[index] !== elements[index]) {
-                    return;
-                }
+            if (!this.columns[index].sortable) {
+                return;
             }
 
             if (this.sorting == null) {
@@ -352,12 +487,6 @@ class DataTable {
     onTableRow(tableRow, rowIndex) {
         // rowIndex === 0 is the header
         if (rowIndex > 0) {
-            tableRow.classList.add("row");
-
-            if (this.hover) {
-                tableRow.classList.add("hoverable");
-            }
-
             // Table row selection
             if (this.rowSelection) {
                 tableRow.classList.add("selectable");
@@ -379,28 +508,13 @@ class DataTable {
                 }
             }
 
-            // Alternate the colors
-            if (this.striped) {
-                if (rowIndex % 2 === 0) {
-                    tableRow.classList.add("even");
-                } else {
-                    tableRow.classList.add("odd");
-                }
+            // Marks the rows as even or odds
+            if (rowIndex % 2 === 0) {
+                tableRow.classList.add("even");
+            } else {
+                tableRow.classList.add("odd");
             }
         }
-    }
-
-    render() {
-        if (this.dataTable == null) {
-            return;
-        }
-
-        const dataTable = this.dataTable;
-        const tableContainer = dataTable.getElementsByClassName("table-container")[0];
-        const paginatorContainer = dataTable.getElementsByClassName("paginator-container")[0];
-
-        tableContainer.replaceChild(this.renderTableNode(), tableContainer.firstChild);
-        paginatorContainer.replaceChild(this.renderPaginatorNode(), paginatorContainer.firstChild);
     }
 
     renderDatatableNode(table) {
@@ -441,30 +555,15 @@ class DataTable {
         const id = getNextID("searchbar-input");
         const input = document.createElement("input");
         input.setAttribute("id", id)
-
+        
         input.addEventListener("input", (event) => {
             this.filter((data) => {
-                if (Array.isArray(this.searchable)) {
-                    if (this.searchable.length === 0) {
-                        return true;
-                    }
-
-                    const objectKeys = Object.keys(data);
-
-                    for (const e of this.searchable) {
-                        const index = this.header.indexOf(e);
-                        const key = objectKeys[index];
-                        const element = data[key]?.toString().toLowerCase();
-
-                        if (element && element.includes(event.target.value.toLowerCase())) {
-                            return true;
-                        }
-                    }
-
-                } else {
-                    for (const key in data) {
-                        const element = data[key]?.toString().toLowerCase();
-                        if (element && element.includes(event.target.value.toLowerCase())) {
+                const objectKeys = Object.keys(data);
+                for (const col of this.columns) {
+                    if (col.searchable && col.index < objectKeys.length) {
+                        const key = objectKeys[col.index];
+                        const value = data[key]?.toString().toLowerCase();
+                        if (value && value.includes(event.target.value.toLowerCase())) {
                             return true;
                         }
                     }
@@ -472,7 +571,7 @@ class DataTable {
 
                 return false;
             })
-        });
+        })
 
         const inputLabel = document.createElement("label");
         inputLabel.setAttribute("for", id)
@@ -561,6 +660,7 @@ class DataTable {
     renderTableNode() {
         let tableNode = document.createElement("table");
         tableNode.className = "datatable";
+        tableNode.classList.add(...this.styles);
 
         // Creates the table header
         const tableHeader = document.createElement("thead");
@@ -597,34 +697,32 @@ class DataTable {
         tableNode.appendChild(tableHeader);
 
         // Creates the table rows
-        const pageData = this.getCurrentPageColumnsData();
+        const pageData = this.getCurrentPageData();
         const tableBody = document.createElement("tbody");
 
         for (let rowIndex = 0; rowIndex < pageData.length; rowIndex++) {
             const data = pageData[rowIndex];
             const tr = document.createElement("tr");
 
-            // Number of 'td' inserted in the current row
-            let count = 0;
+            // Current column
+            let colIndex = 0;
             
             if (data !== null) {
-                let colIndex = 0;
-                for (const key in data) {
-                    const element = data[key];
+                for (const _ in data) {
                     const td = document.createElement("td");
-                    td.innerHTML = element ?? "";
+                    td.innerHTML = this.columns[colIndex].render(data, rowIndex, colIndex);
                     tr.appendChild(td);
 
                     this.onTableColumn(td, colIndex);
                     colIndex += 1;
-                    count += 1;
                 }  
             } 
 
             // Insert empty cells if the current row length is less than the header
-            for (let i = count; i < this.header.length; i++) {
+            for (; colIndex < this.header.length; colIndex++) {
                 const td = document.createElement("td");
-                this.onTableColumn(td, i);
+                td.innerHTML = this.columns[colIndex].render(null, rowIndex, colIndex);
+                this.onTableColumn(td, colIndex);
                 tr.appendChild(td);
             }
 
@@ -636,12 +734,34 @@ class DataTable {
             tableBody.appendChild(tr);
         }
 
+        // Create table footer
+        if (this.foot) {
+            const foot = document.createElement("tfoot");
+            const tr = document.createElement("tr");
+
+            if (typeof this.foot === "string") {
+                const th = document.createElement("th");
+                th.setAttribute("colspan", this.header.length);
+                th.innerHTML = this.foot;
+                tr.appendChild(th);
+            } else {
+                for (const s of this.foot) {
+                    const th = document.createElement("th");
+                    th.innerHTML = s;
+                    tr.appendChild(th);
+                }
+            }
+
+            foot.appendChild(tr);
+            tableNode.appendChild(foot);
+        }
+
         tableNode.appendChild(tableBody);
 
         // vertical scroll
         if (this.scrollY) {
             const scrollYContainer = document.createElement("div");
-            scrollYContainer.classList.add("table-scroll-y");
+            scrollYContainer.classList.add("scroll-y");
             scrollYContainer.style.maxHeight = typeof this.scrollY === "number" ? `${this.scrollY}px` : this.scrollY;
             scrollYContainer.appendChild(tableNode);
             tableNode = scrollYContainer;
@@ -649,10 +769,10 @@ class DataTable {
 
         // Horizontal scroll
         if (this.scrollX) {
-            const tableScrollContainer = document.createElement("div");
-            tableScrollContainer.className = "table-scroll-x";
-            tableScrollContainer.appendChild(tableNode);
-            tableNode = tableScrollContainer;
+            const scrollXContainer = document.createElement("div");
+            scrollXContainer.className = "scroll-x";
+            scrollXContainer.appendChild(tableNode);
+            tableNode = scrollXContainer;
         }
 
         return tableNode;
@@ -665,6 +785,34 @@ class DataTable {
 
     toHtml() {
         return nodeToHtml(this.toNode(), false);
+    }
+}
+
+// Defines how a column is represented.
+class ColumnData {
+    constructor(columnName, columnIndex, sortable, searchable, render) {
+        if (columnName == null){
+            throw new Error("Column name cannot be null");
+        }
+
+        this.columnName = columnName;
+        this.index = columnIndex;
+        this.sortable = sortable?? true;
+        this.searchable = searchable?? true;
+
+        if (render == null) {
+            this.render = (data, _row, _column) => {
+                if(data == null){
+                    return "";
+                } else {
+                    const objectKeys = Object.keys(data);
+                    const key = objectKeys[this.index];
+                    return data[key]?.toString()?? "";
+                }
+            };
+        } else {
+            this.render = render;
+        }        
     }
 }
 

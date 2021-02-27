@@ -23,6 +23,7 @@
         #lista-pasantes {
             padding: 30px;
             margin: 0 auto;
+            width: 100%;
         }
     </style>
 </head>
@@ -51,25 +52,42 @@
             "Apellido": lastName,
             "Correo": `${name}${lastName}@hotmail.com`.toLowerCase(),
             "Calificacion": gen.nextInt(70, 100),
-            // "Opciones": `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
-            //         <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
-            //         <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`
         };
     });
 
-    const t = createDatatable("#lista-pasantes",
+    createDatatable("#lista-pasantes"                      /* #id, .class or element to insert the table */,
     {
-        //pageButtonCount: 4,
-        //paginate: false,
-        //searchable: false,
-        //scrollX: true,
-        //scrollY: 400,
-        centerText: true,
-        //rowSelection: true,
-        maxRows: 10,
-        //sortable: ["Nombre", "Apellido", "Correo", "Calificacion"],
-        header: ["Nombre", "Apellido", "Correo", "Calificacion", "Opciones"],
-        data: data
+        data: data,                                   /* the source data to display in the table */
+        // ajax: "../../data/colors.json",              /* the URL to load the data from */
+        header: ["Nombre", "Apellido", "Correo", "Calificacion", "Opciones"],                                  /* the header of the table, if omited the `data` keys will be used instead */
+        // currentPage: 0,                              /* the current page of the table, by default 0 */
+        // paginate: false,                              /* enable pagination in the table, by default true */
+        // minRows: 0,                                  /* the minimun numbers of rows to display per page, by default 0 */
+        maxRows: 10,                                 /* the maximun numbers of rows to display per page, by default display all the rows */
+        // previousButtonText: "Previous",              /* text displayed in the `Previous` button of the paginator */
+        // nextButtonText: "Next",                      /* text displayed in the `Next` button of the paginator */
+        // pageButtonCount: 10,                         /* numbers of buttons to display in the paginator */
+        // hover: false,                                /* enable row hover, by default true */
+        centerText: false,                           /* center the text of the cells, by default false */
+        scrollX: true,                               /* enable horizontal scroll if the table overflows, by default false */
+        // scrollY: 300,                                /* enable vertical overflow within the given heigh for example `30vw` or `300`px */
+        // sortable: false,                             /* enable sorting in the table, by default true */
+        // searchable: false,                           /* enable searching in the table, by default true */
+        // searchLabelText: "Search: ",                 /* the text of the search input label */
+        // columnSelection: false,                      /* enable column selection. If no `false` and the column is `sortable` will be enable */
+        // rowSelection: true,                          /* enable row selection */
+        // styles: [],                                  /* the styles applied to the table, by default: striped, row-hover, column-hover. See datatable.js 'TableStyles' */
+        columns: {                                      /* the data used for display the columns */
+            "Opciones" : {
+                searchable: false,
+                sortable: false,
+                render: () => {
+                    return `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
+                     <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
+                     <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`;
+                }
+            }
+        },                                 
     });
 </script>
 
