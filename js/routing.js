@@ -5,6 +5,7 @@ function redirectToRoute(route) {
 
 window.addEventListener("hashchange", () => {
     let routeHash = window.location.hash;
+    console.log(window.location.hash);
     console.log(`New route hash: ${routeHash}`);
 
     if (routeHash.length > 0) {
