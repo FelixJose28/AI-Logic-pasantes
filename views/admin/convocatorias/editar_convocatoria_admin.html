@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../../css/global-style.css">
+    <link rel="stylesheet" href="../../../css/abrir_convocatoria_admin.css">
+
+    <!-- Sidebar -->
+    <link href="../../../css/sidebar.css" rel="stylesheet" />
+    <script src="../../../js/sidebar.js" defer></script>
+    <script src="../../../js/routing.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="sidebar-container">
+            <!-- Sidebar is dynamically loaded from `sidebar.js` -->
+        </div>
+
+        <div class="main_container " id="main">
+            <!-- cargar el contenido principal es esta seccion de la pagina-->
+
+            <form action="" class="w-65 mx-auto">
+                <h1 class="text-center m-auto">Editar Convocatoria</h1>
+
+                <div class="my-top-large">
+                    <label class="d-block m-auto w-65" for="fecha">Nombre</label>
+                    <input id="nombre"  type="text" class="form-control-auto  w-65" value="Convocatoria ITLA">
+                </div>
+                <div class="my-top-large">
+                    <label class="d-block m-auto w-65" for="cupo">Cupo</label>
+                    <input id="cupo"  type="date" class="form-control-auto  w-65" value="20">
+                </div>
+                <div class="my-top-large">
+                    <label  class="d-block m-auto w-65" for="fechaInicio">Fecha Inicio</label>
+                    <input id="fechaInicio" type="date" class="form-control-auto mx-auto d-block w-65" value="3/2/2021">
+                </div>
+                <div class="my-top-large">
+                    <label  class="d-block m-auto w-65" for="fechaCierre">Fecha Cierre</label>
+                    <input id="fechaCierre" type="date" class="form-control-auto mx-auto d-block w-65" value="3/4/2021">
+                </div>
+                <div class="my-top-large">
+                    <label  class="d-block m-auto w-65" for="crearFormulario">Formulario</label>
+                    <input id="crearFormulario" type="file" class="form-control-auto mx-auto d-block w-65" value="crearFormulario">
+                </div>
+                <div id="btn_group_ACA" class="my-top-large mx-auto w-65">
+                    <button id="btn_saveACA" class="btn w-40 my-top-mid btn-info ">Guardar</button>
+                    <button id="btn_backACA" class="btn w-40 my-top-mid btn-success  float-right">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
