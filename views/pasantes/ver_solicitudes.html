@@ -5,146 +5,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/global-style.css">
+    <!-- <link rel="stylesheet" href="../../css/global-style.css"> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
-    <link href="../../css/solitud_pasantes.css" rel="stylesheet">
+    <!-- <link href="../../css/solitud_pasantes.css" rel="stylesheet"> -->
+
+    <!-- Datatable -->
+    <script src="../../js/datatable.js"></script>
+    <link href="../../css/datatable.css" rel="stylesheet">
 
     <!-- Sidebar -->
     <link href="../../css/sidebar.css" rel="stylesheet" />
     <script src="../../js/sidebar.js" defer></script>
-    <script src="../../js/routing.js"></script>
     <title>Ver Solicitudes</title>
+
+    <style>
+        #lista-pasantes {
+            padding: 30px;
+            margin: 0 auto;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="sidebar-container">
-            <div class="sidebar-bg"></div>
-            <div id="sidebar">
-                <div class="sidebar-menu">
-                    <ul class="opciones_superiores">
-                        <li class="py-mid my-mid border-rounded-small">
-                            <a href="#" class="text-white">
-                                <i class="far fa-user-circle mx-right-mid"></i> Perfil
-                            </a>
-                        </li>
-                        <li class="py-mid my-mid border-rounded-small">
-                            <a href="#" class="text-white">
-                                <i class="far fa-file-alt mx-right-mid"></i>Tareas
-                            </a>
-                        </li>
-                        <li class="py-mid my-mid border-rounded-small">
-                            <a href="#" class="text-white">
-                                <i class="fas fa-clipboard-list mx-right-mid"></i>Evaluaciones
-                            </a>
-                        </li>
-                        <li class="py-mid my-mid border-rounded-small active">
-                            <a href="#" class="text-white">
-                                <i class="fas fa-users mx-right-mid"></i> Pasantes
-                            </a>
-                        </li>
-                        <li class="py-mid my-mid border-rounded-small">
-                            <a href="#" class="text-white">
-                                <i class="fas fa-book-open mx-right-mid"></i>Convocatorias
-                            </a>
-                        </li>
-                    </ul>
-                    <ul id="opciones_inferiores" class="position-bottom">
-                        <li class="py-mid my-mid border-rounded-small">
-                            <a href="#" class="text-white">
-                                <i class="fas fa-cog mx-right-mid"></i>Ajustes
-                            </a>
-                        </li>
-                        <li class="py-mid my-mid border-rounded-small">
-                            <a href="#" class="text-white">
-                                <i class="fas fa-sign-out-alt mx-right-mid"></i>Cerrar Session
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Open/Close Button -->
-            <div class="btn-bar">
-                <i class="fas fa-bars" id="sidebar-btn" onclick="hideOrShowSideBar()"></i>
-            </div>
+        <div id="sidebar-container">
+            <!-- Sidebar dynamically is loaded from `sidebar.js` -->
         </div>
 
         <div class="main_container" id="main">
             <h1 class="mx-left-large text-center" style="color: var(--color-primario);">Solicitudes de los Pasantes</h1>
-            <div class="lista-pasantes">
-                <div class="tabla-pasantes">
-                    <table>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Correo</th>
-                            <th>Calificación</th>
-                            <th>Opciones</th>
-                        </tr>
-                        <tr>
-                            <td>Juana</td>
-                            <td>Perez</td>
-                            <td>juana25@hotmail.com</td>
-                            <td>75</td>
-                            <td>
-                                <div class="solicitud-opciones">
-                                    <span class="material-icons aceptar-solitidud">check_circle</span>
-                                    <span class="material-icons rechazar-solitidud">cancel</span>
-                                    <span class="material-icons ver-solitidud">wysiwyg</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Juana</td>
-                            <td>Perez</td>
-                            <td>juana25@hotmail.com</td>
-                            <td>75</td>
-                            <td>
-                                <div class="solicitud-opciones">
-                                    <span class="material-icons aceptar-solitidud">check_circle</span>
-                                    <span class="material-icons rechazar-solitidud">cancel</span>
-                                    <span class="material-icons ver-solitidud">wysiwyg</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Juana</td>
-                            <td>Perez</td>
-                            <td>juana25@hotmail.com</td>
-                            <td>75</td>
-                            <td>
-                                <div class="solicitud-opciones">
-                                    <span class="material-icons aceptar-solitidud">check_circle</span>
-                                    <span class="material-icons rechazar-solitidud">cancel</span>
-                                    <span class="material-icons ver-solitidud">wysiwyg</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Juana</td>
-                            <td>Perez</td>
-                            <td>juana25@hotmail.com</td>
-                            <td>75</td>
-                            <td>
-                                <div class="solicitud-opciones">
-                                    <span class="material-icons aceptar-solitidud">check_circle</span>
-                                    <span class="material-icons rechazar-solitidud">cancel</span>
-                                    <span class="material-icons ver-solitidud">wysiwyg</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="solicitudes-nav">
-                    <div class="solicitudes-nav-btn">Anterior</div>
-                    <div class="solicitud-pagina">1</div>
-                    <div class="solicitud-pagina">2</div>
-                    <div class="solicitud-pagina-actual">3</div>
-                    <div class="solicitudes-nav-btn">Siguiente</div>
-                </div>
-            </div>
+            <div id="lista-pasantes"></div>            
         </div>
     </div>
 </body>
+<script type="module">
+    import { DataGenerator } from "../../js/datagenerator.js";
+
+    const data = new DataGenerator(100).nextArray(26, (gen) => {
+        const name = gen.nextName();
+        const lastName = gen.nextLastName();
+
+        return {
+            "Nombre": name,
+            "Apellido": lastName,
+            "Correo": `${name}${lastName}@hotmail.com`.toLowerCase(),
+            "Calificacion": gen.nextInt(70, 100),
+        };
+    });
+
+    createDatatable("#lista-pasantes"                      /* #id, .class or element to insert the table */,
+    {
+        data: data,                                   /* the source data to display in the table */
+        // ajax: "../../data/colors.json",              /* the URL to load the data from */
+        header: ["Nombre", "Apellido", "Correo", "Calificacion", "Opciones"],                                  /* the header of the table, if omited the `data` keys will be used instead */
+        // currentPage: 0,                              /* the current page of the table, by default 0 */
+        // paginate: false,                              /* enable pagination in the table, by default true */
+        // minRows: 0,                                  /* the minimun numbers of rows to display per page, by default 0 */
+        maxRows: 10,                                 /* the maximun numbers of rows to display per page, by default display all the rows */
+        // previousButtonText: "Previous",              /* text displayed in the `Previous` button of the paginator */
+        // nextButtonText: "Next",                      /* text displayed in the `Next` button of the paginator */
+        // pageButtonCount: 10,                         /* numbers of buttons to display in the paginator */
+        // hover: false,                                /* enable row hover, by default true */
+        centerText: false,                           /* center the text of the cells, by default false */
+        scrollX: true,                               /* enable horizontal scroll if the table overflows, by default false */
+        // scrollY: 300,                                /* enable vertical overflow within the given heigh for example `30vw` or `300`px */
+        // sortable: false,                             /* enable sorting in the table, by default true */
+        // searchable: false,                           /* enable searching in the table, by default true */
+        // searchLabelText: "Search: ",                 /* the text of the search input label */
+        // columnSelection: false,                      /* enable column selection. If no `false` and the column is `sortable` will be enable */
+        // rowSelection: true,                          /* enable row selection */
+        // styles: [],                                  /* the styles applied to the table, by default: striped, row-hover, column-hover. See datatable.js 'TableStyles' */
+        columns: {                                      /* the data used for display the columns */
+            "Opciones" : {
+                searchable: false,
+                sortable: false,
+                render: () => {
+                    return `<a href="#" class="icon text-success mx-small p-small"><i class="fas fa-pen"></i></a>
+                     <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
+                     <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`;
+                }
+            }
+        },                                 
+    });
+</script>
+
 </html>

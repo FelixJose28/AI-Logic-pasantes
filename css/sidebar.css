@@ -3,192 +3,195 @@
 /* Variables */
 
 :root {
-    --sidebar-width: 250px;
-    --transition-time: 0.4s;
+  --sidebar-width: 250px;
+  --slide-in-duration: 0.3s;
+  --menu-option-radius: 8px;
 }
-
 
 /* Sidebar */
 
 #sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--sidebar-width);
-    height: 100%;
-    transition: var(--transition-time);
-    background-color: var(--color-primario);
-    /* box-shadow: 10px 0px 20px rgba(0, 0, 0, 0.3); */
-    z-index: 1;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  transition: var(--slide-in-duration);
+  background-color: var(--color-primario);
+  z-index: 1;
 }
 
-#sidebar.hidden {
-    left: calc(var(--sidebar-width) * -1);
-    box-shadow: none;
+#sidebar[sidebar-visible="true"] {
+  left: 0;
+  width: var(--sidebar-width);
+  box-shadow: 10px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
+#sidebar[sidebar-visible="false"] {
+  left: calc(var(--sidebar-width) * -1);
+  box-shadow: none;
+}
 
 /* Sidebar menu */
 
 .sidebar-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--white-color);
-    margin: 30px 0px;
+  display: flex;
+  flex-direction: column;
+  color: var(--white-color);
+  margin: 40px 0px;
+  height: 90%;
+  overflow-y: auto;
 }
 
-.sidebar-menu li {
-    padding: 10px;
-}
-
-.sidebar-menu li:hover {
-    /* background-color: var(--white-color); */
-    /* color: var(--color-primario-dark); */
-    transition-duration: 0.3s;
-}
-
-
-/* .sidebar-menu li.active {
-    background-color: var(--white-color);
-    color: var(--color-primario);
-} */
-
-.sidebar-menu li a {
-    font-size: 18px;
-    color: inherit;
-}
-
-
-/* Mostar el submenu de la opcion activa */
-
-.mainmenu li:hover .submenu {
-    display: block;
-    max-height: 200px;
+/* Menu options and hover */
+.sidebar-menu li div {
+  padding: 10px;
+  margin: 12px 10px;
 }
 
 .submenu {
-    overflow: hidden;
-    max-height: 0;
-    /* -webkit-transition: all 0.5s ease-out; */
+  background-color: var(--color-primario-dark);
 }
 
+.submenu li {
+  padding: 8px 10px;
+  margin: 5px 10px;
+  margin-left: 20px;
+}
+
+.sidebar-menu li:hover div {
+  background-color: var(--white-color);
+  color: var(--color-primario-dark);
+  border-radius: var(--menu-option-radius);
+}
+
+.submenu li:hover {
+  background-color: var(--white-color);
+  color: var(--color-primario-dark);
+  border-radius: var(--menu-option-radius);
+}
+
+/* Push bottom options down */
+.options_bottom {
+  margin-top: auto;
+}
+
+.sidebar-menu li a {
+  font-size: 18px;
+  color: inherit;
+}
+
+.sidebar-menu li:hover {
+  display: block;
+}
+
+/* Mostar el submenu de la opcion activa */
+
+.submenu {
+  overflow: hidden;
+  margin-top: 10px;
+  max-height: 0px;
+  transition: 0.3s ease-out;
+}
+
+li:hover .submenu {
+  max-height: 200px;
+}
+
+.submenu li a {
+  font-size: 15px;
+}
 
 /* Sidebar show/hidden button */
 
 #sidebar-btn {
-    margin-left: var(--sidebar-width);
-    padding: 10px;
-    font-size: 30px;
-    transition: var(--transition-time);
+  padding: 10px;
+  font-size: 30px;
+  transition: var(--slide-in-duration);
 }
 
-#sidebar-btn.hidden {
-    margin-left: 0;
+#sidebar-btn[sidebar-visible="true"] {
+  margin-left: var(--sidebar-width);
+}
+
+#sidebar-btn[sidebar-visible="false"] {
+  margin-left: 0;
 }
 
 #sidebar-btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
-
 
 /* Main content */
 
 #main {
-    margin-left: var(--sidebar-width);
-    padding: 10px;
-    transition: var(--transition-time);
-    overflow: hidden;
+  padding: 10px;
+  transition: var(--slide-in-duration);
+  overflow: hidden;
 }
 
-#main.hidden {
-    margin-left: 0;
+#main[sidebar-visible="true"] {
+  margin-left: var(--sidebar-width);;
 }
 
+#main[sidebar-visible="false"] {
+  margin-left: 0;
+}
 
 /* Button bar */
 
 .btn-bar {
-    background-color: var(--color-primario);
-    color: white;
-    width: 100%;
-    height: 50px;
+  background-color: var(--color-primario);
+  color: white;
+  width: 100%;
+  height: 50px;
 }
 
-
-/* .sidebar-bg {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: black;
-    opacity: 0.3;
-    backdrop-filter: blur(10px);
-} */
-
 @media (max-width: 800px) {
-    #sidebar-btn {
-        position: absolute;
-        color: white;
-        right: 0;
-    }
-    .btn_back {
-        background-color: aquamarine;
-    }
-    #main {
-        margin-left: 0;
-    }
-    /* ABRIR CONCONVOCATORIA ADMIN */
-    #btn_group_ACA {
-        width: 65%;
-    }
-    #btn_saveACA {
-        display: block;
-        margin: auto;
-        width: 50%;
-    }
-    #btn_backACA {
-        display: block;
-        margin: auto;
-        float: none;
-        margin-top: 2%;
-        width: 50%;
-    }
+  #sidebar-btn {
+    position: absolute;
+    color: white;
+    right: 0;
+  }
+
+  #main {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 600px) {
-    #sidebar {
-        width: 100%;
-        z-index: 1;
-    }
-    #sidebar-btn {
-        z-index: 2;
-    }
-    #sidebar.hidden {
-        left: -100%;
-    }
-    .sidebar-menu li {
-        padding: 20px 15vw;
-    }
-    .sidebar-menu {
-        margin-top: 60px;
-    }
-    /* ABRIR CONCONVOCATORIA ADMIN */
-    #btn_group_ACA {
-        margin: auto;
-        width: 90%;
-    }
-    #btn_saveACA {
-        display: block;
-        margin: auto;
-        width: 50%;
-    }
-    #btn_backACA {
-        display: block;
-        margin: auto;
-        float: none;
-        margin-top: 2%;
-        width: 50%;
-    }
+  #sidebar[sidebar-visible="true"] {
+    width: 100%;
+    z-index: 1;
+  }
+
+  #sidebar-btn {
+    z-index: 2;
+  }
+
+  #sidebar[sidebar-visible="false"] {
+    left: -200%; 
+  }
+
+  .sidebar-menu li div a{
+    font-size: 20px;
+  }
+
+  .submenu li a {
+    font-size: 16px;
+  }
+
+  .sidebar-menu li div {
+    padding: 10px;
+    margin: 10px auto;
+    margin-left: 20px;
+  }
+  
+  .submenu li {
+    padding: 8px 10px;
+    margin: 5px 10px;
+    margin-left: 40px;
+  }
+
+  .sidebar-menu {
+    margin-top: 60px;
+  }
 }

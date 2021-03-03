@@ -1,0 +1,182 @@
+/*
+DO NOT MODIFY, this is `datatable.js` global configuration,
+consider using other `.css` file with `!important` if needed.
+
+The styles of the datatable must be keep at minimun to avoid conficts when using css.
+*/
+
+/* Variables */
+:root {
+    /* Colors */
+    --primary-color: rgb(200, 200, 200);
+    --secondary-color: rgb(242, 242, 242);
+    --inactive-color: rgb(205, 205, 205);
+    --selected-color: rgba(230, 230, 230, 0.2);    
+    --hover-color: rgb(230, 230, 230);
+
+    /* Sizes */
+    --sort-icon-size: 13px;
+}
+
+/* table */
+table.datatable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.datatable .text-center {
+    text-align: center;
+}
+
+.datatable th {
+    user-select: none;
+}
+
+/* Table styles */
+table.datatable th, table.datatable td {
+    padding: 10px; 
+}
+
+/* Table styles: Compact table */
+table.datatable.compact th, table.datatable.compact td {
+    padding: 0px; 
+}
+
+/* Table styles: Column Border */
+table.datatable.column-border td, table.datatable.column-border th {
+    border-left: 1px solid var(--primary-color);
+    border-right: 1px solid var(--primary-color);
+}
+
+table.datatable.column-border th {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+/* Table styles: Row Border */
+table.datatable.row-border td, table.datatable.row-border th {
+    border-bottom: 1px solid var(--primary-color);
+    border-top: 1px solid var(--primary-color);
+}
+
+/* Table styles: Striped Even Rows */
+table.datatable.striped tr.even {
+    background-color: var(--secondary-color);
+}
+
+/* Table styles: Striped Odd Rows */
+table.datatable.striped-inverted tr.odd {
+    background-color: var(--secondary-color);
+}
+
+/* Table styles: Hover rows */
+table.datatable.hover-row tr:hover:not(thead tr) {
+    background-color: var(--hover-color); 
+}
+
+/* Table styles: Hover column */
+table.datatable.hover-column td.selected {
+    background-color: var(--selected-color);
+}
+
+/* Selected row */
+.datatable .selectable {
+    cursor: pointer;
+}
+
+.datatable tr.selected {
+    background-color: var(--hover-color);
+}
+
+/* Sortable */
+.datatable .sortable {
+    cursor: pointer;
+}
+
+.datatable .sortable::after {
+    content: "";
+    width: var(--sort-icon-size);
+    height: var(--sort-icon-size);
+    float: right;
+}
+
+.datatable .sortable.asc::after { 
+    content: "⯅";
+    font-size: var(--sort-icon-size);
+    color: var(--primary-color);
+    float: right;
+}
+
+.datatable .sortable.desc::after {
+    content: "⯆";
+    font-size: var(--sort-icon-size);
+    color: var(--primary-color);
+    float: right;
+}
+
+/* Scroll-y */
+.datatable-container .scroll-y { 
+    overflow-y: auto;  
+    height: 400px;
+}
+
+.datatable-container .scroll-y thead th { 
+    background-color: white;
+    position: sticky; 
+    top: 0; 
+}
+
+th {
+    margin: 0;
+    padding: 0;
+}
+
+.datatable-container .scroll-y table td, .datatable-container .scroll-y table th {
+    white-space: nowrap;
+}
+
+/* Scroll-x */
+.datatable-container .scroll-x {
+    overflow-x: auto;
+}
+
+.datatable-container .scroll-x table td, .datatable-container .scroll-x table th {
+    white-space: nowrap;
+}
+
+/* Paginator */
+.datatable-container .paginator-container {
+    text-align: center;
+}
+
+.datatable-container .paginator button {
+    cursor: pointer;
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.datatable-container .paginator .inactive {
+    color: var(--inactive-color);
+}
+
+.datatable-container .paginator button.active {
+    background-color: var(--primary-color);
+}
+
+.datatable-container .paginator button:hover:not(.inactive, .active) {
+    background-color: var(--hover-color);
+}
+
+/* Searchbar */
+.datatable-container .searchbar-container {
+   overflow: hidden;
+}
+
+.datatable-container .searchbar {
+    float: right;
+    margin-bottom: 5px;
+}
