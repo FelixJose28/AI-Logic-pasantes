@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../img/logo (2).ico" sizes="16x16" type="image/png"> 
+
+<style>
+   
+*{margin: 0; padding: 0;}
+nav{width: 100%;
+ background-color:  whitesmoke;
+ position: relative;
+ display: inline-block;
+ }
+.fa-bars{color:#4CAF50 ;padding:10px;font-size: 25px;}
+.Logo{color:#007123 ; padding: 15px;}
+.fa-bars:focus{
+  background-color: #4CAF50;
+  color: aliceblue;
+  
+}
+
+.navbar-container{
+  overflow: auto;
+  z-index: 1;
+  position: absolute;
+  background-color: burlywood;
+  display:none ;
+
+  
+}
+
+.navbar-container a{
+  padding: 15px;
+  text-decoration: none;
+  text-align: center;
+  color: #007123;
+  display: block;
+}
+
+.navbar-container a:hover{
+  background-color: whitesmoke;
+
+}
+
+.navbar-container{}
+
+</style>
+</head>
+
+<body>
+  <header>
+    <nav>
+
+    <a href="#" class="btn-bars" onclick="prueba()" ><i class="fas fa-bars"></i></a>
+    <a class="Logo">De Leon Service</a>
+    <input type="text" placeholder="Search" name="Search">
+    <button type="submit"> Search</button>
+    
+    <div id="mydrop" class="navbar-container">
+      <a href="#"> Prices <i class="fas fa-dollar-sign"></i></a>
+      <a href="#" >Services  <i class="far fa-concierge-bell"></i></a>
+      <a href="#"> About us <i class="fas fa-address-card"></i></a>
+      <a href="#"> Contanct us <i class="fas fa-address-book"></i> </a>
+      <a href="#"> Help  <i class="fas fa-info-circle"></i></a>
+  
+    </div>
+
+   
+
+  </nav>
+ 
+</header>
+ 
+  
+<div>
+  <img name="imagenes"  width="300px" height="400px">
+  
+  <div > <p> Sometext</p> </div>
+</div>
+
+
+
+
+
+</body>
+
+
+<script>
+ 
+var i;
+var image =[];
+var time = 4000;
+
+image[0] = '/img/portada.jpg';
+image[1] ='/img/portada1.jpg';
+image[2] = '/img/slider-fondo.jpg';
+showslides();
+
+function showslides(){
+
+for(i=0; i<Image.length;i++){
+
+    document.imagenes.src = image[i];
+  
+
+}
+
+}
+
+setTimeout("showslides()",time );
+</script>
+</html>

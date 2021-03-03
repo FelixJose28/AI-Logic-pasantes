@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../img/logo (2).ico" sizes="16x16" type="image/png"> 
+
+<style>
+   
+body{background-color: #1ba7e9;}
+
+
+*{
+  box-sizing: border-box;
+}
+.login-container{
+  display: flexbox;
+  background-color: white;
+  margin: 150px auto 0 auto;
+
+
+  width: 500px;
+}
+
+.ip-container{
+  width: 100%;
+  display: flex;
+ 
+  margin:0px 0 15px 0;
+  
+}
+
+input{
+outline: none;
+padding: 10px;
+width: 90%;
+margin-right: 25px;
+}
+input:focus{
+  border: 2px solid #1081a3;
+}
+.fas, .far{
+  padding: 10px;
+  color: white;
+  background-color: #1081a3;
+  min-width: 50px;
+  text-align: center;
+  margin-left: 25px;
+
+}
+
+.fa-home{
+    float: left; 
+    font-size:30px;
+    margin-top: -100px;
+}
+
+.fa-home:hover{background-color:  #0b5268;}
+
+@media screen and (max-width: 700px) {
+    .login-container{
+        display: block;
+        width: 100%;
+        margin: auto auto auto auto;
+
+    }
+
+    .fa-home{ 
+        position: absolute;
+        right: 0; 
+        margin:  0px 9px 9px 9px;
+        padding: 27px 0 25px 0 ;
+    }
+
+    
+}
+
+
+
+
+
+
+
+.btn {
+  background-color:#1081a3;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+  margin: 25px 0 25px 25%; 
+}
+
+.btn:hover {
+  opacity: 1;
+}
+  
+  .login-tema-position{display: flex;
+    background-color: #1081a3; 
+    width: 100%;
+  color:white;
+  border-bottom: #1081a3 solid;
+
+margin-bottom: 50px;}
+ .text-forgot-password{
+   display: block;
+   width: 100%;
+   text-align: center;
+ }
+</style>
+</head>
+
+<body>
+    <a href="#" ><i class="fas fa-home"></i></a>
+<div class="login-container">  
+
+  <div class="login-tema-position">
+ <img src="../../img/logo1.png" width="60px" height="35px" style="margin-top: 24px;">
+    <h1>Registro</h1> </div>
+    <form>
+        <div class="ip-container"> 
+        <i class="fas fa-user"></i>
+        <input type="text" placeholder="Username"></div>
+
+        <div class="ip-container">
+        
+        <i class="far fa-envelope"></i>
+        <input class="tx-contain" type="email" placeholder="E-mail"></div>
+
+        <div class="ip-container">
+        <i class="fas fa-lock"></i>
+        <input class="tx-contain" type="password" placeholder="Password"></div>
+
+        <div class="ip-container">
+            <i class="fas fa-key"></i>
+        <input class="tx-contain" type="password" placeholder="Repeat Password"></div>
+
+  
+
+    <button type="submit" class="btn">Crear Cuenta</button>
+    </form>
+
+
+</div>
+
+
+
+</body>
+</html>

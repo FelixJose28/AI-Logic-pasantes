@@ -1,46 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/global-style.css">
-    <link rel="icon" href=".png" sizes="16x16" type="image/png"> 
+    <link rel="icon" href="../../img/logo (2).ico" sizes="16x16" type="image/png"> 
+    <link rel="stylesheet" href="/css/index2.css">
     <title>AI Logic</title>
-    <link rel="stylesheet" href="../../css/login.css">
+    
+    
 
 
 </head>
 
-
 <body>
-
-
-
-
-
     
 <div class="conteiner">
     
    <div class="item1"> <header> 
     <nav>
-        <!--<ul>
-            <li><a href="#" id="Home">Home</a></li>
-            <li><a href="#">Solicitud de pasantia</a></li>
-            <li class="lift"><a href="#" onclick="logperf()">Login</a></li>
-            <li class="lift"><a href="#" onclick="registropen()">Registro</a></li>
-            
-        </ul> -->
-        <a>Home</a>
-        <a>Contact</a>
+        
+        <a href="#" class="licon"> <img src="../../img/logo1.png"></a>
+        <a href="#" class="hidemenu">Home</a>
+        <a href="#Contact" class="hidemenu">Contact</a>
+        <a class="show-little-screen" href="/index.html"><i class="fas fa-home"></i></a>
+            <a class="show-little-screen" href="#Contact"><i class="fas fa-address-book"></i></a>
         <div>
-        <a href="#" onclick="logperf()">Login</a>
-        <a href="#" onclick="registropen()">Sign in</a>
+            <a class="show-little-screen" href="/views/login/Login2.html"><i class="fas fa-sign-in-alt"></i></a>
+                <a class="show-little-screen" href="/views/login/Registro2.html"><i class="fas fa-file-signature"></i></a>
+        <a href="login2.html" class="hidemenu" target="_self" onclick="logperf()">Login</a>
+        <a href="Registro2.html" class="hidemenu" target="_self" onclick="registropen()">Sign in</a>
     </div>
     </nav>
 </header>
 </div>
        <div class="item2">
-           <img src="../../img/portada.jpg" >
+          
+
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+             
+              <img src="/img/portada.jpg" style="width:100%;height: 400px;">
+              <div class="content">Unete!!! Inscribete en nuestro sistema de pasantes y demuestra tus capacidades</div>
+            </div>
+            
+            <div class="mySlides fade">
+              
+              <img src="/img/portada1.jpg" style="width:100%;height: 400px; ">
+              <div class="content">Demuestra tus capacidades de trabajo en equipo y obtiene la mejor experiencia laboral
+                  junto a nuestro team de profesionales.
+              </div>
+            </div>
+            
+            <div class="mySlides fade">
+             
+              <img src="/img/slider-fondo.jpg" style="width:100%; height: 400px;" >
+              <div class="content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia porro quam consequatur 
+                eligendi nobis delectus, cupiditate 
+                similique veniam at autem facere natus fugit quas hic, perferendis suscipit labore iusto impedit?</div>
+            </div>
+            
+            
+            </div>
+            <br>
+            
+            <div style="text-align:center">
+              <span class="dot" onclick="currentSlide(1)"></span> 
+              <span class="dot" onclick="currentSlide(2)"></span> 
+              <span class="dot" onclick="currentSlide(3)"></span> 
+            </div>
+            
+
+
+
        </div>
+
+      
        <div class="item3"> 
            <article>
                <h2>Pasante como futuro del manana</h2>
@@ -69,11 +108,13 @@
             </p></div>
         </article>
     </div>
+
        <div class="item5">
 
         <div>
-             
+             <a name="Contact"></a>
              <h2>Contactanos </h2>
+             
              <div class="container">
                 
                 <form action="/action_page.php">
@@ -94,116 +135,47 @@
 
      
 
-
-
-
-
-                   
-<div  id="log" class="overpage" >
-    <a class="closebtn" href="#" onclick="closeview()"><i class="far fa-times-circle" ></i></a>
-   
-
-<div class="logview">
-<div class="stileft"> </div>
-<img src="../../img/logo.jpg" width="200px" height="200px" class="logo">  
-<p class="pt"> Usuario</p>
-<input type="text">
-<p class="pt"> Password</p>
-<input type="password">
-<p class="plink">no tengo cuenta , deseo <a onclick="registropen()" href="#" >registrarme</a> </p>
-
-
-
-
-<button onclick="" class="btn"> Iniciar Sesion </button>
-</div>
-</div>
-
-
-<!--Vista de registro-->
-<div  id="regist" class="overpage" >
-    <a class="closebtn" href="#" onclick="closeview()"><i class="far fa-times-circle" ></i></a>
-    
-
-<div class="logview2">
-<div class="stileft"> </div>
-
-    <img src="../../img/logo.jpg" width="100px" height="100px" class="logo2">  
-
-    <p class=""> Correo</p>
-    <input type="email">
-
-    <p class=""> Nombre</p>
-    <input type="text">
-
-    <p class=""> Apellido</p>
-    <input type="text">
-
-    <p class=""> Password</p>
-    <input type="password">
-
-    <p class=""> Repetir Password</p>
-    <input type="password">
-
-    <p class="plink">Tengo cuenta, ir al <a onclick="logperf()" href="#" >login</a> </p>
-
-
-
-
-        <button onclick="" class="btn" id="btnl"> Registrarse </button>
+       
     </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       <footer>
+    
+    <footer>
         
         <a href="#" class="fa fa-facebook"></a>
-        <a><i class="fab fa-facebook"></i></a>
+        
         <a href="#" class="fa fa-twitter"></a>
         <a href="#" class="fa fa-linkedin"></a>
         <a href="#" class="fa fa-instagram"></a>
         <a href="#" class="fa fa-whatsapp"></a>
        
-       
-
-<h6> Copyright ©  2021 - AILogic. All Rights Reserved</h6>
+   
+        <h6> Copyright ©  2021 - AILogic. All Rights Reserved</h6>
     </footer>
-    </div>
-    
-    
 
+
+
+    
     <script>
+   var slideIndex = 0;
+showSlides();
 
-        function closeview(){
-    
-            document.getElementById("log").style.width ="0%";
-            document.getElementById("regist").style.width ="0%";
-        }
-    
-        function logperf(){
-    
-    document.getElementById("log").style.width ="100%";
-    document.getElementById("regist").style.width ="0%";
-    }
-    
-    function registropen(){
-        document.getElementById("log").style.width ="0%";
-    document.getElementById("regist").style.width ="100%";
-    }
-      </script>
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 5000); 
+}
+    </script>
+
 
 </body>
 </html>

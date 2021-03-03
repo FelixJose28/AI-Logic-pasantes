@@ -1,22 +1,46 @@
-*{
-    margin: 0;
-    padding: 0;
-}
+ /* quitar los espacio en general*/
+        *{
+        padding: 0;
+        margin: 0;
+        
+    }
+    /* dandole estilo al body*/
+    body{
+        box-sizing: border-box; 
+        background-color: whitesmoke;
+    }
 
+    /*dandole estilo al menu en general*/
+    .licon > img{width: 70px;
+        height: 60px; 
+       padding: 0}
+    .licon{padding: 4px; background-color: rgba(4, 98, 221, 0.856);}
+    nav {
+        background-color:white;
+        width: 100%;
+        overflow: hidden;
+    }
+    nav a{ 
+        padding: 27px;
+        float: left;
+        text-decoration: none;
+        display: block;
+        font-size: 17px;
+        color: dodgerblue;
 
-body{background-color: whitesmoke;}
+    }
+    nav a:hover{
+        color: teal;
+        background-color: rgb(240, 240, 240);
+        
+    }
+    .licon:hover{background-color: rgba(4, 98, 221, 0.856);}
+    nav >div{
+        float: right;
+        
+    }
 
-
-.licon{
-    padding: 0 0 0 0;
-   
- }
- .licon img { width: 55px;
-    height: 45px;}
-    .licon:hover{background-color: #76daf3 ;}
-
-
-.show-little-screen{padding: 10px; display: none;}
+    .show-little-screen{padding: 10px; display: none;}
 .show-little-screen >.fas {
     font-size: 30px;
     color: #1FA0C0;
@@ -30,8 +54,8 @@ body{background-color: whitesmoke;}
     }
 
     @keyframes example {
-        font{ color:#1FA0C0;}
-        to {color: white;}
+        font{ color:white;}
+        to {color: #1FA0C0;}
         
     }
 
@@ -41,53 +65,76 @@ body{background-color: whitesmoke;}
         animation-duration: 4s;
         animation-fill-mode: forwards;}
 
-        
+        .hidemenu{display: none;}
     
 
+       
+}
+        /*fondo del slider*/
+  
+      /* Slideshow container */
+.slideshow-container {
+ 
+  position: relative;
+  
+  
+}
 
+/* los dots*/
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
 }
 
 
-@media screen and (max-width:500px){
-    /*nav a{float:none; display: block;
-}
-
-    nav div {float: none;display: block; background-color: teal;}*/
-
-    .hidemenu{display: none;}
 
 
 
 
 
-}
-
-
-nav{
-    width: 100%;
-    overflow: auto;
-    background-color: #1FA0C0;
-
-}
-nav a{ 
-    text-decoration: none;
-    float: left;
-    display: block;
-    padding: 15px;
-    font-size: 17px;
-    color: white;
+ .content {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0); 
+  background: rgba(0, 0, 0, 0.5); 
+  color: #f1f1f1; 
+  width: 100%; 
+  padding: 20px 2px 10px 2px; 
+  text-align: center;
+  overflow: hidden;
 }
 
 
-nav a:hover{
-    background-color: #1081a3;
-}
-nav div{float: right;}
 
 
-
-
-
+/*El resto de las cosas*/
 
 .conteiner{
     display: grid;
@@ -102,17 +149,14 @@ nav div{float: right;}
 }
 .item2{
     grid-column: 1/5;
-    background-color: white;
-    margin: 5px;
+    background-color: #183543;
+    padding: 20px;
+    
+    margin: 20px;
    
 }
 
-
-.item2 img{
-    width: 90%;
-    height: 300px;
-    margin: 50px 0 50px 70px;
-}
+      
 .item3{
     
     grid-column: 1/2;
@@ -159,7 +203,7 @@ nav div{float: right;}
   }
   
   input[type=submit] {
-    background-color: #4CAF50;
+    background-color: dodgerblue;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -168,7 +212,7 @@ nav div{float: right;}
   }
   
   input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: rgb(17, 120, 223);
   }
   
   .container {
@@ -180,7 +224,7 @@ nav div{float: right;}
     
     display: block;
   }
-h2{text-align: center; margin: 30px; font-size: 40px;}
+h2{text-align: center; margin: 30px; font-size: 40px;color: dodgerblue;}
 
 
 
@@ -189,16 +233,11 @@ footer{
     width: 100%;
     margin-top: 50px;
    height: 55px;
-    background-color: black;
+    background-color:#2879E2;
     padding: 10px;
     bottom: 0;
     left: 0;
     right: 0;
-   
-   
-
-
-   
 
     
 
@@ -256,21 +295,20 @@ footer h6{
 
 .item3{grid-column: 1/4;}
 
-
+.container{margin-left:0;width: auto;}
   }
 
 
   @media screen and (max-width:500px){
     .item1 ,.item2,.item3,.item4,.item5{float:none; display: block; width: 100%;grid-column: 1/5;
 }
-
+.item2{margin: 15px 0 0 0;padding: 0;}
     .container{margin-left:0;width: auto;}
-    .item2 >img{
-        width: 100%;
-        left: 0%;
-        margin: 0;
     
-    }
 
     .parrafo > img{margin-left:80px ;}
+   
+    
+    .myslides>img{width: auto;height:auto;}
+    
 }
