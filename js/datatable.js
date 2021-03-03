@@ -7,7 +7,7 @@ const SORT_DESC = "desc";
 function _USAGE() {
     createDatatable("#myContainer"                      /* #id, .class or element to insert the table */,
     {
-        // data: data,                                  /* the source data to display in the table */
+        // data: data,                                  /* the source data to display in the table, for example a list of objects */
         // ajax: "../../data/colors.json",              /* the URL to load the data from */
         // header: [],                                  /* the header of the table, if omited the `data` keys will be used instead */
         // currentPage: 0,                              /* the current page of the table, by default 0 */
