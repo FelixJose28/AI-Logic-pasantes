@@ -11,8 +11,8 @@
     <link href="../../css/solitud_pasantes.css" rel="stylesheet">
 
     <!-- Datatable -->
-    <script src="../../js/datatable.js"></script>
-    <link href="../../css/datatable.css" rel="stylesheet">
+    <script src="/lib/datatable/datatable.js"></script>
+    <link href="/lib/datatable/datatable.css" rel="stylesheet">
 
     <!-- Sidebar -->
     <link href="../../css/sidebar.css" rel="stylesheet" />
@@ -41,9 +41,9 @@
     </div>
 </body>
 <script type="module">
-    import { DataGenerator } from "../../js/datagenerator.js";
+    import { Faker } from "/lib/faker/faker.js";
 
-    const data = new DataGenerator(100).nextArray(26, (gen) => {
+    const data = new Faker(100).nextArray(26, (gen) => {
         const name = gen.nextName();
         const lastName = gen.nextLastName();
 
