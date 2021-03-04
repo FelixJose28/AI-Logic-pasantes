@@ -1,314 +1,323 @@
  /* quitar los espacio en general*/
-        *{
-        padding: 0;
-        margin: 0;
-        
-    }
-    /* dandole estilo al body*/
-    body{
-        box-sizing: border-box; 
-        background-color: whitesmoke;
-    }
-
-    /*dandole estilo al menu en general*/
-    .licon > img{width: 70px;
-        height: 60px; 
-       padding: 0}
-    .licon{padding: 4px; background-color: rgba(4, 98, 221, 0.856);}
-    nav {
-        background-color:white;
-        width: 100%;
-        overflow: hidden;
-    }
-    nav a{ 
-        padding: 27px;
-        float: left;
-        text-decoration: none;
-        display: block;
-        font-size: 17px;
-        color: dodgerblue;
-
-    }
-    nav a:hover{
-        color: teal;
-        background-color: rgb(240, 240, 240);
-        
-    }
-    .licon:hover{background-color: rgba(4, 98, 221, 0.856);}
-    nav >div{
-        float: right;
-        
-    }
-
-    .show-little-screen{padding: 10px; display: none;}
-.show-little-screen >.fas {
-    font-size: 30px;
-    color: #1FA0C0;
-    
-}
-
-@media screen and (max-width:500px){
-    .show-little-screen{
-        display: inline;
-        
-    }
-
-    @keyframes example {
-        font{ color:white;}
-        to {color: #1FA0C0;}
-        
-    }
-
-    .show-little-screen >.fas {
-        
-        animation-name: example;
-        animation-duration: 4s;
-        animation-fill-mode: forwards;}
-
-        .hidemenu{display: none;}
-    
-
-       
-}
-        /*fondo del slider*/
-  
-      /* Slideshow container */
-.slideshow-container {
  
-  position: relative;
-  
-  
-}
-
-/* los dots*/
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-
-
-
-
-
-
+ * {
+     padding: 0;
+     margin: 0;
+ }
+ /* dandole estilo al body*/
+ 
+ body {
+     box-sizing: border-box;
+     background-color: whitesmoke;
+ }
+ /*dandole estilo al menu en general*/
+ 
+ .licon>img {
+     width: 70px;
+     height: 60px;
+     padding: 0
+ }
+ 
+ .licon {
+     padding: 4px;
+     background-color: rgba(4, 98, 221, 0.856);
+ }
+ 
+ nav {
+     background-color: white;
+     width: 100%;
+     overflow: hidden;
+ }
+ 
+ nav a {
+     padding: 27px;
+     float: left;
+     text-decoration: none;
+     display: block;
+     font-size: 17px;
+     color: dodgerblue;
+ }
+ 
+ nav a:hover {
+     color: teal;
+     background-color: rgb(240, 240, 240);
+ }
+ 
+ .licon:hover {
+     background-color: rgba(4, 98, 221, 0.856);
+ }
+ 
+ nav>div {
+     float: right;
+ }
+ 
+ .show-little-screen {
+     padding: 10px;
+     display: none;
+ }
+ 
+ .show-little-screen>.fas {
+     font-size: 30px;
+     color: #1FA0C0;
+ }
+ 
+ @media screen and (max-width:500px) {
+     .show-little-screen {
+         display: inline;
+     }
+     @keyframes example {
+         font {
+             color: white;
+         }
+         to {
+             color: #1FA0C0;
+         }
+     }
+     .show-little-screen>.fas {
+         animation-name: example;
+         animation-duration: 4s;
+         animation-fill-mode: forwards;
+     }
+     .hidemenu {
+         display: none;
+     }
+ }
+ /*fondo del slider*/
+ /* Slideshow container */
+ 
+ .slideshow-container {
+     position: relative;
+ }
+ /* los dots*/
+ 
+ .dot {
+     height: 15px;
+     width: 15px;
+     margin: 0 2px;
+     background-color: #bbb;
+     border-radius: 50%;
+     display: inline-block;
+     transition: background-color 0.6s ease;
+ }
+ 
+ .active {
+     background-color: #717171;
+ }
+ /* Fading animation */
+ 
+ .fade {
+     -webkit-animation-name: fade;
+     -webkit-animation-duration: 1.5s;
+     animation-name: fade;
+     animation-duration: 1.5s;
+ }
+ 
+ @-webkit-keyframes fade {
+     from {
+         opacity: .4
+     }
+     to {
+         opacity: 1
+     }
+ }
+ 
+ @keyframes fade {
+     from {
+         opacity: .4
+     }
+     to {
+         opacity: 1
+     }
+ }
+ 
  .content {
-  position: absolute; 
-  bottom: 0; 
-  background: rgb(0, 0, 0); 
-  background: rgba(0, 0, 0, 0.5); 
-  color: #f1f1f1; 
-  width: 100%; 
-  padding: 20px 2px 10px 2px; 
-  text-align: center;
-  overflow: hidden;
-}
-
-
-
-
-/*El resto de las cosas*/
-
-.conteiner{
-    display: grid;
-    grid-column-gap: 5px;
+     position: absolute;
+     bottom: 0;
+     background: rgb(0, 0, 0);
+     background: rgba(0, 0, 0, 0.5);
+     color: #f1f1f1;
+     width: 100%;
+     padding: 20px 2px 10px 2px;
+     text-align: center;
+     overflow: hidden;
+ }
+ /*El resto de las cosas*/
  
-    grid-template-columns: auto auto auto auto;
-
-}
-
-.item1{
-    grid-column: 1/5;
-}
-.item2{
-    grid-column: 1/5;
-    background-color: #183543;
-    padding: 20px;
-    
-    margin: 20px;
-   
-}
-
-      
-.item3{
-    
-    grid-column: 1/2;
-    background-color: white;
-    margin: 5px;
-}
-.item4{
-    grid-column:3/3;
-    
-    background-color: white;
-    margin: 5px;
-}
-
-.item5{
-    grid-column: 1/5;
-    margin-top: 50px;
-    background-color: white;
-    margin: 5px;
-}
-
-
-
-.parrafo > p{
-    
-    
-   padding: 30px;
-      
-    
-     
-}
-.parrafo img
-{margin:10px 10px 10px 30%;}
-
-
-.inputed {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-  }
-  
-  input[type=submit] {
-    background-color: dodgerblue;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  input[type=submit]:hover {
-    background-color: rgb(17, 120, 223);
-  }
-  
-  .container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    width: 35%;
-    margin: 20px 0 0 35%;
-    
-    display: block;
-  }
-h2{text-align: center; margin: 30px; font-size: 40px;color: dodgerblue;}
-
-
-
-
-footer{
-    width: 100%;
-    margin-top: 50px;
-   height: 55px;
-    background-color:#2879E2;
-    padding: 10px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    
-
-}
-footer h6{
-    color: white;
-    text-align: center;
-}
-
-
-
-
-/*Los Iconos del Footer*/
-.fa ,.fab{
-    padding: 5px;
-    font-size: 20px;
-    width: 25px;
-    text-align: center;
-    text-decoration: none;
-    margin: 5px 2px;
-  }
-  
-  .fa,.fab:hover {
-      opacity: 0.7;
-  }
-  
-  .fa-facebook {
-    background: #3B5998;
-    color: white;
-  }
-  
-  .fa-instagram {
-    background: #125688;
-    color: white;
-  }
-
-  .fa-twitter {
-    background: #55ACEE;
-    color: white;
-  }
-  .fa-linkedin {
-    background: #007bb5;
-    color: white;
-  }
-
-  .fa-whatsapp {
-    background: #06b655;
-    color: white;
-  }
-
-
-
-
-  @media screen and (max-width:800px){
-
-.item3{grid-column: 1/4;}
-
-.container{margin-left:0;width: auto;}
-  }
-
-
-  @media screen and (max-width:500px){
-    .item1 ,.item2,.item3,.item4,.item5{float:none; display: block; width: 100%;grid-column: 1/5;
-}
-.item2{margin: 15px 0 0 0;padding: 0;}
-    .container{margin-left:0;width: auto;}
-    
-
-    .parrafo > img{margin-left:80px ;}
-   
-    
-    .myslides>img{width: auto;height:auto;}
-    
-}
+ .conteiner {
+     display: grid;
+     grid-column-gap: 5px;
+     grid-template-columns: auto auto auto auto;
+ }
+ 
+ .item1 {
+     grid-column: 1/5;
+ }
+ 
+ .item2 {
+     grid-column: 1/5;
+     background-color: #183543;
+     padding: 20px;
+     margin: 20px;
+ }
+ 
+ .item3 {
+     grid-column: 1/2;
+     background-color: white;
+     margin: 5px;
+ }
+ 
+ .item4 {
+     grid-column: 3/3;
+     background-color: white;
+     margin: 5px;
+ }
+ 
+ .item5 {
+     grid-column: 1/5;
+     margin-top: 50px;
+     background-color: white;
+     margin: 5px;
+ }
+ 
+ .parrafo>p {
+     padding: 30px;
+ }
+ 
+ .parrafo img {
+     margin: 10px 10px 10px 30%;
+ }
+ 
+ .inputed {
+     width: 100%;
+     padding: 12px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     box-sizing: border-box;
+     margin-top: 6px;
+     margin-bottom: 16px;
+     resize: vertical;
+ }
+ 
+ input[type=submit] {
+     background-color: dodgerblue;
+     color: white;
+     padding: 12px 20px;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+ }
+ 
+ input[type=submit]:hover {
+     background-color: rgb(17, 120, 223);
+ }
+ 
+ .container {
+     border-radius: 5px;
+     background-color: #f2f2f2;
+     padding: 20px;
+     width: 35%;
+     margin: 20px 0 0 35%;
+     display: block;
+ }
+ 
+ h2 {
+     text-align: center;
+     margin: 30px;
+     font-size: 40px;
+     color: dodgerblue;
+ }
+ 
+ footer {
+     width: 100%;
+     margin-top: 50px;
+     height: 55px;
+     background-color: #2879E2;
+     padding: 10px;
+     bottom: 0;
+     left: 0;
+     right: 0;
+ }
+ 
+ footer h6 {
+     color: white;
+     text-align: center;
+ }
+ /*Los Iconos del Footer*/
+ 
+ .fa,
+ .fab {
+     padding: 5px;
+     font-size: 20px;
+     width: 25px;
+     text-align: center;
+     text-decoration: none;
+     margin: 5px 2px;
+ }
+ 
+ .fa,
+ .fab:hover {
+     opacity: 0.7;
+ }
+ 
+ .fa-facebook {
+     background: #3B5998;
+     color: white;
+ }
+ 
+ .fa-instagram {
+     background: #125688;
+     color: white;
+ }
+ 
+ .fa-twitter {
+     background: #55ACEE;
+     color: white;
+ }
+ 
+ .fa-linkedin {
+     background: #007bb5;
+     color: white;
+ }
+ 
+ .fa-whatsapp {
+     background: #06b655;
+     color: white;
+ }
+ 
+ @media screen and (max-width:800px) {
+     .item3 {
+         grid-column: 1/4;
+     }
+     .container {
+         margin-left: 0;
+         width: auto;
+     }
+ }
+ 
+ @media screen and (max-width:500px) {
+     .item1,
+     .item2,
+     .item3,
+     .item4,
+     .item5 {
+         float: none;
+         display: block;
+         width: 100%;
+         grid-column: 1/5;
+     }
+     .item2 {
+         margin: 15px 0 0 0;
+         padding: 0;
+     }
+     .container {
+         margin-left: 0;
+         width: auto;
+     }
+     .parrafo>img {
+         margin-left: 80px;
+     }
+     .myslides>img {
+         width: auto;
+         height: auto;
+     }
+ }
