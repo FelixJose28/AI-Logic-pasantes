@@ -100,7 +100,7 @@ function loadSidebar(){
             <li class="border-rounded-small">
                 <div>
                     <a href="/views/examenes/ver_examenes.html" class="text-white">
-                        <i class="fas fa-clipboard-list mx-right-mid"></i>Examenes
+                        <i class="fas fa-clipboard-list mx-right-mid"></i>Evaluaciones
                     </a>
                 </div>
             </li>
@@ -117,7 +117,7 @@ function loadSidebar(){
             </li>
             <li class="border-rounded-small">
                 <div>
-                    <a href="#" class="text-white">
+                    <a href="/views/admin/convocatorias/lista_convocatoria_admin.html" class="text-white">
                         <i class="fas fa-book-open mx-right-mid"></i>Convocatorias
                     </a>
                 </div>

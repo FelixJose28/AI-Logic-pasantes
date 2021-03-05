@@ -9,7 +9,7 @@ The styles of the datatable must be keep at minimun to avoid conficts when using
 :root {
     /* Colors */
     --primary-color: rgb(200, 200, 200);
-    --secondary-color: rgb(242, 242, 242);
+    --secondary-color: rgb(247, 247, 247);
     --inactive-color: rgb(205, 205, 205);
     --selected-color: rgba(230, 230, 230, 0.2);    
     --hover-color: rgb(230, 230, 230);
@@ -93,7 +93,7 @@ table.datatable.hover-column td.selected {
 }
 
 .datatable .sortable::after {
-    content: "";
+    content: " ";
     width: var(--sort-icon-size);
     height: var(--sort-icon-size);
     float: right;
