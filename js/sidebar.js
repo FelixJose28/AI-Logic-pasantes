@@ -79,7 +79,7 @@ function loadSidebar(){
         <ul class="options_top">
             <li class="border-rounded-small">
                 <div>
-                    <a href="../pasantes/perfil_pasante.html" class="text-white">
+                    <a href="/views/pasantes/perfil_pasante.html" class="text-white">
                         <i class="far fa-user-circle mx-right-mid"></i> Perfil
                     </a>
                 </div>
@@ -91,15 +91,15 @@ function loadSidebar(){
                     </a>
                 </div>
                 <ul class="submenu">
-                    <li><a href="../tarea/tarea.html">Crear tarea</a></li>
-                    <li><a href="../tarea/Listado-tarea.html">Sin asignar</a></li>
-                    <li><a href="../tarea/tareas-entregadas.html">Ver entregas</a></li>
+                    <li><a href="/views/tarea/tarea.html">Crear tarea</a></li>
+                    <li><a href="/views/tarea/Listado-tarea.html">Sin asignar</a></li>
+                    <li><a href="/views/tarea/tareas-entregadas.html">Ver entregas</a></li>
                 </ul>
             </li>
 
             <li class="border-rounded-small">
                 <div>
-                    <a href="../examenes/ver_examenes.html" class="text-white">
+                    <a href="/views/examenes/ver_examenes.html" class="text-white">
                         <i class="fas fa-clipboard-list mx-right-mid"></i>Examenes
                     </a>
                 </div>
@@ -111,8 +111,8 @@ function loadSidebar(){
                     </a>
                 </div>
                 <ul class="submenu">
-                    <li><a href="../pasantes/ver_solicitudes.html">Ver solicitudes</a></li>
-                    <li><a href="../pasantes/estado_solicitudes.html">Estado solicitudes</a></li>
+                    <li><a href="/views/pasantes/ver_solicitudes.html">Ver solicitudes</a></li>
+                    <li><a href="/views/pasantes/estado_solicitudes.html">Estado solicitudes</a></li>
                 </ul>
             </li>
             <li class="border-rounded-small">

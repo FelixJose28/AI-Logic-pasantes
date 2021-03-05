@@ -8,6 +8,9 @@
     <!-- <link rel="stylesheet" href="../../css/global-style.css"> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
+    <link href="/css/admin/formularios/ver_formularios.css" rel="stylesheet">
+    
+    <!-- Shared table styles -->
     <link href="/css/tables.css" rel="stylesheet">
 
     <!-- Datatable -->
@@ -15,9 +18,9 @@
     <link href="/lib/datatable/datatable.css" rel="stylesheet">
 
     <!-- Sidebar -->
-    <link href="../../css/sidebar.css" rel="stylesheet" />
-    <script src="../../js/sidebar.js" defer></script>
-    <title>Formularios</title>
+    <link href="/css/sidebar.css" rel="stylesheet" />
+    <script src="/js/sidebar.js" defer></script>
+    <title>Evaluaciones</title>
 </head>
 
 <body>
@@ -27,19 +30,26 @@
         </div>
 
         <div class="main_container" id="main">
-            <h1 class="mx-left-large text-center" style="color: var(--color-primario);">Formularios</h1>
-            <div id="lista-formularios"></div>            
+            <h1 class="mx-left-large text-center" style="color: var(--color-primario);">Evaluaciones</h1>
+            <div id="lista-formularios"></div>       
+            <div class="text-center">
+                <button class="crear-formulario-button">Crear evaluacion</button> 
+            </div>
         </div>
     </div>
 </body>
+
 <script type="module">
     import { Faker } from "/lib/faker/faker.js";
 
     const data = new Faker(20).nextArray(26, (f) => {
         const id = f.nextString(5);
+        const dificultad = ["Basico", "Medio", "Avanzado"];
+        const examen = ["HTML", "JavaScript", "CSS", "C#", "Java", "Python", "PHP"];
 
         return {
-            "Nombre": `Formulario-${id}`,
+            "Nombre": `Evaluacion-${id}`,
+            "Descripción": `Realizar el examen de ${f.nextValue(examen)} (${f.nextValue(dificultad)})`
         };
     });
 
@@ -47,11 +57,11 @@
     {
         data: data,                                   /* the source data to display in the table */
         // ajax: "../../data/colors.json",              /* the URL to load the data from */
-        header: ["Nombre", "Opciones"],                                  /* the header of the table, if omited the `data` keys will be used instead */
+        header: ["Nombre", "Descripción", "Opciones"],                                  /* the header of the table, if omited the `data` keys will be used instead */
         // currentPage: 0,                              /* the current page of the table, by default 0 */
         // paginate: false,                              /* enable pagination in the table, by default true */
-        minRows: 10,                                  /* the minimun numbers of rows to display per page, by default 0 */
-        maxRows: 10,                                 /* the maximun numbers of rows to display per page, by default display all the rows */
+        minRows: 7,                                  /* the minimun numbers of rows to display per page, by default 0 */
+        maxRows: 7,                                 /* the maximun numbers of rows to display per page, by default display all the rows */
         // previousButtonText: "Previous",              /* text displayed in the `Previous` button of the paginator */
         // nextButtonText: "Next",                      /* text displayed in the `Next` button of the paginator */
         // pageButtonCount: 10,                         /* numbers of buttons to display in the paginator */
@@ -65,6 +75,12 @@
         // columnSelection: false,                      /* enable column selection. If no `false` and the column is `sortable` will be enable */
         // rowSelection: true,                          /* enable row selection */
         styles: [],                                  /* the styles applied to the table, by default: striped, row-hover, column-hover. See datatable.js 'TableStyles' */
+        attributes: {
+            "input": {
+                "placeholder" : "Search...",
+                "autocomplete" : "off"
+            }
+        },
         columns: {                                      /* the data used for display the columns */
             "Opciones" : {
                 searchable: false,

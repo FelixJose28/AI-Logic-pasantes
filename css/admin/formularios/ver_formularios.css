@@ -1,0 +1,18 @@
+@import url("/css/global-style.css");
+
+.crear-formulario-button {
+    background-color: var(--color-primario);
+    color: var(--white-color);
+    font-size: 18px;
+    height: 40px;
+    width: 200px;
+    margin: 30px 0;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.crear-formulario-button:hover {
+    background-color: var(--color-primario-dark);
+}

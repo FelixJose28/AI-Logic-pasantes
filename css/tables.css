@@ -2,14 +2,18 @@
 
 .datatable-container {
     width: 80%;
-    padding: 30px;
     margin: 0 auto;
+    margin-top: 30px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .datatable-container {
         width: 100%;
     }
+}
+
+.datatable {
+    margin-top: 5px;
 }
 
 thead tr th {
@@ -38,4 +42,25 @@ th:after {
 
 tbody tr:hover {
     background-color: rgb(230, 244, 255) !important
+}
+
+.searchbar input {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+    background-image: url(https://cdn2.iconfinder.com/data/icons/font-awesome/1792/search-512.png);
+    background-size: 20px 20px;
+    background-position: 10px 6px;
+    background-repeat: no-repeat;
+    padding: 5px 5px 5px 40px;
+    width: 250px;
+    transition: width 0.2s ease-in-out;
+}
+
+.searchbar {
+    width: 100%;
+}
+
+.searchbar input:focus {
+    width: 100%;
 }
