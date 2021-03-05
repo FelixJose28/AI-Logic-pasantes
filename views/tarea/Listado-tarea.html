@@ -21,35 +21,70 @@
 
     <script>
         let estudiantes = [{
-            "nombre": "Gabriel",
-            "Apellido": "Geronimo",
-            "Edad": 20,
-            "Carrera": "Software"
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
         }, {
-            "nombre": "Jose",
-            "Apellido": "Mendez",
-            "Edad": 12,
-            "Carrera": "Software"
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
         }, {
-            "nombre": "Ronadl",
-            "Apellido": "Rojas",
-            "Edad": 20,
-            "Carrera": "Software"
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
         }, {
-            "nombre": "Felix",
-            "Apellido": "Ynfante",
-            "Edad": 20,
-            "Carrera": "Software"
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
         }, {
-            "nombre": "Eduardo",
-            "Apellido": "Gusman",
-            "Edad": 20,
-            "Carrera": "Software"
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
         }, {
-            "nombre": "Freddy",
-            "Apellido": "Paredes",
-            "Edad": 20,
-            "Carrera": "Software"
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
+        }, {
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
+        }, {
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
+        }, {
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
+        }, {
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
+        }, {
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
+        }, {
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
+        }, {
+            "Fecha": "20/09/2021",
+            "Titulo": "Asignacion#2",
+            "DiaEntrega": "24/09/2021",
+            "Estado": "En proceso"
         }]
     </script>
 </head>
@@ -76,7 +111,7 @@
                                     <a href="#" class="icon text-danger mx-small  p-small"><i class="fas fa-trash-alt"></i></a>
                                     <a href="#" class="icon text-info mx-small    p-small"><i class="fas fa-info-circle"></i></a>`;
 
-                                cargarDatosEnTable(opciones, ["nombre", "Apellido", "Edad", "Carreara", "Opciones"], {
+                                cargarDatosEnTable(opciones, ["Fecha", "Titulo", "Dia de entrega", "Estado", "Opciones"], {
                                     "thead": "thead",
                                     "tbody": "tbody",
                                     "data": estudiantes
@@ -84,24 +119,23 @@
                             </script>
                         </tbody>
                     </table>
-                    <div id="paginator" class="flex flex-row  flex-justify-center p-large">
-                        <script>
-                            crearPaginator({
-                                "opciones": opciones,
-                                "data": estudiantes,
-                                "length": 10,
-                                "tableName": "table-estudiantes",
-                                "tableConfig": [
-                                    [], {
-                                        "thead": "thead",
-                                        "tbody": "tbody",
-                                        "data": estudiantes,
-                                        "length": 8
-                                    }
-                                ]
-                            })
-                        </script>
-                    </div>
+                    <div id="paginator" class="text-center p-large"></div>
+                    <script>
+                        crearPaginator({
+                            "opciones": opciones,
+                            "data": estudiantes,
+                            "length": 10,
+                            "tableName": "table-estudiantes",
+                            "tableConfig": [
+                                [], {
+                                    "thead": "thead",
+                                    "tbody": "tbody",
+                                    "data": estudiantes,
+                                    "length": 8
+                                }
+                            ]
+                        })
+                    </script>
                 </div>
             </div>
         </div>
