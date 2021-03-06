@@ -87,7 +87,7 @@ function loadSidebar(){
             <li class="border-rounded-small">
                 <div>
                     <a class="text-white">
-                        <i class="far fa-file-alt mx-right-mid"></i> Tarea
+                        <i class="far fa-file-alt mx-right-mid"></i> Tareas
                     </a>
                 </div>
                 <ul class="submenu">
@@ -99,7 +99,7 @@ function loadSidebar(){
 
             <li class="border-rounded-small">
                 <div>
-                    <a href="/views/examenes/ver_examenes.html" class="text-white">
+                    <a href="/views/admin/evaluaciones/ver_evaluaciones_admin.html" class="text-white">
                         <i class="fas fa-clipboard-list mx-right-mid"></i>Evaluaciones
                     </a>
                 </div>
@@ -119,6 +119,13 @@ function loadSidebar(){
                 <div>
                     <a href="/views/admin/convocatorias/lista_convocatoria_admin.html" class="text-white">
                         <i class="fas fa-book-open mx-right-mid"></i>Convocatorias
+                    </a>
+                </div>
+            </li>
+            <li class="border-rounded-small">
+                <div>
+                    <a href="/views/admin/formularios/ver_formularios_admin.html" class="text-white">
+                        <i class="far fa-list-alt mx-right-mid"></i>Formularios
                     </a>
                 </div>
             </li>

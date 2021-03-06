@@ -25,11 +25,9 @@ thead tr th {
 
 tr {
     height: 40px;
-}
-
-tr {
     border: 1px solid #ccc;
 }
+
 
 .pageBtn.active, .paginator button:hover:not(.active, .inactive)  {
     background-color: var(--color-primario) !important;
@@ -40,7 +38,7 @@ th:after {
     color: var(--color-primario-dark) !important;
 }
 
-tbody tr:hover {
+tbody tr:hover, .selected  {
     background-color: rgb(230, 244, 255) !important
 }
 

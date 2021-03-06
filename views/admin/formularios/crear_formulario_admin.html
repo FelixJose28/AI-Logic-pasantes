@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../../css/global-style.css"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ce59bd3c16.js" crossorigin="anonymous"></script>
+    <link href="/css/global-style.css" rel="stylesheet">
+    <link href="formulario.css" rel="stylesheet">
+
+    <!-- Shared table styles -->
+    <link href="/css/tables.css" rel="stylesheet">
+
+    <!-- Datatable -->
+    <script src="/lib/datatable/datatable.js"></script>
+    <link href="/lib/datatable/datatable.css" rel="stylesheet">
+
+    <!-- Sidebar -->
+    <link href="/css/sidebar.css" rel="stylesheet" />
+    <script src="/js/sidebar.js" defer></script>
+    <title>Formularios</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="sidebar-container">
+            <!-- Sidebar dynamically is loaded from `sidebar.js` -->
+        </div>
+
+        <div class="main_container" id="main">
+            <h1 class="mx-left-large text-center" style="color: var(--color-primario);">Crear Formulario</h1>
+            <div class="formulario-nombre">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-25">
+                            <label style="color: black">Nombre del Formulario</label>
+                        </div>
+                        <div class="col-75">
+                            <div class="flex-row">
+                                <input type="text" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formulario-container">
+                <form id="formulario">
+                    <div class="formulario-list">
+                        <div class="row">
+                            <div class="col-25">
+                                <label>Nombre</label>
+                            </div>
+                            <div class="col-75">
+                                <div class="flex-row">
+                                    <input type="text" autocomplete="off">
+                                    <a href="#" class="icon mx-small p-small text-white"><i class="fas fa-pen"></i></a>
+                                    <a href="#" class="icon mx-small p-small text-white"><i
+                                            class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-25">
+                                <label>Apellido</label>
+                            </div>
+                            <div class="col-75">
+                                <div class="flex-row">
+                                    <input type="text" autocomplete="off">
+                                    <a href="#" class="icon mx-small p-small text-white"><i class="fas fa-pen"></i></a>
+                                    <a href="#" class="icon mx-small p-small text-white"><i
+                                            class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-25">
+                                <label>Correo</label>
+                            </div>
+                            <div class="col-75">
+                                <div class="flex-row">
+                                    <input type="text" autocomplete="off">
+                                    <a href="#" class="icon mx-small p-small text-white"><i class="fas fa-pen"></i></a>
+                                    <a href="#" class="icon mx-small p-small text-white"><i
+                                            class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label>Telefono</label>
+                            </div>
+                            <div class="col-75">
+                                <div class="flex-row">
+                                    <input type="text" autocomplete="off">
+                                    <a href="#" class="icon mx-small p-small text-white"><i class="fas fa-pen"></i></a>
+                                    <a href="#" class="icon mx-small p-small text-white"><i
+                                            class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <input type="submit" value="Guardar" class="btn btn-primario">
+                    </div> -->
+                </form>
+                <div class="row text-center">
+                    <button class="btn btn-primario m-small add-form-field" style="width: 250px; height: 40px;">Agregar
+                        campo</button>
+                </div>
+            </div>
+            <div class="row text-center">
+                <a href="ver_formularios_admin.html">
+                    <button class="btn btn-primario m-large add-form-field" style="width: 250px; height: 40px;">Guardar</button>
+                </a>            
+            </div>
+        </div>
+    </div>
+
+    <!-- Form field template -->
+    <template id="nuevo-campo-template">
+        <div class="row">
+            <div class="col-25">
+                <label>Nuevo campo</label>
+            </div>
+            <div class="col-75">
+                <div class="flex-row">
+                    <input type="text" autocomplete="off">
+                    <a href="#" class="icon mx-small p-small text-white"><i class="fas fa-pen"></i></a>
+                    <a href="#" class="icon mx-small p-small text-white"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </template>
+</body>
+
+<style>
+    .formulario-nombre {
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+</style>
+
+<script>
+    const template = document.querySelector("#nuevo-campo-template");
+    const formulario = document.querySelector(".formulario-list");
+
+    document.querySelector(".add-form-field").addEventListener("click", () => {
+        formulario.append(template.content.cloneNode(true));
+    });
+</script>
+
+</html>

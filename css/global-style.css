@@ -44,11 +44,16 @@ h6 {
 .btn {
     text-align: center;
     width: 140px;
-    padding: 10px 18px;
+    padding: 8px 18px;
     border-radius: 5px;
-    border: none;
     font-size: 14px;
     text-decoration: none;
+    border: 2px solid transparent;
+    outline: none;
+}
+
+.btn:active {
+    border: 2px solid black;
 }
 
 .btn:hover {
@@ -419,7 +424,6 @@ textarea {
     padding: var(--small-mp);
 }
 
-
 /* Clases para formulario  */
 
 .control-group {
@@ -545,6 +549,21 @@ textarea {
 
 .w-100 {
     width: 100%;
+}
+
+/* Flex */
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
 }
 
 
