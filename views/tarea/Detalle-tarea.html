@@ -49,44 +49,9 @@
                         </p>
                     </div>
                     <a href="#" class="btn btn-success">ver archivo adjuntos</a>
-                    <a href="#" class="btn btn-info" onclick="editarCont.style.display = 'flex'"> Editar</a>
                 </div>
             </div>
-            <div class="contianer-editar " id="editar-container ">
-                <div>
-                    <form action=" " enctype="multipart/form-data " class="mx-auto my-top-large w-75 ">
-                        <h2>Editar tarea </h2>
-                        <br>
-                        <div class="control-group ">
-                            <label for=" " class=" ">Titulo *</label>
-                            <input type="text " placeholder="Titulo de la tarea " name="titulo " id="titulo " class="form-control w-75 ">
-                        </div>
-                        <div class="control-group ">
-                            <label for=" " class=" ">Para *</label>
-                            <input type="date " placeholder="Dia de entrega " name="fecha-entrega " id="editar-entrega " class="form-control w-75 ">
-                        </div>
-                        <div class="control-group ">
-                            <label for=" ">Descripcion *</label>
-                            <Textarea rows="5 " cols="8 " placeholder="Escribir la descripcion de su tarea. " class="form-control w-75 "></Textarea>
-                        </div>
-                        <!-- <div class="control-group ">
-                            <label for=" ">Adjunto *</label>
-                            <input type="file " name="archivo " id=" " multiple accept=".rar,.iso,.zip " class="form-control w-75 ">
-                        </div> -->
-                        <div class="text-center ">
-                            <!-- <input type="file " class="btn ">Subir archivo</button> -->
 
-                            <button type="button " class="btn btn-danger text-white my-large mx-mid " onclick="editarCont.style.display='none' ">Cancelar</button>
-                            <button type=" submit " class="btn btn-primario text-white my-large ">Guardar</button>
-                        </div>
-
-                        <script>
-                            let editarCont = document.getElementById("editar-container ");
-                        </script>
-
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 </body>
