@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/global-style.css">
+    <link rel="stylesheet" href="../../css/tarea-style.css">
+
+    <!-- Sidebar -->
+    <link href="../../css/sidebar.css" rel="stylesheet" />
+    <script src="../../js/sidebar.js" defer></script>
+    <script src="../../js/routing.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="sidebar-container">
+            <!-- Sidebar is dynamically loaded from `sidebar.js` -->
+        </div>
+
+        <div class="main-container p-large" id="main">
+            <!-- cargar el contenido principal es esta seccion de la pagina-->
+            <!-- <h2 class="text-left mx-left-large ">Añadir Tarea</h2> -->
+            <div class="contianer-tarea">
+                <div>
+                    <form action="" enctype="multipart/form-data" class="mx-auto px-large my-top-large">
+                        <h2>Editar tarea </h2>
+                        <hr class="my-large">
+                        <br>
+                        <div class="control-group">
+                            <label for="" class="">Titulo *</label>
+                            <input type="text" placeholder="Titulo de la tarea" name="titulo" id="titulo" class="form-control w-75">
+                        </div>
+                        <div class="control-group">
+                            <label for="" class="">Para *</label>
+                            <input type="date" placeholder="Dia de entrega" name="fehca-entrega" id="dia-entrega" class="form-control w-75">
+                        </div>
+                        <div class="control-group">
+                            <label for="">Descripcion *</label>
+                            <Textarea rows="5" cols="8" placeholder="Escribir la descripcion de su tarea." class="form-control w-75"></Textarea>
+                        </div>
+                        <!-- <div class="control-group">
+                            <label for="">Adjunto *</label>
+                            <input type="file" name="archivo" id="" multiple accept=".rar,.iso,.zip" class="form-control w-75">
+                        </div> -->
+                        <div class="text-center">
+                            <!-- <input type="file" class="btn ">Subir archivo</button> -->
+
+                            <button type="button" class="btn btn-danger text-white my-large mx-mid">Cancelar</button>
+                            <button type="submit" class="btn btn-primario text-white my-large">Guardar</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
